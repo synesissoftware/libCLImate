@@ -1,0 +1,57 @@
+
+# directories (by name)
+
+_internal/
+
+bin/
+lib/
+
+include/shwild/
+include/xcontract/
+include/xcover/
+include/xtests/
+
+src/shwild/
+src/xcontract/
+src/xcover/
+src/xtests/
+
+Debug/
+DebugMt/
+DebugDll/
+Release/
+ReleaseMt/
+ReleaseDll/
+
+x64/
+Win32/
+
+# directories (by pattern)
+
+# files (by name)
+
+# files (by pattern)
+
+*~
+*.a
+*.app
+*.dll
+*.dylib
+*.exe
+*.gch
+*.lib
+*.ncb
+*.o
+*.obj
+*.opensdf
+*.opt
+*.out
+*.pch
+*.scc
+*.sbr
+*.sdf
+*.so
+*.suo
+*.vcproj.user
+*.vcxproj.user
+
