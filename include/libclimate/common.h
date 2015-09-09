@@ -48,6 +48,30 @@
 
 #include <libclimate/version.h>
 
+#include <stlsoft/stlsoft.h>
+
+#if defined(STLSOFT_VER)
+# if STLSOFT_VER < 0x010978ff
+#  error Requires STLSoft 1.9.120 or later
+# endif
+#elif defined(_STLSOFT_VER)
+# if _STLSOFT_VER < 0x010978ff
+#  error Requires STLSoft 1.9.120 or later
+# endif
+#else
+# error Requires STLSoft 1.9.120 or later
+#endif
+
+#include <systemtools/clasp/clasp.h>
+
+#if defined(CLASP_VER)
+# if CLASP_VER < 0x000a0102
+#  error Requires CLASP 0.10.2 or later
+# endif
+#else
+# error Requires CLASP 0.10.2 or later
+#endif
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_INCL_LIBCLIMATE_H_COMMON */
