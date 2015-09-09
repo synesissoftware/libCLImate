@@ -1,0 +1,89 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "example.C++.args.implicit_main"=".\examples\C++\example.C++.args.implicit_main\vc6\example.C++.args.implicit_main.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libCLImate.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "example.C++.implicit_main.throw"=".\examples\C++\example.C++.implicit_main.throw\vc6\example.C++.implicit_main.throw.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libCLImate.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "example.C.args"=".\examples\C\example.C.args\vc6\example.C.args.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libCLImate.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "example.C.args.implicit_main"=".\examples\C\example.C.args.implicit_main\vc6\example.C.args.implicit_main.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name libCLImate.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "libCLImate.core"=".\projects\libCLImate.core\vc6\libCLImate.core.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+
