@@ -499,6 +499,10 @@ SOURCE="$(STLSOFT_1_10)\include\stlsoft\shims\access\string.hpp"
 # End Source File
 # Begin Source File
 
+SOURCE="$(STLSOFT_1_10)\include\stlsoft\string\string_slice.h"
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\stlsoft\shims\access\string\std\time.hpp"
 # End Source File
 # Begin Source File
@@ -531,7 +535,15 @@ SOURCE="$(STLSOFT_1_10)\include\platformstl\system\console_functions.h"
 # End Source File
 # Begin Source File
 
+SOURCE="$(STLSOFT_1_10)\include\platformstl\filesystem\path_functions.h"
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\platformstl\platformstl.h"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT_1_10)\include\platformstl\platformstl_1_10.h"
 # End Source File
 # End Group
 # Begin Group "WinSTL"
@@ -689,31 +701,31 @@ SOURCE=..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\
 # End Group
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\SynesisSoftware\CommandLineInterface\main\api.h"
+SOURCE=..\..\..\include\libclimate\main\api.h
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\SynesisSoftware\CommandLineInterface\main\api.hpp"
+SOURCE=..\..\..\include\libCLImate\main\api.hpp
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\SynesisSoftware\CommandLineInterface\common.h"
+SOURCE=..\..\..\include\libclimate\common.h
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\SynesisSoftware\CommandLineInterface\main.h"
+SOURCE=..\..\..\include\libclimate\main.h
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\SynesisSoftware\CommandLineInterface\main.hpp"
+SOURCE=..\..\..\include\libCLImate\main.hpp
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\src\quiet_program_termination_exception.hpp"
+SOURCE=..\..\..\src\quiet_program_termination_exception.hpp
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\SynesisSoftware\CommandLineInterface\version.h"
+SOURCE=..\..\..\include\libclimate\version.h
 # End Source File
 # End Group
 # End Target

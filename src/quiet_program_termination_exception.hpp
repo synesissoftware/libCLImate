@@ -51,6 +51,41 @@
  * - stlsoft::unrecoverable
  */
 
+#if 0 || \
+    defined(LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_NONE) || \
+    defined(LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_exception) || \
+    defined(LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error) || \
+    defined(LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable) || \
+    0
+# include <stlsoft/stlsoft.h>
+# ifdef LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_NONE
+#  define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE
+#  ifdef STLSOFT_PPF_pragma_message_SUPPORT
+#   pragma message("The symbol LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_NONE is obsolete, and will be removed in a future release. Please use instead LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE")
+#  endif
+# endif
+# ifdef LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_exception
+#  define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception
+#  ifdef STLSOFT_PPF_pragma_message_SUPPORT
+#   pragma message("The symbol LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_exception is obsolete, and will be removed in a future release. Please use instead LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception")
+#  endif
+# endif
+# ifdef LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error
+#  define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error
+#  ifdef STLSOFT_PPF_pragma_message_SUPPORT
+#   pragma message("The symbol LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error is obsolete, and will be removed in a future release. Please use instead LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error")
+#  endif
+# endif
+# ifdef LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable
+#  define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable
+#  ifdef STLSOFT_PPF_pragma_message_SUPPORT
+#   pragma message("The symbol LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable is obsolete, and will be removed in a future release. Please use instead LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable")
+#  endif
+# endif
+#endif
+
+
+
 #if 0
 #define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE
 #define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception
