@@ -1,11 +1,9 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        main_entry_point_C.c
+ * File:        libclimate/internal/clasp.clasp.h
  *
- * Purpose:     Implementation of main for C-clients. The implementation
- *              employs call-around for diagnostic logging (Pantheios) and
- *              command-line argument handling (CLASP).
+ * Purpose:     Version-ensuring include of systemtools/clasp/clasp.h
  *
- * Created:     12nd July 2015
+ * Created:     9th September 2015
  * Updated:     9th September 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
@@ -45,86 +43,14 @@
  * includes
  */
 
-#include <libclimate/main/api.h>
+#include <systemtools/clasp/clasp.h>
 
-#include <libclimate/internal/clasp.main.h>
-
-#include <libclimate/internal/pantheios.extras.diagutil.h>
-
-#include <libclimate/internal/pantheios.extras.main.h>
-
-#include <libclimate/internal/pantheios.pantheios.h>
-
-#include <stdarg.h>
-
-/* /////////////////////////////////////////////////////////////////////////
- * Implementation
- */
-
-static
-void
-CLASP_CALLCONV CLASP_Pantheios_log_(
-  void*       context
-, int         severity
-, char const* fmt
-, va_list     args
-)
-{
-  ((void)context);
-
-  pantheios_logvprintf(severity, fmt, args);
-}
-
-static
-int
-main_CLASP_(
-  int     argc
-, char**  argv
-)
-{
-  unsigned const  flags = 0
-                        | CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE
-                        ;
-
-  clasp_diagnostic_context_t  ctxt = { 0 };
-
-  ctxt.pfnLog = &CLASP_Pantheios_log_;
-
-  return clasp_main_invoke(
-              argc
-            , argv
-            , libCLImate_program_main_C
-            , NULL
-            , libCLImate_aliases
-            , flags
-            , &ctxt
-            );
-}
-
-static
-int
-main_memory_leak_trace_(
-  int     argc
-, char**  argv
-)
-{
-  return pantheios_extras_diagutil_main_leak_trace_invoke(argc, argv, main_CLASP_);
-}
-
-/* /////////////////////////////////////////////////////////////////////////
- * API functions
- */
-
-int
-libCLImate_main_entry_point_C(
-  int     argc
-, char**  argv
-, void*   reserved
-)
-{
-  ((void)reserved);
-
-  return pantheios_extras_main_invoke(argc, argv, main_memory_leak_trace_, NULL, NULL);
-}
+#if defined(CLASP_VER)
+# if CLASP_VER < 0x000a0102
+#  error Requires CLASP 0.10.2 or later
+# endif
+#else
+# error Error in CLASP clasp.h header
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */

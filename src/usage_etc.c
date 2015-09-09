@@ -45,7 +45,7 @@
 
 #include <libclimate/main/api.h>
 
-#include <systemtools/clasp/clasp.h>
+#include <libclimate/internal/clasp.clasp.h>
 
 #include <platformstl/system/console_functions.h>
 

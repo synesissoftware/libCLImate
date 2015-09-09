@@ -49,13 +49,13 @@
 
 #include "quiet_program_termination_exception.hpp"
 
-#include <systemtools/clasp/main.hpp>
+#include <libclimate/internal/clasp.main.hpp>
 
-#include <pantheios/extras/diagutil.hpp>
+#include <libclimate/internal/pantheios.extras.diagutil.hpp>
 
-#include <pantheios/extras/main.hpp>
+#include <libclimate/internal/pantheios.extras.main.hpp>
 
-#include <pantheios/pantheios.h>
+#include <libclimate/internal/pantheios.pantheios.h>
 
 #include <stdarg.h>
 

@@ -144,7 +144,7 @@
  * includes
  */
 
-#include <stlsoft/stlsoft.h>
+#include <libclimate/internal/stlsoft.stlsoft.h>
 
 #if defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception)

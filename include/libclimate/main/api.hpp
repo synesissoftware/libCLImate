@@ -52,7 +52,7 @@
 
 #include <libclimate/main/api.h>
 
-#include <systemtools/clasp/clasp.hpp>
+#include <libclimate/internal/clasp.clasp.hpp>
 
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
