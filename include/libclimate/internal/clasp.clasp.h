@@ -46,8 +46,8 @@
 #include <systemtools/clasp/clasp.h>
 
 #if defined(CLASP_VER)
-# if CLASP_VER < 0x000a0102
-#  error Requires CLASP 0.10.2 or later
+# if CLASP_VER < 0x000b0101
+#  error Requires CLASP 0.11.1 or later
 # endif
 #else
 # error Error in CLASP clasp.h header
