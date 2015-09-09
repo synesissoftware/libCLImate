@@ -42,12 +42,12 @@
     <ClCompile Include="..\..\..\src\usage_etc.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\SynesisSoftware\CommandLineInterface\common.h" />
-    <ClInclude Include="..\..\..\include\SynesisSoftware\CommandLineInterface\main.h" />
-    <ClInclude Include="..\..\..\include\SynesisSoftware\CommandLineInterface\main.hpp" />
-    <ClInclude Include="..\..\..\include\SynesisSoftware\CommandLineInterface\main\api.h" />
-    <ClInclude Include="..\..\..\include\SynesisSoftware\CommandLineInterface\main\api.hpp" />
-    <ClInclude Include="..\..\..\include\SynesisSoftware\CommandLineInterface\version.h" />
+    <ClInclude Include="..\..\..\include\libclimate\common.h" />
+    <ClInclude Include="..\..\..\include\libclimate\main.h" />
+    <ClInclude Include="..\..\..\include\libclimate\main.hpp" />
+    <ClInclude Include="..\..\..\include\libclimate\main\api.h" />
+    <ClInclude Include="..\..\..\include\libclimate\main\api.hpp" />
+    <ClInclude Include="..\..\..\include\libclimate\version.h" />
     <ClInclude Include="..\..\..\src\quiet_program_termination_exception.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
