@@ -6,7 +6,7 @@
  *              command-line argument handling (CLASP).
  *
  * Created:     13th July 2015
- * Updated:     9th September 2015
+ * Updated:     28th September 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -129,9 +129,15 @@ main_CLASP_outer_(
     , va_list     args
     )
     {
-      ((void)context);
+      STLSOFT_SUPPRESS_UNUSED(context);
 
+#ifdef PANTHEIOS_USE_WIDE_STRINGS
+      STLSOFT_SUPPRESS_UNUSED(severity);
+      STLSOFT_SUPPRESS_UNUSED(fmt);
+      STLSOFT_SUPPRESS_UNUSED(args);
+#else
       ::pantheios::logvprintf(severity, fmt, args);
+#endif
     }
   };
 
