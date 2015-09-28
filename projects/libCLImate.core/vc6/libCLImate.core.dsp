@@ -709,6 +709,18 @@ SOURCE=..\..\..\include\libCLImate\main\api.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\include\libclimate\internal\clasp.clasp.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\include\libclimate\internal\clasp.main.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\include\libclimate\internal\clasp.main.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\include\libclimate\common.h
 # End Source File
 # Begin Source File
@@ -721,7 +733,31 @@ SOURCE=..\..\..\include\libCLImate\main.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\include\libclimate\internal\pantheios.extras.diagutil.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\include\libclimate\internal\pantheios.extras.diagutil.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\include\libclimate\internal\pantheios.extras.main.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\include\libclimate\internal\pantheios.extras.main.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\include\libclimate\internal\pantheios.pantheios.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\src\quiet_program_termination_exception.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\include\libclimate\internal\stlsoft.stlsoft.h
 # End Source File
 # Begin Source File
 

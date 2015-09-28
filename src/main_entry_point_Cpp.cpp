@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:        main_entry_point_Cpp.cpp
  *
- * Purpose:     Implementation of main for C-clients. The implementation
+ * Purpose:     Implementation of main for C++-clients. The implementation
  *              employs call-around for diagnostic logging (Pantheios) and
  *              command-line argument handling (CLASP).
  *
