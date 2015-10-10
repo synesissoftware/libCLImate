@@ -4,7 +4,7 @@
  * Purpose:     libCLImate core API for C programs.
  *
  * Created:     13th July 2015
- * Updated:     9th September 2015
+ * Updated:     10th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -112,7 +112,7 @@ libCLImate_program_main_Cpp(
 
 #if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     defined(__cplusplus)
-/** The main implementation for C++
+/** The main() implementation for C++
  */
 extern "C"
 int
@@ -125,7 +125,7 @@ libCLImate_main_entry_point_Cpp(
 
 #if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     !defined(__cplusplus)
-/** The main implementation for C
+/** The main() implementation for C
  */
 int
 libCLImate_main_entry_point_C(
@@ -153,8 +153,8 @@ libCLImate_exit_immediately(
 
 #if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     defined(__cplusplus)
-/** This function causes the executing program to exit, either by a
- * caller-supplied function, or by <code>exit</code>.
+/** This function causes the executing program to exit by a
+ * library-internal exception throw-catch.
  */
 extern "C++"
 void

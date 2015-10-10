@@ -4,7 +4,7 @@
  * Purpose:     Implementation of unwind_and_exit API function.
  *
  * Created:     13th July 2015
- * Updated:     9th September 2015
+ * Updated:     10th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -46,8 +46,6 @@
 #include <libclimate/main/api.h>
 
 #include "quiet_program_termination_exception.hpp"
-
-#include <stdlib.h>
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions

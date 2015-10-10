@@ -4,7 +4,7 @@
  * Purpose:     libCLImate library version.
  *
  * Created:     13th July 2015
- * Updated:     28th September 2015
+ * Updated:     10th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -48,14 +48,14 @@
 
 #define LIBCLIMATE_VER_MAJOR            0
 #define LIBCLIMATE_VER_MINOR            3
-#define LIBCLIMATE_VER_REVISION         2
+#define LIBCLIMATE_VER_REVISION         3
 
-#ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
+#ifndef LIBCLIMATE_DOCUMENTATION_SKIP_SECTION
  /* libCLImate completely supercedes Synesis Software Command Line Interface library */
 # define SSCLI_VER_MAJOR                LIBCLIMATE_VER_MAJOR
 # define SSCLI_VER_MINOR                LIBCLIMATE_VER_MINOR
 # define SSCLI_VER_REVISION             LIBCLIMATE_VER_REVISION
-#endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
+#endif /* !LIBCLIMATE_DOCUMENTATION_SKIP_SECTION */
 
 /* ////////////////////////////////////////////////////////////////////// */
 
