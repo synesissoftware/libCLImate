@@ -4,7 +4,7 @@
  * Purpose:     libCLImate core API for C programs.
  *
  * Created:     13th July 2015
- * Updated:     10th October 2015
+ * Updated:     11th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -133,7 +133,7 @@ libCLImate_main_entry_point_C(
 , char**  argv
 , void*   reserved
 );
-#endif /* __cplusplus */
+#endif /* !__cplusplus */
 
 
 /* exit */
