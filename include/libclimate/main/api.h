@@ -118,6 +118,8 @@ extern "C"
 #if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     defined(__cplusplus)
 /** The main() implementation for C++
+ *
+ * \param This must be called only once in a C++ program
  */
 int
 libCLImate_main_entry_point_Cpp(
@@ -130,6 +132,8 @@ libCLImate_main_entry_point_Cpp(
 #if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     !defined(__cplusplus)
 /** The main() implementation for C
+ *
+ * \param This must be called only once in a C program
  */
 int
 libCLImate_main_entry_point_C(
@@ -150,7 +154,8 @@ libCLImate_exit_immediately(
   int   programExitCode
 , void (*pfn)(int programExitCode, void* param)
 , void* param
-);
+) /* noexcept */
+;
 
 #if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     defined(__cplusplus)
