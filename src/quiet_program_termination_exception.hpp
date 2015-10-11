@@ -5,7 +5,7 @@
  *              class.
  *
  * Created:     13th July 2015
- * Updated:     9th September 2015
+ * Updated:     11th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -259,7 +259,7 @@ public:
   virtual ~program_termination_exception() = 0
   {}
 private:
-  program_termination_exception &operator =(program_termination_exception const&);
+  class_type &operator =(class_type const&);
 
 public:
   int const   ExitCode;
@@ -286,7 +286,7 @@ public:
   ~quiet_program_termination_exception()
   {}
 private:
-  quiet_program_termination_exception &operator =(quiet_program_termination_exception const&);
+  class_type &operator =(class_type const&);
 };
 
 /* ///////////////////////////// end of file //////////////////////////// */
