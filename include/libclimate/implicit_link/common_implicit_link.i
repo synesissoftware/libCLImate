@@ -4,7 +4,7 @@
  * Purpose:     Common implicit link functionality for libCLImate
  *
  * Created:     6th August 2015
- * Updated:     9th September 2015
+ * Updated:     11th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -49,7 +49,13 @@
 /* SystemTools::CLASP header files */
 #include <systemtools/clasp/implicit_link.h>
 
+/* Pantheios header files */
+#include <pantheios/implicit_link/util.h>
+#include <pantheios/implicit_link/core.h>
+
 /* recls header files */
-#include <recls/implicit_link.h>
+#ifdef _WIN32
+# include <recls/implicit_link.h>
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
