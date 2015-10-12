@@ -43,6 +43,8 @@ Win32/
 
 # files (by name)
 
+logging-bailout.txt
+
 # files (by pattern)
 
 *~
