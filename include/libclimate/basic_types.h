@@ -1,9 +1,9 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/internal/pantheios.extras.diagutil.h
+ * File:        libclimate/basic_types.h
  *
- * Purpose:     Version-ensuring include of pantheios/extras/diagutil.h
+ * Purpose:     libCLImate basic types.
  *
- * Created:     9th September 2015
+ * Created:     12th October 2015
  * Updated:     13th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
@@ -39,28 +39,21 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-/* /////////////////////////////////////////////////////////////////////////
- * includes - 1
- */
-
-#include <libclimate/internal/common.h>
+#ifndef SYNSOFT_INCL_LIBCLIMATE_H_BASIC_TYPES
+#define SYNSOFT_INCL_LIBCLIMATE_H_BASIC_TYPES
 
 /* /////////////////////////////////////////////////////////////////////////
- * feature discrimination
+ * includes
  */
+
+#include <libclimate/common.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * includes - 2
+ * types
  */
 
-#include <pantheios/extras/diagutil.h>
+/* ////////////////////////////////////////////////////////////////////// */
 
-#if defined(PANTHEIOS_EXTRAS_DIAGUTIL_VER)
-# if PANTHEIOS_EXTRAS_DIAGUTIL_VER < 0x00010102
-#  error Requires Pantheios.Extras.Diagutil 0.1.2 or later
-# endif
-#else
-# error Error in Pantheios.Extras.Diagutil include
-#endif
+#endif /* !SYNSOFT_INCL_LIBCLIMATE_H_BASIC_TYPES */
 
 /* ///////////////////////////// end of file //////////////////////////// */

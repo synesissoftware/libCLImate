@@ -4,7 +4,7 @@
  * Purpose:     Version-ensuring include of pantheios/extras/diagutil.hpp
  *
  * Created:     9th September 2015
- * Updated:     9th September 2015
+ * Updated:     13th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -43,8 +43,10 @@
  * includes
  */
 
-#include <pantheios/extras/diagutil.hpp>
+#include <libclimate/internal/common.h>
 
 #include <libclimate/internal/pantheios.extras.diagutil.h>
+
+#include <pantheios/extras/diagutil.hpp>
 
 /* ///////////////////////////// end of file //////////////////////////// */

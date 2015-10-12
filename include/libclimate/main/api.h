@@ -48,6 +48,8 @@
 
 #include <libclimate/common.h>
 
+#include <libclimate/basic_types.h>
+
 #include <libclimate/internal/clasp.clasp.h>
 
 #include <stdio.h>

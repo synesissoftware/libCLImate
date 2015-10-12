@@ -1,9 +1,9 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/internal/pantheios.extras.diagutil.h
+ * File:        libclimate/internal/common.h
  *
- * Purpose:     Version-ensuring include of pantheios/extras/diagutil.h
+ * Purpose:     Common internal header
  *
- * Created:     9th September 2015
+ * Created:     13th October 2015
  * Updated:     13th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
@@ -40,27 +40,9 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * includes - 1
- */
+* includes
+*/
 
-#include <libclimate/internal/common.h>
-
-/* /////////////////////////////////////////////////////////////////////////
- * feature discrimination
- */
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes - 2
- */
-
-#include <pantheios/extras/diagutil.h>
-
-#if defined(PANTHEIOS_EXTRAS_DIAGUTIL_VER)
-# if PANTHEIOS_EXTRAS_DIAGUTIL_VER < 0x00010102
-#  error Requires Pantheios.Extras.Diagutil 0.1.2 or later
-# endif
-#else
-# error Error in Pantheios.Extras.Diagutil include
-#endif
+#include <libclimate/common.h>
 
 /* ///////////////////////////// end of file //////////////////////////// */

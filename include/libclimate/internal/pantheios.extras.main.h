@@ -4,7 +4,7 @@
  * Purpose:     Version-ensuring include of pantheios/extras/main.h
  *
  * Created:     9th September 2015
- * Updated:     9th September 2015
+ * Updated:     13th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -40,7 +40,17 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * includes
+ * includes - 1
+ */
+
+#include <libclimate/internal/common.h>
+
+/* /////////////////////////////////////////////////////////////////////////
+ * feature discrimination
+ */
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes - 2
  */
 
 #include <pantheios/extras/main.h>
