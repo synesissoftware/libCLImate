@@ -4,7 +4,7 @@
  * Purpose:     libCLImate core API for C programs.
  *
  * Created:     13th July 2015
- * Updated:     10th October 2015
+ * Updated:     11th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -108,13 +108,19 @@ libCLImate_program_main_Cpp(
  * API functions
  */
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif /* __cplusplus */
+
 /* main */
 
 #if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     defined(__cplusplus)
 /** The main() implementation for C++
+ *
+ * \param This must be called only once in a C++ program
  */
-extern "C"
 int
 libCLImate_main_entry_point_Cpp(
   int     argc
@@ -126,6 +132,8 @@ libCLImate_main_entry_point_Cpp(
 #if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     !defined(__cplusplus)
 /** The main() implementation for C
+ *
+ * \param This must be called only once in a C program
  */
 int
 libCLImate_main_entry_point_C(
@@ -133,7 +141,7 @@ libCLImate_main_entry_point_C(
 , char**  argv
 , void*   reserved
 );
-#endif /* __cplusplus */
+#endif /* !__cplusplus */
 
 
 /* exit */
@@ -141,15 +149,13 @@ libCLImate_main_entry_point_C(
 /** This function causes the executing program to exit, either by a
  * caller-supplied function, or by <code>exit</code>.
  */
-#ifdef __cplusplus
-extern "C"
-#endif /* __cplusplus */
 void
 libCLImate_exit_immediately(
   int   programExitCode
 , void (*pfn)(int programExitCode, void* param)
 , void* param
-);
+) /* noexcept */
+;
 
 #if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     defined(__cplusplus)
@@ -169,9 +175,6 @@ libCLImate_unwind_and_exit(
 /** This function causes a stock-form usage to be emitted, via CLASP,
  * to the given file-stream.
  */
-#ifdef __cplusplus
-extern "C"
-#endif /* __cplusplus */
 int
 libCLImate_show_usage(
   clasp_arguments_t const*  args
@@ -192,9 +195,6 @@ libCLImate_show_usage(
 /** This function causes a stock-form usage to be emitted, via CLASP,
  * to the given file-stream.
  */
-#ifdef __cplusplus
-extern "C"
-#endif /* __cplusplus */
 int
 libCLImate_show_usage_header(
   clasp_arguments_t const*  args
@@ -215,9 +215,6 @@ libCLImate_show_usage_header(
 /** This function causes a stock-form usage to be emitted, via CLASP,
  * to the given file-stream.
  */
-#ifdef __cplusplus
-extern "C"
-#endif /* __cplusplus */
 int
 libCLImate_show_usage_body(
   clasp_arguments_t const*  args
@@ -238,9 +235,6 @@ libCLImate_show_usage_body(
 /** This function causes a stock-form version to be emitted, via CLASP,
  * to the given file-stream.
  */
-#ifdef __cplusplus
-extern "C"
-#endif /* __cplusplus */
 int
 libCLImate_show_version(
   clasp_arguments_t const*  args
@@ -252,6 +246,10 @@ libCLImate_show_version(
 , int                       buildNumber
 , char const*               programName
 );
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif /* __cplusplus */
 
 /* ////////////////////////////////////////////////////////////////////// */
 
