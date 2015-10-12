@@ -276,7 +276,7 @@ SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/implicit_link.h"
 # End Source File
 # Begin Source File
 
-SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/internal/shim_macros.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/internal/shim_macros.h"
 # End Source File
 # End Group
 # Begin Source File
