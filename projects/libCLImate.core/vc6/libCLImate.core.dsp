@@ -680,23 +680,23 @@ SOURCE="$(PANTHEIOS_ROOT)\include\pantheios\internal\string_encoding.h"
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\clasp.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/clasp.h"
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\clasp.hpp
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/clasp.hpp"
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\main.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/main.h"
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\main.hpp
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/main.hpp"
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\internal\shim_macros.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/internal/shim_macros.h"
 # End Source File
 # End Group
 # Begin Source File
