@@ -52,6 +52,8 @@
  * types
  */
 
+typedef char    libclimate_char_t;
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_INCL_LIBCLIMATE_H_BASIC_TYPES */

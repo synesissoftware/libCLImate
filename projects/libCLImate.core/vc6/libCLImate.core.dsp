@@ -25,6 +25,10 @@ CFG=libCLImate.core - Win32 Unicode Debug Multithreaded
 !MESSAGE "libCLImate.core - Win32 Unicode Debug" (based on "Win32 (x86) Static Library")
 !MESSAGE "libCLImate.core - Win32 Unicode Release Multithreaded" (based on "Win32 (x86) Static Library")
 !MESSAGE "libCLImate.core - Win32 Unicode Debug Multithreaded" (based on "Win32 (x86) Static Library")
+!MESSAGE "libCLImate.core - Win32 wmain Release" (based on "Win32 (x86) Static Library")
+!MESSAGE "libCLImate.core - Win32 wmain Debug" (based on "Win32 (x86) Static Library")
+!MESSAGE "libCLImate.core - Win32 wmain Release Multithreaded" (based on "Win32 (x86) Static Library")
+!MESSAGE "libCLImate.core - Win32 wmain Debug Multithreaded" (based on "Win32 (x86) Static Library")
 !MESSAGE
 
 # Begin Project
@@ -232,6 +236,106 @@ LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.widestring.mt.debug.lib"
 # ADD LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.widestring.mt.debug.lib"
 
+!ELSEIF  "$(CFG)" == "libCLImate.core - Win32 wmain Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "URelease"
+# PROP BASE Intermediate_Dir "URelease"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "URelease"
+# PROP Intermediate_Dir "URelease"
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /W3 /GX /O2 /I "../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "NDEBUG" /D "LIBCLIMATE_USE_wmain" /D "_UNICODE" /D "UNICODE" /D "_LIB" /FD /c
+# SUBTRACT BASE CPP /YX
+# ADD CPP /nologo /W3 /GX /O2 /I "../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "NDEBUG" /D "LIBCLIMATE_USE_wmain" /D "_UNICODE" /D "UNICODE" /D "_LIB" /FD /c
+# SUBTRACT CPP /YX
+# ADD BASE RSC /l 0xc09 /d "NDEBUG"
+# ADD RSC /l 0xc09 /d "NDEBUG"
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.wmain.lib"
+# ADD LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.wmain.lib"
+
+!ELSEIF  "$(CFG)" == "libCLImate.core - Win32 wmain Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "UDebug"
+# PROP BASE Intermediate_Dir "UDebug"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "UDebug"
+# PROP Intermediate_Dir "UDebug"
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /I "../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "LIBCLIMATE_USE_wmain" /D "_UNICODE" /D "UNICODE" /D "_LIB" /FD /GZ /c
+# SUBTRACT BASE CPP /YX
+# ADD CPP /nologo /W3 /Gm /GX /ZI /Od /I "../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "LIBCLIMATE_USE_wmain" /D "_UNICODE" /D "UNICODE" /D "_LIB" /FD /GZ /c
+# SUBTRACT CPP /YX
+# ADD BASE RSC /l 0xc09 /d "_DEBUG"
+# ADD RSC /l 0xc09 /d "_DEBUG"
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.wmain.debug.lib"
+# ADD LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.wmain.debug.lib"
+
+!ELSEIF  "$(CFG)" == "libCLImate.core - Win32 wmain Release Multithreaded"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "UReleaseMt"
+# PROP BASE Intermediate_Dir "UReleaseMt"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "UReleaseMt"
+# PROP Intermediate_Dir "UReleaseMt"
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /MT /W3 /GX /O2 /I "../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "NDEBUG" /D "LIBCLIMATE_USE_wmain" /D "_UNICODE" /D "UNICODE" /D "_LIB" /FD /c
+# SUBTRACT BASE CPP /YX
+# ADD CPP /nologo /MT /W3 /GX /O2 /I "../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "NDEBUG" /D "LIBCLIMATE_USE_wmain" /D "_UNICODE" /D "UNICODE" /D "_LIB" /FD /c
+# SUBTRACT CPP /YX
+# ADD BASE RSC /l 0xc09 /d "NDEBUG"
+# ADD RSC /l 0xc09 /d "NDEBUG"
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.wmain.mt.lib"
+# ADD LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.wmain.mt.lib"
+
+!ELSEIF  "$(CFG)" == "libCLImate.core - Win32 wmain Debug Multithreaded"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "UDebugMt"
+# PROP BASE Intermediate_Dir "UDebugMt"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "UDebugMt"
+# PROP Intermediate_Dir "UDebugMt"
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "LIBCLIMATE_USE_wmain" /D "_UNICODE" /D "UNICODE" /D "_LIB" /FD /GZ /c
+# SUBTRACT BASE CPP /YX
+# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include" /I "$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "LIBCLIMATE_USE_wmain" /D "_UNICODE" /D "UNICODE" /D "_LIB" /FD /GZ /c
+# SUBTRACT CPP /YX
+# ADD BASE RSC /l 0xc09 /d "_DEBUG"
+# ADD RSC /l 0xc09 /d "_DEBUG"
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.wmain.mt.debug.lib"
+# ADD LIB32 /nologo /out:"..\..\..\lib\libclimate.0.core.vc6.wmain.mt.debug.lib"
+
 !ENDIF
 
 # Begin Target
@@ -244,6 +348,10 @@ LIB32=link.exe -lib
 # Name "libCLImate.core - Win32 Unicode Debug"
 # Name "libCLImate.core - Win32 Unicode Release Multithreaded"
 # Name "libCLImate.core - Win32 Unicode Debug Multithreaded"
+# Name "libCLImate.core - Win32 wmain Release"
+# Name "libCLImate.core - Win32 wmain Debug"
+# Name "libCLImate.core - Win32 wmain Release Multithreaded"
+# Name "libCLImate.core - Win32 wmain Debug Multithreaded"
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"

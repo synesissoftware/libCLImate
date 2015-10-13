@@ -6,7 +6,7 @@
  *              command-line argument handling (CLASP).
  *
  * Created:     13th July 2015
- * Updated:     28th September 2015
+ * Updated:     13th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -60,7 +60,11 @@
 #include <stdarg.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Implementation
+ * feature discrimination
+ */
+
+/* /////////////////////////////////////////////////////////////////////////
+ * implementation
  */
 
 static
@@ -111,8 +115,8 @@ main_CLASP_inner_(
 static
 int
 main_CLASP_outer_(
-  int     argc
-, char**  argv
+  int               argc
+, clasp_char_t**    argv
 )
 {
   unsigned const  flags = 0
@@ -122,16 +126,17 @@ main_CLASP_outer_(
   struct CLASP_Pantheios_log
   {
     static void
-    CLASP_CALLCONV fn(
-      void*       context
-    , int         severity
-    , char const* fmt
-    , va_list     args
+    CLASP_CALLCONV          fn(
+      void*                 context
+    , int                   severity
+    , clasp_char_t const*   fmt
+    , va_list               args
     )
     {
       STLSOFT_SUPPRESS_UNUSED(context);
 
-#ifdef PANTHEIOS_USE_WIDE_STRINGS
+#if defined(PANTHEIOS_USE_WIDE_STRINGS) && \
+    !defined(CLASP_USE_WIDE_STRINGS)
       STLSOFT_SUPPRESS_UNUSED(severity);
       STLSOFT_SUPPRESS_UNUSED(fmt);
       STLSOFT_SUPPRESS_UNUSED(args);
@@ -168,8 +173,13 @@ main_CLASP_outer_(
 static
 int
 main_memory_leak_trace_(
-  int     argc
-, char**  argv
+#ifdef LIBCLIMATE_USE_wmain
+  int       argc
+, wchar_t** argv
+#else /* ? LIBCLIMATE_USE_wmain */
+  int       argc
+, char**    argv
+#endif /* LIBCLIMATE_USE_wmain */
 )
 {
   return ::pantheios::extras::diagutil::main_leak_trace::invoke(argc, argv, main_CLASP_outer_);
@@ -180,12 +190,21 @@ main_memory_leak_trace_(
  */
 
 extern "C"
+#ifdef LIBCLIMATE_USE_wmain
+int
+libCLImate_wmain_entry_point_Cpp(
+  int       argc
+, wchar_t** argv
+, void*     reserved
+)
+#else /* ? LIBCLIMATE_USE_wmain */
 int
 libCLImate_main_entry_point_Cpp(
   int       argc
 , char**    argv
 , void*  /* reserved */
 )
+#endif /* LIBCLIMATE_USE_wmain */
 {
   return ::pantheios::extras::main::invoke(argc, argv, main_memory_leak_trace_);
 }

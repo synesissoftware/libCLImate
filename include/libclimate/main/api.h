@@ -4,7 +4,7 @@
  * Purpose:     libCLImate core API for C programs.
  *
  * Created:     13th July 2015
- * Updated:     11th October 2015
+ * Updated:     13th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -50,7 +50,7 @@
 
 #include <libclimate/basic_types.h>
 
-#include <libclimate/internal/clasp.clasp.h>
+#include <systemtools/clasp/clasp.h>
 
 #include <stdio.h>
 
@@ -144,6 +144,24 @@ libCLImate_main_entry_point_C(
 , void*   reserved
 );
 #endif /* !__cplusplus */
+
+
+/* wmain() */
+
+/* Currently only defined for C++ and Windows, neither of which are
+ * in-principle limits, just what's easiest for now.
+ */
+#if !defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) && \
+    defined(_WIN32) && \
+    defined(LIBCLIMATE_USE_wmain) && \
+    defined(__cplusplus)
+int
+libCLImate_wmain_entry_point_Cpp(
+  int       argc
+, wchar_t** argv
+, void*     reserved
+);
+#endif /* LIBCLIMATE_USE_wmain && C++ */
 
 
 /* exit */
