@@ -319,6 +319,10 @@ SOURCE="$(STLSOFT)\include\stlsoft\meta\capabilities.hpp"
 # End Source File
 # Begin Source File
 
+SOURCE="$(STLSOFT)\include\stlsoft\conversion\char_conversions.hpp"
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\stlsoft\string\char_traits.hpp"
 # End Source File
 # Begin Source File
@@ -709,6 +713,10 @@ SOURCE=..\..\..\include\libCLImate\main\api.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\include\libclimate\basic_types.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\include\libclimate\internal\clasp.clasp.h
 # End Source File
 # Begin Source File
@@ -718,6 +726,10 @@ SOURCE=..\..\..\include\libclimate\internal\clasp.main.h
 # Begin Source File
 
 SOURCE=..\..\..\include\libclimate\internal\clasp.main.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\include\libclimate\internal\common.h
 # End Source File
 # Begin Source File
 

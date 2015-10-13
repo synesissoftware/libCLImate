@@ -253,7 +253,15 @@ SOURCE="..\..\..\..\include\libCLImate\main\api.h"
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\..\include\libclimate\basic_types.h
+# End Source File
+# Begin Source File
+
 SOURCE="..\..\..\..\include\libCLImate\common.h"
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\..\include\libclimate\internal\common.h
 # End Source File
 # Begin Source File
 
