@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Internal Header Files">
+      <UniqueIdentifier>{729b5443-69e6-4f78-864b-4c6a81f3d3a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\unwind_and_exit.cpp">
@@ -52,6 +55,36 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\quiet_program_termination_exception.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\clasp.clasp.h">
+      <Filter>Header Files\Internal Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\clasp.clasp.hpp">
+      <Filter>Header Files\Internal Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\clasp.main.h">
+      <Filter>Header Files\Internal Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\clasp.main.hpp">
+      <Filter>Header Files\Internal Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.extras.diagutil.h">
+      <Filter>Header Files\Internal Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.extras.diagutil.hpp">
+      <Filter>Header Files\Internal Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.extras.main.h">
+      <Filter>Header Files\Internal Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.extras.main.hpp">
+      <Filter>Header Files\Internal Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.pantheios.h">
+      <Filter>Header Files\Internal Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libclimate\internal\stlsoft.stlsoft.h">
+      <Filter>Header Files\Internal Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 
 # TARGTYPE "Win32 (x86) Console Application" 0x0103
 
-CFG=example.C++.implicit_main.throw - Win32 Debug
+CFG=example.C++.implicit_main.throw - Win32 Unicode Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
@@ -13,12 +13,13 @@ CFG=example.C++.implicit_main.throw - Win32 Debug
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "example.C++.implicit_main.throw.mak" CFG="example.C++.implicit_main.throw - Win32 Debug"
+!MESSAGE NMAKE /f "example.C++.implicit_main.throw.mak" CFG="example.C++.implicit_main.throw - Win32 Unicode Debug"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
 !MESSAGE "example.C++.implicit_main.throw - Win32 Release" (based on "Win32 (x86) Console Application")
 !MESSAGE "example.C++.implicit_main.throw - Win32 Debug" (based on "Win32 (x86) Console Application")
+!MESSAGE "example.C++.implicit_main.throw - Win32 Unicode Debug" (based on "Win32 (x86) Console Application")
 !MESSAGE 
 
 # Begin Project
@@ -41,7 +42,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "Release"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /Yu"stdafx.h" /FD /c
+# ADD BASE CPP /nologo /W3 /GX /O2 /I "../../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FD /c
 # ADD CPP /nologo /W3 /GR /GX /O2 /I "../../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FD /c
 # SUBTRACT CPP /YX /Yc /Yu
 # ADD BASE RSC /l 0xc09 /d "NDEBUG"
@@ -66,7 +67,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "Debug"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Yu"stdafx.h" /FD /GZ /c
+# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /I "../../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FD /GZ /c
 # ADD CPP /nologo /W3 /Gm /GR /GX /Zi /Od /I "../../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FD /GZ /c
 # SUBTRACT CPP /YX /Yc /Yu
 # ADD BASE RSC /l 0xc09 /d "_DEBUG"
@@ -78,12 +79,40 @@ LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
 # ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /version:0.1 /subsystem:console /debug /machine:I386 /pdbtype:sept /libpath:"../../../../lib" /libpath:"$(PANTHEIOS_ROOT)/lib" /libpath:"$(CLASP_ROOT)/lib" /libpath:"$(RECLS_ROOT)/lib"
 
+!ELSEIF  "$(CFG)" == "example.C++.implicit_main.throw - Win32 Unicode Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "UDebug"
+# PROP BASE Intermediate_Dir "UDebug"
+# PROP BASE Ignore_Export_Lib 0
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "UDebug"
+# PROP Intermediate_Dir "UDebug"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /W3 /Gm /GR /GX /Zi /Od /I "../../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_UNICODE" /D "UNICODE" /FD /GZ /c
+# SUBTRACT BASE CPP /YX /Yc /Yu
+# ADD CPP /nologo /W3 /Gm /GR /GX /Zi /Od /I "../../../../include" /I "$(CLASP_ROOT)/include" /I "$(PANTHEIOS_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_UNICODE" /D "UNICODE" /FR /FD /GZ /c
+# SUBTRACT CPP /YX /Yc /Yu
+# ADD BASE RSC /l 0xc09 /d "_DEBUG"
+# ADD RSC /l 0xc09 /d "_DEBUG"
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /version:0.1 /subsystem:console /debug /machine:I386 /pdbtype:sept /libpath:"../../../../lib" /libpath:"$(PANTHEIOS_ROOT)/lib" /libpath:"$(CLASP_ROOT)/lib" /libpath:"$(RECLS_ROOT)/lib"
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /version:0.1 /subsystem:console /debug /machine:I386 /pdbtype:sept /libpath:"../../../../lib" /libpath:"$(PANTHEIOS_ROOT)/lib" /libpath:"$(CLASP_ROOT)/lib" /libpath:"$(RECLS_ROOT)/lib"
+
 !ENDIF 
 
 # Begin Target
 
 # Name "example.C++.implicit_main.throw - Win32 Release"
 # Name "example.C++.implicit_main.throw - Win32 Debug"
+# Name "example.C++.implicit_main.throw - Win32 Unicode Debug"
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
@@ -268,20 +297,20 @@ SOURCE="$(RECLS_ROOT)\include\recls\internal\retcodes.h"
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\clasp.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/clasp.h"
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\implicit_link.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/implicit_link.h"
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\internal\shim_macros.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/internal/shim_macros.h"
 # End Source File
 # End Group
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\libCLImate\main\api.h"
+SOURCE="..\..\..\..\include\libCLImate\main\api.h"
 # End Source File
 # Begin Source File
 
@@ -289,7 +318,7 @@ SOURCE=..\..\..\..\include\libCLImate\main\api.hpp
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\libCLImate\common.h"
+SOURCE="..\..\..\..\include\libCLImate\common.h"
 # End Source File
 # Begin Source File
 
@@ -297,7 +326,7 @@ SOURCE=..\..\..\..\include\libCLImate\implicit_link\core.h
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\libCLImate\main.h"
+SOURCE="..\..\..\..\include\libCLImate\main.h"
 # End Source File
 # Begin Source File
 
@@ -305,7 +334,7 @@ SOURCE=..\..\..\..\include\libCLImate\main.hpp
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\libCLImate\version.h"
+SOURCE="..\..\..\..\include\libCLImate\version.h"
 # End Source File
 # End Group
 # Begin Group "Resource Files"

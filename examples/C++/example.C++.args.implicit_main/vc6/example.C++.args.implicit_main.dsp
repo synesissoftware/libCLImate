@@ -268,24 +268,24 @@ SOURCE="$(RECLS_ROOT)\include\recls\internal\retcodes.h"
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\clasp.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/clasp.h"
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\implicit_link.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/implicit_link.h"
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\..\..\..\freelibs\systemtools\new\libraries\clasp\trunk\include\systemtools\clasp\internal\shim_macros.h
+SOURCE="$(CLASP_ROOT)/include/systemtools/clasp/internal/shim_macros.h"
 # End Source File
 # End Group
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\libCLImate\main\api.h"
+SOURCE="..\..\..\..\include\libCLImate\main\api.h"
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\libCLImate\common.h"
+SOURCE="..\..\..\..\include\libCLImate\common.h"
 # End Source File
 # Begin Source File
 
@@ -293,11 +293,11 @@ SOURCE=..\..\..\..\include\libCLImate\implicit_link\core.h
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\libCLImate\main.h"
+SOURCE="..\..\..\..\include\libCLImate\main.h"
 # End Source File
 # Begin Source File
 
-SOURCE="$(SYNESIS_DEV)-2015\libraries\libCLImate\include\libCLImate\version.h"
+SOURCE="..\..\..\..\include\libCLImate\version.h"
 # End Source File
 # End Group
 # Begin Group "Resource Files"

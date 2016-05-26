@@ -43,6 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\libclimate\common.h" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\clasp.clasp.h" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\clasp.clasp.hpp" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\clasp.main.h" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\clasp.main.hpp" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.extras.diagutil.h" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.extras.diagutil.hpp" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.extras.main.h" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.extras.main.hpp" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\pantheios.pantheios.h" />
+    <ClInclude Include="..\..\..\include\libclimate\internal\stlsoft.stlsoft.h" />
     <ClInclude Include="..\..\..\include\libclimate\main.h" />
     <ClInclude Include="..\..\..\include\libclimate\main.hpp" />
     <ClInclude Include="..\..\..\include\libclimate\main\api.h" />

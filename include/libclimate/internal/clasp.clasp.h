@@ -4,7 +4,7 @@
  * Purpose:     Version-ensuring include of systemtools/clasp/clasp.h
  *
  * Created:     9th September 2015
- * Updated:     9th September 2015
+ * Updated:     13th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -43,11 +43,13 @@
  * includes
  */
 
+#include <libclimate/internal/common.h>
+
 #include <systemtools/clasp/clasp.h>
 
 #if defined(CLASP_VER)
-# if CLASP_VER < 0x000a0102
-#  error Requires CLASP 0.10.2 or later
+# if CLASP_VER < 0x000b0101
+#  error Requires CLASP 0.11.1 or later
 # endif
 #else
 # error Error in CLASP clasp.h header

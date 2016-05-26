@@ -4,7 +4,7 @@
  * Purpose:     libCLImate common include.
  *
  * Created:     13th July 2015
- * Updated:     9th September 2015
+ * Updated:     13th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -47,6 +47,14 @@
  */
 
 #include <libclimate/version.h>
+
+/* /////////////////////////////////////////////////////////////////////////
+ * feature discrimination
+ */
+
+#ifdef LIBCLIMATE_USE_wmain
+# define CLASP_USE_WIDE_STRINGS
+#endif
 
 /* ////////////////////////////////////////////////////////////////////// */
 

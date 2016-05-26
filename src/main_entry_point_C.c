@@ -6,7 +6,7 @@
  *              command-line argument handling (CLASP).
  *
  * Created:     12nd July 2015
- * Updated:     9th September 2015
+ * Updated:     13th October 2015
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -64,15 +64,22 @@
 static
 void
 CLASP_CALLCONV CLASP_Pantheios_log_(
-  void*       context
-, int         severity
-, char const* fmt
-, va_list     args
+  void*                 context
+, int                   severity
+, clasp_char_t const*   fmt
+, va_list               args
 )
 {
-  ((void)context);
+  STLSOFT_SUPPRESS_UNUSED(context);
 
+#if defined(PANTHEIOS_USE_WIDE_STRINGS) && \
+    !defined(CLASP_USE_WIDE_STRINGS)
+  STLSOFT_SUPPRESS_UNUSED(severity);
+  STLSOFT_SUPPRESS_UNUSED(fmt);
+  STLSOFT_SUPPRESS_UNUSED(args);
+#else
   pantheios_logvprintf(severity, fmt, args);
+#endif
 }
 
 static
