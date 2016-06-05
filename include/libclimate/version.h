@@ -48,7 +48,7 @@
 
 #define LIBCLIMATE_VER_MAJOR            0
 #define LIBCLIMATE_VER_MINOR            3
-#define LIBCLIMATE_VER_REVISION         4
+#define LIBCLIMATE_VER_REVISION         5
 
 #ifndef LIBCLIMATE_DOCUMENTATION_SKIP_SECTION
  /* libCLImate completely supercedes Synesis Software Command Line Interface library */
