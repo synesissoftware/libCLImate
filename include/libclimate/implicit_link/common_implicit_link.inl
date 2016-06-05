@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        common_implicit_link.i
+ * File:        common_implicit_link.inl
  *
  * Purpose:     Common implicit link functionality for libCLImate
  *
  * Created:     6th August 2015
- * Updated:     11th October 2015
+ * Updated:     5th June 2016
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2015-2016, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
