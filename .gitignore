@@ -6,6 +6,8 @@ _internal/
 bin/
 lib/
 
+ipch/
+
 include/shwild/
 include/xcontract/
 include/xcover/
