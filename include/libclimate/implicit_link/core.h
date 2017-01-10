@@ -4,7 +4,7 @@
  * Purpose:     Implicit linking for libCLImate
  *
  * Created:     12th July 2015
- * Updated:     13th October 2015
+ * Updated:     10th January 2017
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -48,14 +48,14 @@
 #define LIBCLIMATE_INCL_LIBCLIMATE_IMPLICIT_LINK_H_CORE
 
 /* /////////////////////////////////////////////////////////////////////////
- * Version information
+ * version information
  */
 
 #ifndef LIBCLIMATE_DOCUMENTATION_SKIP_SECTION
 # define LIBCLIMATE_VER_SYNESISSOFTWARE_COMMANDLINEINTERFACE_IMPLICIT_LINK_H_CORE_MAJOR    2
 # define LIBCLIMATE_VER_SYNESISSOFTWARE_COMMANDLINEINTERFACE_IMPLICIT_LINK_H_CORE_MINOR    1
 # define LIBCLIMATE_VER_SYNESISSOFTWARE_COMMANDLINEINTERFACE_IMPLICIT_LINK_H_CORE_REVISION 1
-# define LIBCLIMATE_VER_SYNESISSOFTWARE_COMMANDLINEINTERFACE_IMPLICIT_LINK_H_CORE_EDIT     5
+# define LIBCLIMATE_VER_SYNESISSOFTWARE_COMMANDLINEINTERFACE_IMPLICIT_LINK_H_CORE_EDIT     6
 #endif /* !LIBCLIMATE_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -65,14 +65,14 @@
 #include <libclimate/common.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Macros and definitions
+ * macros and definitions
  */
 
 #define LIBCLIMATE_STRINGIZE_(x)     #x
 #define LIBCLIMATE_STRINGIZE(x)      LIBCLIMATE_STRINGIZE_(x)
 
 /* /////////////////////////////////////////////////////////////////////////
- * Architecture discrimination
+ * architecture discrimination
  */
 
 #ifdef LIBCLIMATE_ARCH_IS_X86_
@@ -100,7 +100,7 @@
 #endif /* _M_?? */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Implicit linking
+ * implicit linking
  */
 
 #if defined(_WIN32) || \

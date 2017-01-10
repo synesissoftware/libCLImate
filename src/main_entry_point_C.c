@@ -6,7 +6,7 @@
  *              command-line argument handling (CLASP).
  *
  * Created:     12nd July 2015
- * Updated:     13th October 2015
+ * Updated:     10th January 2017
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -58,7 +58,7 @@
 #include <stdarg.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Implementation
+ * implementation
  */
 
 static
