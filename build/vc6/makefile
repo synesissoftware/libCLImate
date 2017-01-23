@@ -664,41 +664,41 @@ TARGS_EX=\
 ########################################
 # libraries
 
-OBJ_CORE_exitimm_DLL_D	=	$(PROJ_OBJ_DIR)\exit_immediately$(LIBCLI_SUF_DLL_D).obj
-OBJ_CORE_entryC_DLL_D	=	$(PROJ_OBJ_DIR)\main_entry_point_C$(LIBCLI_SUF_DLL_D).obj
-OBJ_CORE_entryCpp_DLL_D	=	$(PROJ_OBJ_DIR)\main_entry_point_Cpp$(LIBCLI_SUF_DLL_D).obj
-OBJ_CORE_unwindex_DLL_D	=	$(PROJ_OBJ_DIR)\unwind_and_exit$(LIBCLI_SUF_DLL_D).obj
-OBJ_CORE_usageetc_DLL_D	=	$(PROJ_OBJ_DIR)\usage_etc$(LIBCLI_SUF_DLL_D).obj
+OBJ_CORE_exitimm_DLL_D	=	$(PROJ_OBJ_DIR)\core.exit_immediately$(LIBCLI_SUF_DLL_D).obj
+OBJ_CORE_entryC_DLL_D	=	$(PROJ_OBJ_DIR)\core.main_entry_point_C$(LIBCLI_SUF_DLL_D).obj
+OBJ_CORE_entryCpp_DLL_D	=	$(PROJ_OBJ_DIR)\core.main_entry_point_Cpp$(LIBCLI_SUF_DLL_D).obj
+OBJ_CORE_unwindex_DLL_D	=	$(PROJ_OBJ_DIR)\core.unwind_and_exit$(LIBCLI_SUF_DLL_D).obj
+OBJ_CORE_usageetc_DLL_D	=	$(PROJ_OBJ_DIR)\core.usage_etc$(LIBCLI_SUF_DLL_D).obj
 
-OBJ_CORE_exitimm_MT_D	=	$(PROJ_OBJ_DIR)\exit_immediately$(LIBCLI_SUF_MT_D).obj
-OBJ_CORE_entryC_MT_D	=	$(PROJ_OBJ_DIR)\main_entry_point_C$(LIBCLI_SUF_MT_D).obj
-OBJ_CORE_entryCpp_MT_D	=	$(PROJ_OBJ_DIR)\main_entry_point_Cpp$(LIBCLI_SUF_MT_D).obj
-OBJ_CORE_unwindex_MT_D	=	$(PROJ_OBJ_DIR)\unwind_and_exit$(LIBCLI_SUF_MT_D).obj
-OBJ_CORE_usageetc_MT_D	=	$(PROJ_OBJ_DIR)\usage_etc$(LIBCLI_SUF_MT_D).obj
+OBJ_CORE_exitimm_MT_D	=	$(PROJ_OBJ_DIR)\core.exit_immediately$(LIBCLI_SUF_MT_D).obj
+OBJ_CORE_entryC_MT_D	=	$(PROJ_OBJ_DIR)\core.main_entry_point_C$(LIBCLI_SUF_MT_D).obj
+OBJ_CORE_entryCpp_MT_D	=	$(PROJ_OBJ_DIR)\core.main_entry_point_Cpp$(LIBCLI_SUF_MT_D).obj
+OBJ_CORE_unwindex_MT_D	=	$(PROJ_OBJ_DIR)\core.unwind_and_exit$(LIBCLI_SUF_MT_D).obj
+OBJ_CORE_usageetc_MT_D	=	$(PROJ_OBJ_DIR)\core.usage_etc$(LIBCLI_SUF_MT_D).obj
 
-OBJ_CORE_exitimm_ST_D	=	$(PROJ_OBJ_DIR)\exit_immediately$(LIBCLI_SUF_ST_D).obj
-OBJ_CORE_entryC_ST_D	=	$(PROJ_OBJ_DIR)\main_entry_point_C$(LIBCLI_SUF_ST_D).obj
-OBJ_CORE_entryCpp_ST_D	=	$(PROJ_OBJ_DIR)\main_entry_point_Cpp$(LIBCLI_SUF_ST_D).obj
-OBJ_CORE_unwindex_ST_D	=	$(PROJ_OBJ_DIR)\unwind_and_exit$(LIBCLI_SUF_ST_D).obj
-OBJ_CORE_usageetc_ST_D	=	$(PROJ_OBJ_DIR)\usage_etc$(LIBCLI_SUF_ST_D).obj
+OBJ_CORE_exitimm_ST_D	=	$(PROJ_OBJ_DIR)\core.exit_immediately$(LIBCLI_SUF_ST_D).obj
+OBJ_CORE_entryC_ST_D	=	$(PROJ_OBJ_DIR)\core.main_entry_point_C$(LIBCLI_SUF_ST_D).obj
+OBJ_CORE_entryCpp_ST_D	=	$(PROJ_OBJ_DIR)\core.main_entry_point_Cpp$(LIBCLI_SUF_ST_D).obj
+OBJ_CORE_unwindex_ST_D	=	$(PROJ_OBJ_DIR)\core.unwind_and_exit$(LIBCLI_SUF_ST_D).obj
+OBJ_CORE_usageetc_ST_D	=	$(PROJ_OBJ_DIR)\core.usage_etc$(LIBCLI_SUF_ST_D).obj
 
-OBJ_CORE_exitimm_DLL_R	=	$(PROJ_OBJ_DIR)\exit_immediately$(LIBCLI_SUF_DLL_R).obj
-OBJ_CORE_entryC_DLL_R	=	$(PROJ_OBJ_DIR)\main_entry_point_C$(LIBCLI_SUF_DLL_R).obj
-OBJ_CORE_entryCpp_DLL_R	=	$(PROJ_OBJ_DIR)\main_entry_point_Cpp$(LIBCLI_SUF_DLL_R).obj
-OBJ_CORE_unwindex_DLL_R	=	$(PROJ_OBJ_DIR)\unwind_and_exit$(LIBCLI_SUF_DLL_R).obj
-OBJ_CORE_usageetc_DLL_R	=	$(PROJ_OBJ_DIR)\usage_etc$(LIBCLI_SUF_DLL_R).obj
+OBJ_CORE_exitimm_DLL_R	=	$(PROJ_OBJ_DIR)\core.exit_immediately$(LIBCLI_SUF_DLL_R).obj
+OBJ_CORE_entryC_DLL_R	=	$(PROJ_OBJ_DIR)\core.main_entry_point_C$(LIBCLI_SUF_DLL_R).obj
+OBJ_CORE_entryCpp_DLL_R	=	$(PROJ_OBJ_DIR)\core.main_entry_point_Cpp$(LIBCLI_SUF_DLL_R).obj
+OBJ_CORE_unwindex_DLL_R	=	$(PROJ_OBJ_DIR)\core.unwind_and_exit$(LIBCLI_SUF_DLL_R).obj
+OBJ_CORE_usageetc_DLL_R	=	$(PROJ_OBJ_DIR)\core.usage_etc$(LIBCLI_SUF_DLL_R).obj
 
-OBJ_CORE_exitimm_MT_R	=	$(PROJ_OBJ_DIR)\exit_immediately$(LIBCLI_SUF_MT_R).obj
-OBJ_CORE_entryC_MT_R	=	$(PROJ_OBJ_DIR)\main_entry_point_C$(LIBCLI_SUF_MT_R).obj
-OBJ_CORE_entryCpp_MT_R	=	$(PROJ_OBJ_DIR)\main_entry_point_Cpp$(LIBCLI_SUF_MT_R).obj
-OBJ_CORE_unwindex_MT_R	=	$(PROJ_OBJ_DIR)\unwind_and_exit$(LIBCLI_SUF_MT_R).obj
-OBJ_CORE_usageetc_MT_R	=	$(PROJ_OBJ_DIR)\usage_etc$(LIBCLI_SUF_MT_R).obj
+OBJ_CORE_exitimm_MT_R	=	$(PROJ_OBJ_DIR)\core.exit_immediately$(LIBCLI_SUF_MT_R).obj
+OBJ_CORE_entryC_MT_R	=	$(PROJ_OBJ_DIR)\core.main_entry_point_C$(LIBCLI_SUF_MT_R).obj
+OBJ_CORE_entryCpp_MT_R	=	$(PROJ_OBJ_DIR)\core.main_entry_point_Cpp$(LIBCLI_SUF_MT_R).obj
+OBJ_CORE_unwindex_MT_R	=	$(PROJ_OBJ_DIR)\core.unwind_and_exit$(LIBCLI_SUF_MT_R).obj
+OBJ_CORE_usageetc_MT_R	=	$(PROJ_OBJ_DIR)\core.usage_etc$(LIBCLI_SUF_MT_R).obj
 
-OBJ_CORE_exitimm_ST_R	=	$(PROJ_OBJ_DIR)\exit_immediately$(LIBCLI_SUF_ST_R).obj
-OBJ_CORE_entryC_ST_R	=	$(PROJ_OBJ_DIR)\main_entry_point_C$(LIBCLI_SUF_ST_R).obj
-OBJ_CORE_entryCpp_ST_R	=	$(PROJ_OBJ_DIR)\main_entry_point_Cpp$(LIBCLI_SUF_ST_R).obj
-OBJ_CORE_unwindex_ST_R	=	$(PROJ_OBJ_DIR)\unwind_and_exit$(LIBCLI_SUF_ST_R).obj
-OBJ_CORE_usageetc_ST_R	=	$(PROJ_OBJ_DIR)\usage_etc$(LIBCLI_SUF_ST_R).obj
+OBJ_CORE_exitimm_ST_R	=	$(PROJ_OBJ_DIR)\core.exit_immediately$(LIBCLI_SUF_ST_R).obj
+OBJ_CORE_entryC_ST_R	=	$(PROJ_OBJ_DIR)\core.main_entry_point_C$(LIBCLI_SUF_ST_R).obj
+OBJ_CORE_entryCpp_ST_R	=	$(PROJ_OBJ_DIR)\core.main_entry_point_Cpp$(LIBCLI_SUF_ST_R).obj
+OBJ_CORE_unwindex_ST_R	=	$(PROJ_OBJ_DIR)\core.unwind_and_exit$(LIBCLI_SUF_ST_R).obj
+OBJ_CORE_usageetc_ST_R	=	$(PROJ_OBJ_DIR)\core.usage_etc$(LIBCLI_SUF_ST_R).obj
 
 OBJS_CORE=\
  \
@@ -1060,34 +1060,54 @@ $(PROJ_BIN_DIR)\dir_exists:
 
 # compile targets
 
-compile.libs.core:			prep $(OBJS_CORE)
+compile.libs.core:			prep	$(OBJS_CORE)
 
-compile.libs:				compile.libs.core
+compile.libs:						compile.libs.core
 
-compile.examples:			prep $(OBJS_EX)
+compile.examples:			prep	$(OBJS_EX)
 
-
-
-
-
-
-
-
+compile:	\
+ compile.libs\
+ compile.examples\
+ \
 
 
 
 # build targets
 
-build.libs.core:			prep $(LIBS_CORE)
+build.libs.core:			prep	$(LIBS_CORE)
 
-build.libs: 				      build.libs.core
+build.libs: 						build.libs.core
 
-build.examples:				prep $(TARGS_EX)
+build.examples:				prep	$(TARGS_EX)
 
 build:	\
  build.libs\
  build.examples\
  \
+
+
+# clean targets
+
+clean.libs.core:
+	@echo cleaning core libraries ...
+	@-if exist core.*.obj $(RM) core.*.obj
+	@-if exist core.*.pdb $(RM) core.*.pdb
+	@-if exist $(PROJ_LIB_DIR)\$(PROJ_TAG_VER).core.$(COMP_ARCH_OS_TAG)*.lib $(RM) $(PROJ_LIB_DIR)\$(PROJ_TAG_VER).core.$(COMP_ARCH_OS_TAG)*.lib
+
+clean.libs:							clean.libs.core
+
+clean.examples:
+	@echo cleaning examples ...
+	@-if exist ex.*.obj $(RM) ex.*.obj
+	@-if exist ex.*.pdb $(RM) ex.*.pdb
+	@-if exist $(PROJ_BIN_DIR)\$(PROJ_TAG_VER).ex.*.$(COMP_ARCH_OS_TAG)*.exe $(RM) $(PROJ_BIN_DIR)\$(PROJ_TAG_VER).ex.*.$(COMP_ARCH_OS_TAG)*.exe
+
+clean:	\
+ clean.libs\
+ clean.examples\
+ \
+
 
 ############################################################################
 # build targets
