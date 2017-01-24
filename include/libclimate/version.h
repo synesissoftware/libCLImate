@@ -4,11 +4,11 @@
  * Purpose:     libCLImate library version.
  *
  * Created:     13th July 2015
- * Updated:     5th June 2016
+ * Updated:     24th January 2017
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
- * Copyright (c) 2015-2016, Matthew Wilson and Synesis Software
+ * Copyright (c) 2015-2017, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,7 +48,7 @@
 
 #define LIBCLIMATE_VER_MAJOR            0
 #define LIBCLIMATE_VER_MINOR            3
-#define LIBCLIMATE_VER_REVISION         5
+#define LIBCLIMATE_VER_REVISION         6
 
 #ifndef LIBCLIMATE_DOCUMENTATION_SKIP_SECTION
  /* libCLImate completely supercedes Synesis Software Command Line Interface library */
@@ -62,3 +62,4 @@
 #endif /* !SYNSOFT_INCL_LIBCLIMATE_H_VERSION */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+
