@@ -358,11 +358,13 @@ CC_F_COMPILE_ONLY		=	-c
 CC_F_MAXIMUM_SPEED		=	-O2
 CC_F_MINIMUM_SIZE		=	-O1
 CC_F_NOLOGO 			=	-nologo
-CC_F_WARNING_MAX		=	-W3
 CC_F_WARNING_ERR		=	-WX
+CC_F_WARNING_MAX		=	-W3
+CC_F_WARNING_SUP		=	
 CC_F_WARNINGS_LIMIT		=	
 CC_EX_F_WARNING_ERR		=	$(CC_F_WARNING_ERR)
 CC_EX_F_WARNING_MAX		=	$(CC_F_WARNING_MAX)
+CC_EX_F_WARNING_SUP		=	$(CC_F_WARNING_SUP)
 
 CPPC_F_ADDITIONAL		=	
 CPPC_F_COMPILE_ONLY 	=	-c
@@ -378,9 +380,11 @@ CPPC_F_RTTI_OFF 		=	-GR-
 CPPC_F_RTTI_ON			=	-GR
 CPPC_F_WARNING_ERR		=	-WX
 CPPC_F_WARNING_MAX		=	-W3
+CPPC_F_WARNING_SUP		=	
 CPPC_F_WARNINGS_LIMIT	=	
 CPPC_EX_F_WARNING_ERR	=	$(CPPC_F_WARNING_ERR)
 CPPC_EX_F_WARNING_MAX	=	$(CPPC_F_WARNING_MAX)
+CPPC_EX_F_WARNING_SUP	=	$(CPPC_F_WARNING_SUP)
 
 CC_FLAGS_COMMON=\
  $(CC_F_ADDITIONAL)\
@@ -388,6 +392,7 @@ CC_FLAGS_COMMON=\
  $(CC_F_NOLOGO)\
  $(CC_F_WARNING_ERR)\
  $(CC_F_WARNING_MAX)\
+ $(CC_F_WARNING_SUP)\
  $(CC_F_WARNINGS_LIMIT)\
  $(CC_CUSTOM_FLAGS)\
  \
@@ -400,6 +405,7 @@ CPPC_FLAGS_COMMON=\
  $(CPPC_F_RTTI)\
  $(CPPC_F_WARNING_ERR)\
  $(CPPC_F_WARNING_MAX)\
+ $(CPPC_F_WARNING_SUP)\
  $(CPPC_F_WARNINGS_LIMIT)\
  $(CPPC_CUSTOM_FLAGS)\
  \
@@ -407,6 +413,7 @@ CPPC_FLAGS_COMMON=\
 CC_EX_FLAGS_COMMON=\
  $(CC_EX_F_WARNING_ERR)\
  $(CC_EX_F_WARNING_MAX)\
+ $(CC_EX_F_WARNING_SUP)\
  $(CC_F_ADDITIONAL)\
  $(CC_F_COMPILE_ONLY)\
  $(CC_F_NOLOGO)\
@@ -417,6 +424,7 @@ CC_EX_FLAGS_COMMON=\
 CPPC_EX_FLAGS_COMMON=\
  $(CPPC_EX_F_WARNING_ERR)\
  $(CPPC_EX_F_WARNING_MAX)\
+ $(CPPC_EX_F_WARNING_SUP)\
  $(CPPC_F_ADDITIONAL)\
  $(CPPC_F_COMPILE_ONLY)\
  $(CPPC_F_EXCEPTIONS_ON)\
@@ -485,6 +493,7 @@ AR_ARGS_COMMON=\
  $(AR_F_ARCHITECTURE)\
  $(AR_F_WARNING_ERR)\
  $(AR_F_WARNING_MAX)\
+ $(AR_F_WARNING_SUP)\
  $(AR_F_NOLOGO)\
  \
 
@@ -513,6 +522,7 @@ LD_ARGS_COMMON=\
  $(LD_F_ARCHITECTURE)\
  $(LD_F_WARNING_ERR)\
  $(LD_F_WARNING_MAX)\
+ $(LD_F_WARNING_SUP)\
  $(LD_F_NOLOGO)\
  \
 
@@ -1028,19 +1038,22 @@ prep.files.for.os:	$(PROJ_MAKEFILE_NAME)\
 prep:	prep.files.for.os
 
 
-check.lib.dir:		$(PROJ_MAKEFILE_NAME) $(PROJ_LIB_DIR)\.dir_exists
+CHECK_FILE_lib_dir	=	$(PROJ_LIB_DIR)\.dir_exists
+CHECK_FILE_bin_dir	=	$(PROJ_BIN_DIR)\.dir_exists
 
-$(PROJ_LIB_DIR)\.dir_exists:
+check.lib.dir:		$(PROJ_MAKEFILE_NAME) $(CHECK_FILE_lib_dir)
+
+$(CHECK_FILE_lib_dir):
 	@-if not exist $(PROJ_LIB_DIR)\NUL mkdir $(PROJ_LIB_DIR)
-	echo .dir_exists > $(PROJ_LIB_DIR)\.dir_exists
-	attrib +h $(PROJ_LIB_DIR)\.dir_exists
+	@echo .dir_exists > $(CHECK_FILE_lib_dir)
+	@attrib +h $(CHECK_FILE_lib_dir)
 
-check.bin.dir:		$(PROJ_MAKEFILE_NAME) $(PROJ_BIN_DIR)\.dir_exists
+check.bin.dir:		$(PROJ_MAKEFILE_NAME) $(CHECK_FILE_bin_dir)
 
-$(PROJ_BIN_DIR)\.dir_exists:
+$(CHECK_FILE_bin_dir):
 	@-if not exist $(PROJ_BIN_DIR)\NUL mkdir $(PROJ_BIN_DIR)
-	echo .dir_exists > $(PROJ_BIN_DIR)\.dir_exists
-	attrib +h $(PROJ_BIN_DIR)\.dir_exists
+	echo .dir_exists > $(CHECK_FILE_bin_dir)
+	attrib +h $(CHECK_FILE_bin_dir)
 
 
 # compile targets
@@ -1109,7 +1122,7 @@ OBJS_CORE_DLL_D=\
  $(OBJ_CORE_usageetc_DLL_D)\
  \
 
-$(LIB_CORE_DLL_D):	check.lib.dir $(OBJS_CORE_DLL_D)
+$(LIB_CORE_DLL_D):	$(CHECK_FILE_lib_dir) $(OBJS_CORE_DLL_D)
 	$(AR) $(AR_ARGS_DLL_D) -out:$@ $(OBJS_CORE_DLL_D)
 
 $(OBJ_CORE_exitimm_DLL_D): $(PROJ_SRC_DIR)\exit_immediately.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1137,7 +1150,7 @@ OBJS_CORE_DLL_R=\
  $(OBJ_CORE_usageetc_DLL_R)\
  \
 
-$(LIB_CORE_DLL_R):	check.lib.dir $(OBJS_CORE_DLL_R)
+$(LIB_CORE_DLL_R):	$(CHECK_FILE_lib_dir) $(OBJS_CORE_DLL_R)
 	$(AR) $(AR_ARGS_DLL_R) -out:$@ $(OBJS_CORE_DLL_R)
 
 $(OBJ_CORE_exitimm_DLL_R): $(PROJ_SRC_DIR)\exit_immediately.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1165,7 +1178,7 @@ OBJS_CORE_MT_D=\
  $(OBJ_CORE_usageetc_MT_D)\
  \
 
-$(LIB_CORE_MT_D):	check.lib.dir $(OBJS_CORE_MT_D)
+$(LIB_CORE_MT_D):	$(CHECK_FILE_lib_dir) $(OBJS_CORE_MT_D)
 	$(AR) $(AR_ARGS_MT_D) -out:$@ $(OBJS_CORE_MT_D)
 
 $(OBJ_CORE_exitimm_MT_D): $(PROJ_SRC_DIR)\exit_immediately.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1193,7 +1206,7 @@ OBJS_CORE_MT_R=\
  $(OBJ_CORE_usageetc_MT_R)\
  \
 
-$(LIB_CORE_MT_R):	check.lib.dir $(OBJS_CORE_MT_R)
+$(LIB_CORE_MT_R):	$(CHECK_FILE_lib_dir) $(OBJS_CORE_MT_R)
 	$(AR) $(AR_ARGS_MT_R) -out:$@ $(OBJS_CORE_MT_R)
 
 $(OBJ_CORE_exitimm_MT_R): $(PROJ_SRC_DIR)\exit_immediately.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1221,7 +1234,7 @@ OBJS_CORE_ST_D=\
  $(OBJ_CORE_usageetc_ST_D)\
  \
 
-$(LIB_CORE_ST_D):	check.lib.dir $(OBJS_CORE_ST_D)
+$(LIB_CORE_ST_D):	$(CHECK_FILE_lib_dir) $(OBJS_CORE_ST_D)
 	$(AR) $(AR_ARGS_ST_D) -out:$@ $(OBJS_CORE_ST_D)
 
 $(OBJ_CORE_exitimm_ST_D): $(PROJ_SRC_DIR)\exit_immediately.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1249,7 +1262,7 @@ OBJS_CORE_ST_R=\
  $(OBJ_CORE_usageetc_ST_R)\
  \
 
-$(LIB_CORE_ST_R):	check.lib.dir $(OBJS_CORE_ST_R)
+$(LIB_CORE_ST_R):	$(CHECK_FILE_lib_dir) $(OBJS_CORE_ST_R)
 	$(AR) $(AR_ARGS_ST_R) -out:$@ $(OBJS_CORE_ST_R)
 
 $(OBJ_CORE_exitimm_ST_R): $(PROJ_SRC_DIR)\exit_immediately.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1286,8 +1299,8 @@ OBJS_EX_C_args_DLL_D=\
  $(OBJ_EX_C_args_impl_DLL_D)\
  \
 
-$(TARG_EX_C_args_DLL_D):	check.bin.dir $(OBJS_EX_C_args_DLL_D) $(LIB_CORE_DLL_D) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_DLL_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_DLL_D) $(LIB_CORE_DLL_D) $(LIBS_3PTY_DLL_D) $(LIBS_COMMON_DLL_D)
+$(TARG_EX_C_args_DLL_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_DLL_D) $(LIB_CORE_DLL_D) $(PROJ_MAKEFILE_NAME)
+	$(LD) $(LD_ARGS_DLL_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_DLL_D) $(LIB_CORE_DLL_D) $(LIBS_3PTY_DLL_D) $(LIBS_COMMON_DLL_D)	
 
 $(OBJ_EX_C_args_entr_DLL_D): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_DLL_D) $(CC_EX_FLAGS_DLL_D) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c
@@ -1310,8 +1323,8 @@ OBJS_EX_C_args_DLL_R=\
  $(OBJ_EX_C_args_impl_DLL_R)\
  \
 
-$(TARG_EX_C_args_DLL_R):	check.bin.dir $(OBJS_EX_C_args_DLL_R) $(LIB_CORE_DLL_R) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_DLL_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_DLL_R) $(LIB_CORE_DLL_R) $(LIBS_3PTY_DLL_R) $(LIBS_COMMON_DLL_R)
+$(TARG_EX_C_args_DLL_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_DLL_R) $(LIB_CORE_DLL_R) $(PROJ_MAKEFILE_NAME)
+	$(LD) $(LD_ARGS_DLL_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_DLL_R) $(LIB_CORE_DLL_R) $(LIBS_3PTY_DLL_R) $(LIBS_COMMON_DLL_R)	
 
 $(OBJ_EX_C_args_entr_DLL_R): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_DLL_R) $(CC_EX_FLAGS_DLL_R) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c
@@ -1334,8 +1347,8 @@ OBJS_EX_C_args_MT_D=\
  $(OBJ_EX_C_args_impl_MT_D)\
  \
 
-$(TARG_EX_C_args_MT_D):	check.bin.dir $(OBJS_EX_C_args_MT_D) $(LIB_CORE_MT_D) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_MT_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_MT_D) $(LIB_CORE_MT_D) $(LIBS_3PTY_MT_D) $(LIBS_COMMON_MT_D)
+$(TARG_EX_C_args_MT_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_MT_D) $(LIB_CORE_MT_D) $(PROJ_MAKEFILE_NAME)
+	$(LD) $(LD_ARGS_MT_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_MT_D) $(LIB_CORE_MT_D) $(LIBS_3PTY_MT_D) $(LIBS_COMMON_MT_D)	
 
 $(OBJ_EX_C_args_entr_MT_D): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_MT_D) $(CC_EX_FLAGS_MT_D) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c
@@ -1358,8 +1371,8 @@ OBJS_EX_C_args_MT_R=\
  $(OBJ_EX_C_args_impl_MT_R)\
  \
 
-$(TARG_EX_C_args_MT_R):	check.bin.dir $(OBJS_EX_C_args_MT_R) $(LIB_CORE_MT_R) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_MT_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_MT_R) $(LIB_CORE_MT_R) $(LIBS_3PTY_MT_R) $(LIBS_COMMON_MT_R)
+$(TARG_EX_C_args_MT_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_MT_R) $(LIB_CORE_MT_R) $(PROJ_MAKEFILE_NAME)
+	$(LD) $(LD_ARGS_MT_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_MT_R) $(LIB_CORE_MT_R) $(LIBS_3PTY_MT_R) $(LIBS_COMMON_MT_R)	
 
 $(OBJ_EX_C_args_entr_MT_R): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_MT_R) $(CC_EX_FLAGS_MT_R) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c
@@ -1382,8 +1395,8 @@ OBJS_EX_C_args_ST_D=\
  $(OBJ_EX_C_args_impl_ST_D)\
  \
 
-$(TARG_EX_C_args_ST_D):	check.bin.dir $(OBJS_EX_C_args_ST_D) $(LIB_CORE_ST_D) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_ST_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_ST_D) $(LIB_CORE_ST_D) $(LIBS_3PTY_ST_D) $(LIBS_COMMON_ST_D)
+$(TARG_EX_C_args_ST_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_ST_D) $(LIB_CORE_ST_D) $(PROJ_MAKEFILE_NAME)
+	$(LD) $(LD_ARGS_ST_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_ST_D) $(LIB_CORE_ST_D) $(LIBS_3PTY_ST_D) $(LIBS_COMMON_ST_D)	
 
 $(OBJ_EX_C_args_entr_ST_D): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_ST_D) $(CC_EX_FLAGS_ST_D) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c
@@ -1406,8 +1419,8 @@ OBJS_EX_C_args_ST_R=\
  $(OBJ_EX_C_args_impl_ST_R)\
  \
 
-$(TARG_EX_C_args_ST_R):	check.bin.dir $(OBJS_EX_C_args_ST_R) $(LIB_CORE_ST_R) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_ST_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_ST_R) $(LIB_CORE_ST_R) $(LIBS_3PTY_ST_R) $(LIBS_COMMON_ST_R)
+$(TARG_EX_C_args_ST_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_ST_R) $(LIB_CORE_ST_R) $(PROJ_MAKEFILE_NAME)
+	$(LD) $(LD_ARGS_ST_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_ST_R) $(LIB_CORE_ST_R) $(LIBS_3PTY_ST_R) $(LIBS_COMMON_ST_R)	
 
 $(OBJ_EX_C_args_entr_ST_R): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_ST_R) $(CC_EX_FLAGS_ST_R) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c
@@ -1434,7 +1447,7 @@ OBJS_EX_C_impl_DLL_D=\
  $(OBJ_EX_C_impl_impl_DLL_D)\
  \
 
-$(TARG_EX_C_impl_DLL_D):	check.bin.dir $(OBJS_EX_C_impl_DLL_D) $(LIB_CORE_DLL_D) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_C_impl_DLL_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_impl_DLL_D) $(LIB_CORE_DLL_D) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_DLL_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_impl_noimpl_DLL_D) $(LIB_CORE_DLL_D) $(LIBS_3PTY_DLL_D) $(LIBS_COMMON_DLL_D)
 
 $(OBJ_EX_C_impl_diag_DLL_D): $(PROJ_EXAMPLES_DIR)\C\example.C.args.implicit_main\diagnostics.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1458,7 +1471,7 @@ OBJS_EX_C_impl_DLL_R=\
  $(OBJ_EX_C_impl_impl_DLL_R)\
  \
 
-$(TARG_EX_C_impl_DLL_R):	check.bin.dir $(OBJS_EX_C_impl_DLL_R) $(LIB_CORE_DLL_R) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_C_impl_DLL_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_impl_DLL_R) $(LIB_CORE_DLL_R) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_DLL_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_impl_noimpl_DLL_R) $(LIB_CORE_DLL_R) $(LIBS_3PTY_DLL_R) $(LIBS_COMMON_DLL_R)
 
 $(OBJ_EX_C_impl_diag_DLL_R): $(PROJ_EXAMPLES_DIR)\C\example.C.args.implicit_main\diagnostics.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1482,7 +1495,7 @@ OBJS_EX_C_impl_MT_D=\
  $(OBJ_EX_C_impl_impl_MT_D)\
  \
 
-$(TARG_EX_C_impl_MT_D):	check.bin.dir $(OBJS_EX_C_impl_MT_D) $(LIB_CORE_MT_D) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_C_impl_MT_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_impl_MT_D) $(LIB_CORE_MT_D) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_MT_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_impl_noimpl_MT_D) $(LIB_CORE_MT_D) $(LIBS_3PTY_MT_D) $(LIBS_COMMON_MT_D)
 
 $(OBJ_EX_C_impl_diag_MT_D): $(PROJ_EXAMPLES_DIR)\C\example.C.args.implicit_main\diagnostics.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1506,7 +1519,7 @@ OBJS_EX_C_impl_MT_R=\
  $(OBJ_EX_C_impl_impl_MT_R)\
  \
 
-$(TARG_EX_C_impl_MT_R):	check.bin.dir $(OBJS_EX_C_impl_MT_R) $(LIB_CORE_MT_R) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_C_impl_MT_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_impl_MT_R) $(LIB_CORE_MT_R) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_MT_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_impl_noimpl_MT_R) $(LIB_CORE_MT_R) $(LIBS_3PTY_MT_R) $(LIBS_COMMON_MT_R)
 
 $(OBJ_EX_C_impl_diag_MT_R): $(PROJ_EXAMPLES_DIR)\C\example.C.args.implicit_main\diagnostics.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1530,7 +1543,7 @@ OBJS_EX_C_impl_ST_D=\
  $(OBJ_EX_C_impl_impl_ST_D)\
  \
 
-$(TARG_EX_C_impl_ST_D):	check.bin.dir $(OBJS_EX_C_impl_ST_D) $(LIB_CORE_ST_D) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_C_impl_ST_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_impl_ST_D) $(LIB_CORE_ST_D) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_ST_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_impl_noimpl_ST_D) $(LIB_CORE_ST_D) $(LIBS_3PTY_ST_D) $(LIBS_COMMON_ST_D)
 
 $(OBJ_EX_C_impl_diag_ST_D): $(PROJ_EXAMPLES_DIR)\C\example.C.args.implicit_main\diagnostics.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1554,7 +1567,7 @@ OBJS_EX_C_impl_ST_R=\
  $(OBJ_EX_C_impl_impl_ST_R)\
  \
 
-$(TARG_EX_C_impl_ST_R):	check.bin.dir $(OBJS_EX_C_impl_ST_R) $(LIB_CORE_ST_R) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_C_impl_ST_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_impl_ST_R) $(LIB_CORE_ST_R) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_ST_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_impl_noimpl_ST_R) $(LIB_CORE_ST_R) $(LIBS_3PTY_ST_R) $(LIBS_COMMON_ST_R)
 
 $(OBJ_EX_C_impl_diag_ST_R): $(PROJ_EXAMPLES_DIR)\C\example.C.args.implicit_main\diagnostics.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1582,7 +1595,7 @@ OBJS_EX_Cpp_args_DLL_D=\
  $(OBJ_EX_Cpp_args_impl_DLL_D)\
  \
 
-$(TARG_EX_Cpp_args_DLL_D):	check.bin.dir $(OBJS_EX_Cpp_args_DLL_D) $(LIB_CORE_DLL_D) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_args_DLL_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_args_DLL_D) $(LIB_CORE_DLL_D) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_DLL_D) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_args_noimpl_DLL_D) $(LIB_CORE_DLL_D) $(LIBS_3PTY_DLL_D) $(LIBS_COMMON_DLL_D)
 
 $(OBJ_EX_Cpp_args_diag_DLL_D): $(PROJ_EXAMPLES_DIR)\C++\example.C++.args.implicit_main\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1606,7 +1619,7 @@ OBJS_EX_Cpp_args_DLL_R=\
  $(OBJ_EX_Cpp_args_impl_DLL_R)\
  \
 
-$(TARG_EX_Cpp_args_DLL_R):	check.bin.dir $(OBJS_EX_Cpp_args_DLL_R) $(LIB_CORE_DLL_R) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_args_DLL_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_args_DLL_R) $(LIB_CORE_DLL_R) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_DLL_R) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_args_noimpl_DLL_R) $(LIB_CORE_DLL_R) $(LIBS_3PTY_DLL_R) $(LIBS_COMMON_DLL_R)
 
 $(OBJ_EX_Cpp_args_diag_DLL_R): $(PROJ_EXAMPLES_DIR)\C++\example.C++.args.implicit_main\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1630,7 +1643,7 @@ OBJS_EX_Cpp_args_MT_D=\
  $(OBJ_EX_Cpp_args_impl_MT_D)\
  \
 
-$(TARG_EX_Cpp_args_MT_D):	check.bin.dir $(OBJS_EX_Cpp_args_MT_D) $(LIB_CORE_MT_D) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_args_MT_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_args_MT_D) $(LIB_CORE_MT_D) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_MT_D) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_args_noimpl_MT_D) $(LIB_CORE_MT_D) $(LIBS_3PTY_MT_D) $(LIBS_COMMON_MT_D)
 
 $(OBJ_EX_Cpp_args_diag_MT_D): $(PROJ_EXAMPLES_DIR)\C++\example.C++.args.implicit_main\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1654,7 +1667,7 @@ OBJS_EX_Cpp_args_MT_R=\
  $(OBJ_EX_Cpp_args_impl_MT_R)\
  \
 
-$(TARG_EX_Cpp_args_MT_R):	check.bin.dir $(OBJS_EX_Cpp_args_MT_R) $(LIB_CORE_MT_R) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_args_MT_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_args_MT_R) $(LIB_CORE_MT_R) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_MT_R) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_args_noimpl_MT_R) $(LIB_CORE_MT_R) $(LIBS_3PTY_MT_R) $(LIBS_COMMON_MT_R)
 
 $(OBJ_EX_Cpp_args_diag_MT_R): $(PROJ_EXAMPLES_DIR)\C++\example.C++.args.implicit_main\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1678,7 +1691,7 @@ OBJS_EX_Cpp_args_ST_D=\
  $(OBJ_EX_Cpp_args_impl_ST_D)\
  \
 
-$(TARG_EX_Cpp_args_ST_D):	check.bin.dir $(OBJS_EX_Cpp_args_ST_D) $(LIB_CORE_ST_D) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_args_ST_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_args_ST_D) $(LIB_CORE_ST_D) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_ST_D) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_args_noimpl_ST_D) $(LIB_CORE_ST_D) $(LIBS_3PTY_ST_D) $(LIBS_COMMON_ST_D)
 
 $(OBJ_EX_Cpp_args_diag_ST_D): $(PROJ_EXAMPLES_DIR)\C++\example.C++.args.implicit_main\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1702,7 +1715,7 @@ OBJS_EX_Cpp_args_ST_R=\
  $(OBJ_EX_Cpp_args_impl_ST_R)\
  \
 
-$(TARG_EX_Cpp_args_ST_R):	check.bin.dir $(OBJS_EX_Cpp_args_ST_R) $(LIB_CORE_ST_R) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_args_ST_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_args_ST_R) $(LIB_CORE_ST_R) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_ST_R) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_args_noimpl_ST_R) $(LIB_CORE_ST_R) $(LIBS_3PTY_ST_R) $(LIBS_COMMON_ST_R)
 
 $(OBJ_EX_Cpp_args_diag_ST_R): $(PROJ_EXAMPLES_DIR)\C++\example.C++.args.implicit_main\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1730,7 +1743,7 @@ OBJS_EX_Cpp_impl_DLL_D=\
  $(OBJ_EX_Cpp_impl_impl_DLL_D)\
  \
 
-$(TARG_EX_Cpp_impl_DLL_D):	check.bin.dir $(OBJS_EX_Cpp_impl_DLL_D) $(LIB_CORE_DLL_D) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_impl_DLL_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_impl_DLL_D) $(LIB_CORE_DLL_D) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_DLL_D) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_impl_noimpl_DLL_D) $(LIB_CORE_DLL_D) $(LIBS_3PTY_DLL_D) $(LIBS_COMMON_DLL_D)
 
 $(OBJ_EX_Cpp_impl_diag_DLL_D): $(PROJ_EXAMPLES_DIR)\C++\example.C++.implicit_main.throw\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1754,7 +1767,7 @@ OBJS_EX_Cpp_impl_DLL_R=\
  $(OBJ_EX_Cpp_impl_impl_DLL_R)\
  \
 
-$(TARG_EX_Cpp_impl_DLL_R):	check.bin.dir $(OBJS_EX_Cpp_impl_DLL_R) $(LIB_CORE_DLL_R) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_impl_DLL_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_impl_DLL_R) $(LIB_CORE_DLL_R) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_DLL_R) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_impl_noimpl_DLL_R) $(LIB_CORE_DLL_R) $(LIBS_3PTY_DLL_R) $(LIBS_COMMON_DLL_R)
 
 $(OBJ_EX_Cpp_impl_diag_DLL_R): $(PROJ_EXAMPLES_DIR)\C++\example.C++.implicit_main.throw\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1778,7 +1791,7 @@ OBJS_EX_Cpp_impl_MT_D=\
  $(OBJ_EX_Cpp_impl_impl_MT_D)\
  \
 
-$(TARG_EX_Cpp_impl_MT_D):	check.bin.dir $(OBJS_EX_Cpp_impl_MT_D) $(LIB_CORE_MT_D) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_impl_MT_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_impl_MT_D) $(LIB_CORE_MT_D) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_MT_D) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_impl_noimpl_MT_D) $(LIB_CORE_MT_D) $(LIBS_3PTY_MT_D) $(LIBS_COMMON_MT_D)
 
 $(OBJ_EX_Cpp_impl_diag_MT_D): $(PROJ_EXAMPLES_DIR)\C++\example.C++.implicit_main.throw\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1802,7 +1815,7 @@ OBJS_EX_Cpp_impl_MT_R=\
  $(OBJ_EX_Cpp_impl_impl_MT_R)\
  \
 
-$(TARG_EX_Cpp_impl_MT_R):	check.bin.dir $(OBJS_EX_Cpp_impl_MT_R) $(LIB_CORE_MT_R) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_impl_MT_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_impl_MT_R) $(LIB_CORE_MT_R) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_MT_R) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_impl_noimpl_MT_R) $(LIB_CORE_MT_R) $(LIBS_3PTY_MT_R) $(LIBS_COMMON_MT_R)
 
 $(OBJ_EX_Cpp_impl_diag_MT_R): $(PROJ_EXAMPLES_DIR)\C++\example.C++.implicit_main.throw\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1826,7 +1839,7 @@ OBJS_EX_Cpp_impl_ST_D=\
  $(OBJ_EX_Cpp_impl_impl_ST_D)\
  \
 
-$(TARG_EX_Cpp_impl_ST_D):	check.bin.dir $(OBJS_EX_Cpp_impl_ST_D) $(LIB_CORE_ST_D) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_impl_ST_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_impl_ST_D) $(LIB_CORE_ST_D) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_ST_D) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_impl_noimpl_ST_D) $(LIB_CORE_ST_D) $(LIBS_3PTY_ST_D) $(LIBS_COMMON_ST_D)
 
 $(OBJ_EX_Cpp_impl_diag_ST_D): $(PROJ_EXAMPLES_DIR)\C++\example.C++.implicit_main.throw\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
@@ -1850,7 +1863,7 @@ OBJS_EX_Cpp_impl_ST_R=\
  $(OBJ_EX_Cpp_impl_impl_ST_R)\
  \
 
-$(TARG_EX_Cpp_impl_ST_R):	check.bin.dir $(OBJS_EX_Cpp_impl_ST_R) $(LIB_CORE_ST_R) $(PROJ_MAKEFILE_NAME)
+$(TARG_EX_Cpp_impl_ST_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_Cpp_impl_ST_R) $(LIB_CORE_ST_R) $(PROJ_MAKEFILE_NAME)
 	$(LD) $(LD_ARGS_ST_R) $(LIBPATHS) -out:$@ $(OBJS_EX_Cpp_impl_noimpl_ST_R) $(LIB_CORE_ST_R) $(LIBS_3PTY_ST_R) $(LIBS_COMMON_ST_R)
 
 $(OBJ_EX_Cpp_impl_diag_ST_R): $(PROJ_EXAMPLES_DIR)\C++\example.C++.implicit_main.throw\diagnostics.cpp $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
