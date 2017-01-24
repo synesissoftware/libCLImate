@@ -50,6 +50,8 @@ makefile.tools.xml
 
 logging-bailout.txt
 
+build/replacement-sections.txt
+
 # files (by pattern)
 
 *~
