@@ -407,20 +407,20 @@ CC_LIB_FLAGS_DLL_R			=	$(CC_FLAGS_COMMON) $(CC_FLAGS_COMMON_R) $(CC_CUSTOM_FLAGS
 CC_LIB_FLAGS_MT_D			=	$(CC_FLAGS_COMMON) $(CC_FLAGS_COMMON_D) $(CC_CUSTOM_FLAGS_DEBUG) -MTd
 CC_LIB_FLAGS_MT_R			=	$(CC_FLAGS_COMMON) $(CC_FLAGS_COMMON_R) $(CC_CUSTOM_FLAGS_RELEASE) -MT
 
-CPPC_LIB_FLAGS_DLL_D			=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_D) $(CPPC_CUSTOM_FLAGS_DEBUG) -MDd
-CPPC_LIB_FLAGS_DLL_R			=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_R) $(CPPC_CUSTOM_FLAGS_RELEASE) -MD
-CPPC_LIB_FLAGS_MT_D			=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_D) $(CPPC_CUSTOM_FLAGS_DEBUG) -MTd
-CPPC_LIB_FLAGS_MT_R			=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_R) $(CPPC_CUSTOM_FLAGS_RELEASE) -MT
+CPPC_LIB_FLAGS_DLL_D		=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_D) $(CPPC_CUSTOM_FLAGS_DEBUG) -MDd
+CPPC_LIB_FLAGS_DLL_R		=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_R) $(CPPC_CUSTOM_FLAGS_RELEASE) -MD
+CPPC_LIB_FLAGS_MT_D		=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_D) $(CPPC_CUSTOM_FLAGS_DEBUG) -MTd
+CPPC_LIB_FLAGS_MT_R		=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_R) $(CPPC_CUSTOM_FLAGS_RELEASE) -MT
 
 CC_EX_FLAGS_DLL_D			=	$(CC_FLAGS_COMMON) $(CC_FLAGS_COMMON_D) $(CC_CUSTOM_FLAGS_DEBUG) -MDd
 CC_EX_FLAGS_DLL_R			=	$(CC_FLAGS_COMMON) $(CC_FLAGS_COMMON_R) $(CC_CUSTOM_FLAGS_RELEASE) -MD
 CC_EX_FLAGS_MT_D			=	$(CC_FLAGS_COMMON) $(CC_FLAGS_COMMON_D) $(CC_CUSTOM_FLAGS_DEBUG) -MTd
 CC_EX_FLAGS_MT_R			=	$(CC_FLAGS_COMMON) $(CC_FLAGS_COMMON_R) $(CC_CUSTOM_FLAGS_RELEASE) -MT
 
-CPPC_EX_FLAGS_DLL_D			=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_D) $(CPPC_CUSTOM_FLAGS_DEBUG) -MDd
-CPPC_EX_FLAGS_DLL_R			=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_R) $(CPPC_CUSTOM_FLAGS_RELEASE) -MD
-CPPC_EX_FLAGS_MT_D			=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_D) $(CPPC_CUSTOM_FLAGS_DEBUG) -MTd
-CPPC_EX_FLAGS_MT_R			=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_R) $(CPPC_CUSTOM_FLAGS_RELEASE) -MT
+CPPC_EX_FLAGS_DLL_D		=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_D) $(CPPC_CUSTOM_FLAGS_DEBUG) -MDd
+CPPC_EX_FLAGS_DLL_R		=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_R) $(CPPC_CUSTOM_FLAGS_RELEASE) -MD
+CPPC_EX_FLAGS_MT_D		=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_D) $(CPPC_CUSTOM_FLAGS_DEBUG) -MTd
+CPPC_EX_FLAGS_MT_R		=	$(CPPC_FLAGS_COMMON) $(CPPC_FLAGS_COMMON_R) $(CPPC_CUSTOM_FLAGS_RELEASE) -MT
 
 ########################################
 # arguments (= flags + defines + includes)
@@ -517,7 +517,6 @@ CORE_HEADERS=\
  \
  $(PROJ_SRC_DIR)\quiet_program_termination_exception.hpp\
  \
-
 
 ############################################################################
 # names
@@ -839,9 +838,6 @@ OBJS_EX=\
 
 ##############################
 # unit tests
-
-
-
 
 ############################################################################
 # external targets (invokable by make)
@@ -1450,5 +1446,19 @@ $(OBJ_EX_Cpp_impl_impl_MT_R): $(PROJ_EXAMPLES_DIR)\C++\example.C++.implicit_main
 	$(CPPC) $(CPPC_EX_DEFS_MT_R) $(CPPC_EX_FLAGS_MT_R) $(CPPC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C++\example.C++.implicit_main.throw\implicit_link.cpp
 
 
+##################################################
+# tests
+
+##############################
+# component tests
+
+##############################
+# performance tests
+
+##############################
+# scratch tests
+
+##############################
+# unit tests
 
 ############################### end of file ################################
