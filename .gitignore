@@ -45,6 +45,9 @@ Win32/
 
 # files (by name)
 
+makefile.tmpl
+makefile.tools.xml
+
 logging-bailout.txt
 
 # files (by pattern)
