@@ -5,11 +5,11 @@
  *              class.
  *
  * Created:     13th July 2015
- * Updated:     11th October 2015
+ * Updated:     24th January 2017
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2015-2017, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -162,6 +162,28 @@
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////
+ * macros
+ */
+
+#if defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+
+# define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT
+#elif ( 1 &&\
+        defined(STLSOFT_COMPILER_IS_GCC) &&\
+        1) &&\
+      ( 0 ||\
+        defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception) ||\
+        defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error) ||\
+        0)
+
+# define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT		throw()
+
+#else
+
+# define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT		STLSOFT_NOEXCEPT
+#endif
+
+/* /////////////////////////////////////////////////////////////////////////
  * classes
  */
 
@@ -173,11 +195,10 @@ class NONE_exception_root_
 {
 public: // types
   typedef NONE_exception_root_                  class_type;
-public: // construction
+protected: // construction
   explicit
   NONE_exception_root_(
-    char const*  /* message */
-  , int          /* exitCode */
+    int          /* exitCode */
   )
   {}
 };
@@ -190,13 +211,19 @@ class general_exception_root_
 public: // types
   typedef C                                     parent_class_type;
   typedef general_exception_root_<C>            class_type;
-public: // construction
+protected: // construction
   explicit
   general_exception_root_(
-    char const*     message
-  , int          /* exitCode */
+    int          /* exitCode */
   )
-    : parent_class_type(message)
+# if 0
+# elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception)
+    : parent_class_type()
+# elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error)
+    : parent_class_type("program terminating")
+# else
+#  error
+#endif
   {}
 };
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable)
@@ -206,11 +233,10 @@ class stlsoft_unrecoverable_exception_root_
 public: // types
   typedef STLSOFT_NS_QUAL(unrecoverable)        parent_class_type;
   typedef stlsoft_unrecoverable_exception_root_ class_type;
-public: // construction
+protected: // construction
   explicit
   stlsoft_unrecoverable_exception_root_(
-    char const*  /* message */
-  , int             exitCode
+    int             exitCode
   )
     : STLSOFT_NS_QUAL(unrecoverable)(handler, reinterpret_cast<void*>(exitCode))
   {}
@@ -251,27 +277,22 @@ public:
   typedef root_type_t_                    parent_class_type;
   typedef program_termination_exception   class_type;
 
-public:
+protected:
   explicit program_termination_exception(int exitCode)
-    : parent_class_type(empty_(), exitCode)
+    : parent_class_type(exitCode)
     , ExitCode(exitCode)
   {}
-  virtual ~program_termination_exception() = 0
-  {}
+  virtual ~program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT = 0;
 private:
-  class_type &operator =(class_type const&);
+  class_type &operator =(class_type const&);	// copy-assignment proscribed
 
 public:
   int const   ExitCode;
-
-private:
-  static char const* empty_()
-  {
-    static char const s_empty_[1] = { '\0' };
-
-    return s_empty_;
-  }
 };
+
+inline
+program_termination_exception::~program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT /* = 0 */
+{}
 
 class quiet_program_termination_exception
   : public program_termination_exception
@@ -283,10 +304,11 @@ public:
   explicit quiet_program_termination_exception(int exitCode)
     : parent_class_type(exitCode)
   {}
-  ~quiet_program_termination_exception()
+  ~quiet_program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT 
   {}
 private:
-  class_type &operator =(class_type const&);
+  class_type &operator =(class_type const&);	// copy-assignment proscribed
 };
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

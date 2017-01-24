@@ -505,6 +505,8 @@ CORE_HEADERS=\
  $(PROJ_INCLUDE_DIR)\SynesisSoftware\CommandLineInterface\main\api.h\
  $(PROJ_INCLUDE_DIR)\SynesisSoftware\CommandLineInterface\main\api.hpp\
  \
+ $(PROJ_SRC_DIR)\quiet_program_termination_exception.hpp\
+ \
 
 
 ############################################################################
