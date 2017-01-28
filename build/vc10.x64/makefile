@@ -5,7 +5,7 @@
 #			compiler, on Win64
 #
 # Created:	23rd January 2017
-# Updated:	24th January 2017
+# Updated:	25th January 2017
 #
 ############################################################################
 
@@ -320,6 +320,7 @@ CC_F_COMPILE_ONLY		=	-c
 CC_F_MAXIMUM_SPEED		=	-O2
 CC_F_MINIMUM_SIZE		=	-O1
 CC_F_NOLOGO 			=	-nologo
+CC_F_STANDARD_LEVEL		=	
 CC_F_WARNING_ERR		=	-WX
 CC_F_WARNING_MAX		=	-W4
 CC_F_WARNING_SUP		=	
@@ -340,6 +341,7 @@ CPPC_F_OPTIMISED		=	$(CPPC_F_MAXIMUM_SPEED)
 CPPC_F_RTTI				=	$(CPPC_F_RTTI_ON)
 CPPC_F_RTTI_OFF 		=	-GR-
 CPPC_F_RTTI_ON			=	-GR
+CPPC_F_STANDARD_LEVEL	=	
 CPPC_F_WARNING_ERR		=	-WX
 CPPC_F_WARNING_MAX		=	-W4
 CPPC_F_WARNING_SUP		=	-wd4800 -wd4996
@@ -352,6 +354,7 @@ CC_FLAGS_COMMON=\
  $(CC_F_ADDITIONAL)\
  $(CC_F_COMPILE_ONLY)\
  $(CC_F_NOLOGO)\
+ $(CC_F_STANDARD_LEVEL)\
  $(CC_F_WARNING_ERR)\
  $(CC_F_WARNING_MAX)\
  $(CC_F_WARNING_SUP)\
@@ -365,6 +368,7 @@ CPPC_FLAGS_COMMON=\
  $(CPPC_F_EXCEPTIONS_ON)\
  $(CPPC_F_NOLOGO)\
  $(CPPC_F_RTTI)\
+ $(CPPC_F_STANDARD_LEVEL)\
  $(CPPC_F_WARNING_ERR)\
  $(CPPC_F_WARNING_MAX)\
  $(CPPC_F_WARNING_SUP)\
@@ -379,6 +383,7 @@ CC_EX_FLAGS_COMMON=\
  $(CC_F_ADDITIONAL)\
  $(CC_F_COMPILE_ONLY)\
  $(CC_F_NOLOGO)\
+ $(CC_F_STANDARD_LEVEL)\
  $(CC_F_WARNINGS_LIMIT)\
  $(CC_CUSTOM_FLAGS)\
  \
@@ -392,6 +397,7 @@ CPPC_EX_FLAGS_COMMON=\
  $(CPPC_F_EXCEPTIONS_ON)\
  $(CPPC_F_NOLOGO)\
  $(CPPC_F_RTTI)\
+ $(CPPC_F_STANDARD_LEVEL)\
  $(CPPC_F_WARNINGS_LIMIT)\
  $(CPPC_CUSTOM_FLAGS)\
  \
@@ -1062,7 +1068,7 @@ OBJS_EX_C_args_DLL_D=\
  \
 
 $(TARG_EX_C_args_DLL_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_DLL_D) $(LIB_CORE_DLL_D) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_DLL_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_DLL_D) $(LIB_CORE_DLL_D) $(LIBS_3PTY_DLL_D) $(LIBS_COMMON_DLL_D)	
+	$(LD) $(LD_ARGS_DLL_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_DLL_D) $(LIB_CORE_DLL_D) $(LIBS_3PTY_DLL_D) $(LIBS_COMMON_DLL_D)
 
 $(OBJ_EX_C_args_entr_DLL_D): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_DLL_D) $(CC_EX_FLAGS_DLL_D) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c
@@ -1086,7 +1092,7 @@ OBJS_EX_C_args_DLL_R=\
  \
 
 $(TARG_EX_C_args_DLL_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_DLL_R) $(LIB_CORE_DLL_R) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_DLL_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_DLL_R) $(LIB_CORE_DLL_R) $(LIBS_3PTY_DLL_R) $(LIBS_COMMON_DLL_R)	
+	$(LD) $(LD_ARGS_DLL_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_DLL_R) $(LIB_CORE_DLL_R) $(LIBS_3PTY_DLL_R) $(LIBS_COMMON_DLL_R)
 
 $(OBJ_EX_C_args_entr_DLL_R): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_DLL_R) $(CC_EX_FLAGS_DLL_R) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c
@@ -1110,7 +1116,7 @@ OBJS_EX_C_args_MT_D=\
  \
 
 $(TARG_EX_C_args_MT_D):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_MT_D) $(LIB_CORE_MT_D) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_MT_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_MT_D) $(LIB_CORE_MT_D) $(LIBS_3PTY_MT_D) $(LIBS_COMMON_MT_D)	
+	$(LD) $(LD_ARGS_MT_D) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_MT_D) $(LIB_CORE_MT_D) $(LIBS_3PTY_MT_D) $(LIBS_COMMON_MT_D)
 
 $(OBJ_EX_C_args_entr_MT_D): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_MT_D) $(CC_EX_FLAGS_MT_D) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c
@@ -1134,7 +1140,7 @@ OBJS_EX_C_args_MT_R=\
  \
 
 $(TARG_EX_C_args_MT_R):	$(CHECK_FILE_bin_dir) $(OBJS_EX_C_args_MT_R) $(LIB_CORE_MT_R) $(PROJ_MAKEFILE_NAME)
-	$(LD) $(LD_ARGS_MT_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_MT_R) $(LIB_CORE_MT_R) $(LIBS_3PTY_MT_R) $(LIBS_COMMON_MT_R)	
+	$(LD) $(LD_ARGS_MT_R) $(LIBPATHS) -out:$@ $(OBJS_EX_C_args_noimpl_MT_R) $(LIB_CORE_MT_R) $(LIBS_3PTY_MT_R) $(LIBS_COMMON_MT_R)
 
 $(OBJ_EX_C_args_entr_MT_R): $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c $(CORE_HEADERS) $(PROJ_MAKEFILE_NAME)
 	$(CC) $(CC_EX_DEFS_MT_R) $(CC_EX_FLAGS_MT_R) $(CC_INCLUDES) -Fo$@ $(PROJ_EXAMPLES_DIR)\C\example.C.args\example.C.args.c

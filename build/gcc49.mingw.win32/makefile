@@ -1,8 +1,8 @@
 ############################################################################
 # File: 	makefile
 #
-# Purpose:	Makefile for the libCLImate project, for the GCC 4.2 (UNIX)
-#			compiler, on UNIX
+# Purpose:	Makefile for the libCLImate project, for the GCC 4.9 (MinGW)
+#			compiler, on Win32
 #
 # Created:	23rd January 2017
 # Updated:	25th January 2017
@@ -30,6 +30,10 @@ ifndef PANTHEIOS_EXTRAS_MAIN_ROOT
 $(error PANTHEIOS_EXTRAS_MAIN_ROOT must be defined)
 endif # !PANTHEIOS_EXTRAS_MAIN_ROOT
 
+ifndef RECLS_ROOT
+$(error RECLS_ROOT must be defined)
+endif # !RECLS_ROOT
+
 ifndef STLSOFT
 $(error STLSOFT must be defined)
 endif # !STLSOFT
@@ -40,7 +44,7 @@ endif # !STLSOFT
 ########################################
 # project & compiler version
 
-COMP_TAG			=	gcc42
+COMP_TAG			=	gcc49
 ARCH_TAG			=	
 OS_TAG				=	
 PROJ_TAG			=	libclimate
@@ -58,6 +62,7 @@ NOTHING 			=
 
 CLASP_VER_MAJOR		=	0
 PANTHEIOS_VER_MAJOR	=	1
+RECLS_VER_MAJOR		=	1
 
 ########################################
 # testing verbosity
@@ -84,6 +89,8 @@ PANTHEIOS_INCLUDE		=	-I"$(PANTHEIOS_ROOT)/include"
 PANTHEIOS_EXTRAS_DIAGUTIL_INCLUDE	=	-I"$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include"
 
 PANTHEIOS_EXTRAS_MAIN_INCLUDE		=	-I"$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include"
+
+RECLS_INCLUDE			=	-I"$(RECLS_ROOT)/include"
 
 STLSOFT_INCLUDE			=	-I"$(STLSOFT)/include"
 
@@ -116,6 +123,7 @@ CC_INCLUDES_BASE=\
  $(PANTHEIOS_INCLUDE)\
  $(PANTHEIOS_EXTRAS_DIAGUTIL_INCLUDE)\
  $(PANTHEIOS_EXTRAS_MAIN_INCLUDE)\
+ $(RECLS_INCLUDE)\
  $(STLSOFT_INCLUDE)\
  $(COMMON_INCLUDES)\
  $(ENV_INCLUDES)\
@@ -128,6 +136,7 @@ CPPC_INCLUDES_BASE=\
  $(PANTHEIOS_INCLUDE)\
  $(PANTHEIOS_EXTRAS_DIAGUTIL_INCLUDE)\
  $(PANTHEIOS_EXTRAS_MAIN_INCLUDE)\
+ $(RECLS_INCLUDE)\
  $(STLSOFT_INCLUDE)\
  $(COMMON_INCLUDES)\
  $(ENV_INCLUDES)\
@@ -156,12 +165,15 @@ CLASP_LIBPATH		=	-L"$(CLASP_ROOT)/lib"
 
 PANTHEIOS_LIBPATH	=	-L"$(PANTHEIOS_ROOT)/lib"
 
+RECLS_LIBPATH		=	-L"$(RECLS_ROOT)/lib"
+
 
 LIBPATHS=\
  $(LIBPATHS_LEADER)\
  $(PROJ_LIBPATH)\
  $(CLASP_LIBPATH)\
  $(PANTHEIOS_LIBPATH)\
+ $(RECLS_LIBPATH)\
  $(COMMON_LIBPATHS)\
  $(ENV_LIBPATHS)\
  \
@@ -202,6 +214,7 @@ LIBS_3PTY_MT_D=\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).fe.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_MT_D)\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).bec.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_MT_D)\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).be.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_MT_D)\
+ -lrecls.$(RECLS_VER_MAJOR).$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_MT_D)\
  \
 
 LIBS_3PTY_MT_R=\
@@ -212,6 +225,7 @@ LIBS_3PTY_MT_R=\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).fe.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_MT_R)\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).bec.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_MT_R)\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).be.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_MT_R)\
+ -lrecls.$(RECLS_VER_MAJOR).$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_MT_R)\
  \
 
 LIBS_3PTY_ST_D=\
@@ -222,6 +236,7 @@ LIBS_3PTY_ST_D=\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).fe.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_ST_D)\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).bec.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_ST_D)\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).be.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_ST_D)\
+ -lrecls.$(RECLS_VER_MAJOR).$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_ST_D)\
  \
 
 LIBS_3PTY_ST_R=\
@@ -232,6 +247,7 @@ LIBS_3PTY_ST_R=\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).fe.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_ST_R)\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).bec.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_ST_R)\
  -lpantheios.$(PANTHEIOS_VER_MAJOR).be.null.$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_ST_R)\
+ -lrecls.$(RECLS_VER_MAJOR).$(COMP_TAG)$(ARCH_TAG)$(LIBS_3PTY_SUF_ST_R)\
  \
 
 
@@ -239,7 +255,7 @@ LIBS_3PTY_ST_R=\
 # #defines
 #
 
-OS_DEFS				=	-Dunix
+OS_DEFS				=	-DWIN32
 
 COMMON_DEFS 		=
 
@@ -485,11 +501,15 @@ CORE_HEADERS=\
  $(PROJ_INCLUDE_DIR)/libclimate/version.h\
  $(PROJ_INCLUDE_DIR)/libclimate/main.hpp\
  $(PROJ_INCLUDE_DIR)/libclimate/implicit_link/core.h\
+ $(PROJ_INCLUDE_DIR)/libclimate/internal/clasp.clasp.h\
+ $(PROJ_INCLUDE_DIR)/libclimate/internal/clasp.main.h\
  $(PROJ_INCLUDE_DIR)/libclimate/internal/common.h\
  $(PROJ_INCLUDE_DIR)/libclimate/internal/pantheios.extras.diagutil.h\
  $(PROJ_INCLUDE_DIR)/libclimate/internal/pantheios.extras.main.h\
  $(PROJ_INCLUDE_DIR)/libclimate/internal/pantheios.pantheios.h\
  $(PROJ_INCLUDE_DIR)/libclimate/internal/stlsoft.stlsoft.h\
+ $(PROJ_INCLUDE_DIR)/libclimate/internal/clasp.clasp.hpp\
+ $(PROJ_INCLUDE_DIR)/libclimate/internal/clasp.main.hpp\
  $(PROJ_INCLUDE_DIR)/libclimate/internal/pantheios.extras.diagutil.hpp\
  $(PROJ_INCLUDE_DIR)/libclimate/internal/pantheios.extras.main.hpp\
  $(PROJ_INCLUDE_DIR)/libclimate/main/api.h\
@@ -850,12 +870,18 @@ check.lib.dir:		$(PROJ_MAKEFILE_NAME) $(CHECK_FILE_lib_dir)
 $(CHECK_FILE_lib_dir):
 	@mkdir -p $(PROJ_LIB_DIR)
 	@touch $(CHECK_FILE_lib_dir)
+	@-if not exist $(PROJ_LIB_DIR)/NUL mkdir $(PROJ_LIB_DIR)
+	@echo .dir_exists > $(CHECK_FILE_lib_dir)
+	@attrib +h $(CHECK_FILE_lib_dir)
 
 check.bin.dir:		$(PROJ_MAKEFILE_NAME) $(CHECK_FILE_bin_dir)
 
 $(CHECK_FILE_bin_dir):
 	@mkdir -p $(PROJ_BIN_DIR)
 	@touch $(CHECK_FILE_bin_dir)
+	@-if not exist $(PROJ_BIN_DIR)/NUL mkdir $(PROJ_BIN_DIR)
+	echo .dir_exists > $(CHECK_FILE_bin_dir)
+	attrib +h $(CHECK_FILE_bin_dir)
 
 
 # compile targets
