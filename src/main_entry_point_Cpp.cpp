@@ -6,11 +6,11 @@
  *              command-line argument handling (CLASP).
  *
  * Created:     13th July 2015
- * Updated:     13th October 2015
+ * Updated:     27th January 2017
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2015-2017, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -82,7 +82,7 @@ main_CLASP_inner_(
   {
     pantheios::logprintf(
       PANTHEIOS_SEV_ALERT
-    , PANTHEIOS_LITERAL_STRING("unrecognised command-line argument: ")
+    , PANTHEIOS_LITERAL_STRING("unrecognised command-line argument: %s")
     , x.optionName.c_str()
     );
 
@@ -97,7 +97,7 @@ main_CLASP_inner_(
   {
     pantheios::logprintf(
       PANTHEIOS_SEV_ALERT
-    , PANTHEIOS_LITERAL_STRING("invalid command-line: ")
+    , PANTHEIOS_LITERAL_STRING("invalid command-line: %s")
     , x.what()
     );
 
