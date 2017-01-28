@@ -5,7 +5,7 @@
  *              class.
  *
  * Created:     13th July 2015
- * Updated:     24th January 2017
+ * Updated:     27th January 2017
  *
  * Home:        http://synesissoftware.com/software/libclimate/
  *
@@ -187,7 +187,7 @@
  * classes
  */
 
-namespace
+namespace libCLImate_internal
 {
 
 #if defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
@@ -255,26 +255,25 @@ private:
 # error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 #endif
 
+} /* namespace libCLImate_internal */
 
 #if defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
-typedef NONE_exception_root_                                          root_type_t_;
+typedef libCLImate_internal::NONE_exception_root_                                           libCLImate_pte_root_type_t_;
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception)
-typedef general_exception_root_<STLSOFT_NS_QUAL_STD(exception)>       root_type_t_;
+typedef libCLImate_internal::general_exception_root_<STLSOFT_NS_QUAL_STD(exception)>        libCLImate_pte_root_type_t_;
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error)
-typedef general_exception_root_<STLSOFT_NS_QUAL_STD(runtime_error)>   root_type_t_;
+typedef libCLImate_internal::general_exception_root_<STLSOFT_NS_QUAL_STD(runtime_error)>    libCLImate_pte_root_type_t_;
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable)
-typedef stlsoft_unrecoverable_exception_root_                         root_type_t_;
+typedef libCLImate_internal::stlsoft_unrecoverable_exception_root_                          libCLImate_pte_root_type_t_;
 #else
 # error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 #endif
 
-} /* anonymous namespace */
-
 class program_termination_exception
-  : public root_type_t_
+  : public libCLImate_pte_root_type_t_
 {
 public:
-  typedef root_type_t_                    parent_class_type;
+  typedef libCLImate_pte_root_type_t_     parent_class_type;
   typedef program_termination_exception   class_type;
 
 protected:
