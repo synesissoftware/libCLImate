@@ -1,6 +1,10 @@
 # libCLImate
 
-Command-Line Interface boilerplate mini-framework
+**libCLImate** is a portable, lightweight mini-framework that encapsulates the common aspects of **C**ommand-**L**ine **I**nterface boilerplate, including:
+
+- command-line argument parsing and sorting (using the **[CLASP](https://github.com/synesissoftware/CLASP)** library);
+- diagnostic logging library (**[Pantheios](https://github.com/synesissoftware/Pantheios)**) initialisation / lifetime scoping;
+- provision of de-facto standard CLI facilities, such as responding to '--help' and '--version';
 
 **libCLImate** depends on the following libraries:
 
