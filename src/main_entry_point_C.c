@@ -1,16 +1,17 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        main_entry_point_C.c
+ * File:    main_entry_point_C.c
  *
- * Purpose:     Implementation of main for C-clients. The implementation
- *              employs call-around for diagnostic logging (Pantheios) and
- *              command-line argument handling (CLASP).
+ * Purpose: Implementation of main for C-clients. The implementation employs
+ *          call-around for diagnostic logging (Pantheios) and command-line
+ *          argument handling (CLASP).
  *
- * Created:     12nd July 2015
- * Updated:     10th January 2017
+ * Created: 12nd July 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,6 +58,7 @@
 
 #include <stdarg.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * implementation
  */
@@ -72,7 +74,8 @@ CLASP_CALLCONV CLASP_Pantheios_log_(
 {
   STLSOFT_SUPPRESS_UNUSED(context);
 
-#if defined(PANTHEIOS_USE_WIDE_STRINGS) && \
+#if 0
+#elif defined(PANTHEIOS_USE_WIDE_STRINGS) && \
     !defined(CLASP_USE_WIDE_STRINGS)
   STLSOFT_SUPPRESS_UNUSED(severity);
   STLSOFT_SUPPRESS_UNUSED(fmt);
@@ -118,6 +121,7 @@ main_memory_leak_trace_(
   return pantheios_extras_diagutil_main_leak_trace_invoke(argc, argv, main_CLASP_);
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
  */
@@ -134,4 +138,6 @@ libCLImate_main_entry_point_C(
   return pantheios_extras_main_invoke(argc, argv, main_memory_leak_trace_, NULL, NULL);
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

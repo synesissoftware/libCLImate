@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        usage_etc.c
+ * File:    usage_etc.c
  *
- * Purpose:     Stock usage, version functions.
+ * Purpose: Stock usage, version functions.
  *
- * Created:     6th August 2015
- * Updated:     9th September 2015
+ * Created: 6th August 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,13 +53,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions
  */
 
 static
 int
-libCLImate_get_console_width_()
+libCLImate_get_console_width_(void)
 {
   size_t const r = platformstl_C_get_console_width();
 
@@ -108,17 +110,18 @@ libCLImate_show_usage_to_(
   info.blanksBetweenItems = showBlanksBetweenItems;
 
 
-  if(NULL != pfnHeader)
+  if (NULL != pfnHeader)
   {
     (*pfnHeader)(args, &info, aliases);
   }
-  if(NULL != pfnBody)
+  if (NULL != pfnBody)
   {
     (*pfnBody)(args, &info, aliases);
   }
 
   return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -259,6 +262,7 @@ libCLImate_show_version(
 
   return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

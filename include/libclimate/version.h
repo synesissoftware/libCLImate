@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/version.h
+ * File:    libclimate/version.h
  *
- * Purpose:     libCLImate library version.
+ * Purpose: libCLImate library version.
  *
- * Created:     13th July 2015
- * Updated:     27th January 2017
+ * Created: 13th July 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015-2017, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,8 +43,9 @@
 #ifndef SYNSOFT_INCL_LIBCLIMATE_H_VERSION
 #define SYNSOFT_INCL_LIBCLIMATE_H_VERSION
 
+
 /* /////////////////////////////////////////////////////////////////////////
- * includes
+ * version information
  */
 
 #define LIBCLIMATE_VER_MAJOR            0
@@ -56,6 +58,7 @@
 # define SSCLI_VER_MINOR                LIBCLIMATE_VER_MINOR
 # define SSCLI_VER_REVISION             LIBCLIMATE_VER_REVISION
 #endif /* !LIBCLIMATE_DOCUMENTATION_SKIP_SECTION */
+
 
 /* ////////////////////////////////////////////////////////////////////// */
 

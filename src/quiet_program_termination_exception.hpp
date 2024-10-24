@@ -1,15 +1,16 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        quiet_program_termination_exception.hpp
+ * File:    quiet_program_termination_exception.hpp
  *
- * Purpose:     Definition of quiet_program_termination_exception exception
- *              class.
+ * Purpose: Definition of quiet_program_termination_exception exception
+ *          class.
  *
- * Created:     13th July 2015
- * Updated:     27th January 2017
+ * Created: 13th July 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015-2017, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,33 +58,37 @@
     defined(LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error) || \
     defined(LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable) || \
     0
+
 # include <stlsoft/stlsoft.h>
 # ifdef LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_NONE
+
 #  define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE
 #  ifdef STLSOFT_PPF_pragma_message_SUPPORT
 #   pragma message("The symbol LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_NONE is obsolete, and will be removed in a future release. Please use instead LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE")
 #  endif
 # endif
 # ifdef LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_exception
+
 #  define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception
 #  ifdef STLSOFT_PPF_pragma_message_SUPPORT
 #   pragma message("The symbol LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_exception is obsolete, and will be removed in a future release. Please use instead LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception")
 #  endif
 # endif
 # ifdef LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error
+
 #  define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error
 #  ifdef STLSOFT_PPF_pragma_message_SUPPORT
 #   pragma message("The symbol LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error is obsolete, and will be removed in a future release. Please use instead LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error")
 #  endif
 # endif
 # ifdef LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable
+
 #  define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable
 #  ifdef STLSOFT_PPF_pragma_message_SUPPORT
 #   pragma message("The symbol LIBCLI_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable is obsolete, and will be removed in a future release. Please use instead LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable")
 #  endif
 # endif
 #endif
-
 
 
 #if 0
@@ -99,46 +104,58 @@
     !defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error) || \
     !defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable) || \
     1
+
 # define LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception
 #endif
 
 
 
-#if defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+#if 0
+#elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+
 # if 0 || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception) || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error) || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable) || \
      0
+
 #  error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 # endif
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception)
+
 # if 0 || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE) || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error) || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable) || \
      0
+
 #  error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 # endif
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error)
+
 # if 0 || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE) || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception) || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable) || \
      0
+
 #  error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 # endif
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable)
+
 # if 0 || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE) || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception) || \
      defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error) || \
      0
+
 #  error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 # endif
 #else
+
 # error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -146,26 +163,36 @@
 
 #include <libclimate/internal/stlsoft.stlsoft.h>
 
-#if defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+#if 0
+#elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception)
+
 # include <exception>
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error)
+
 # include <stdexcept>
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable)
+
 # if STLSOFT_LEAD_VER >= 0x010a0000
+
 #  include <stlsoft/exception/unrecoverable.hpp>
 # else
+
 #  include <stlsoft/error/unrecoverable.hpp>
 # endif
 #else
+
 # error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * macros
  */
 
-#if defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+#if 0
+#elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
 
 # define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT
 #elif ( 1 &&\
@@ -177,7 +204,6 @@
         0)
 
 # define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT		throw()
-
 #else
 
 # define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT		STLSOFT_NOEXCEPT
@@ -190,7 +216,8 @@
 namespace libCLImate_internal
 {
 
-#if defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+#if 0
+#elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
 class NONE_exception_root_
 {
 public: // types
@@ -257,15 +284,21 @@ private:
 
 } /* namespace libCLImate_internal */
 
-#if defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+#if 0
+#elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+
 typedef libCLImate_internal::NONE_exception_root_                                           libCLImate_pte_root_type_t_;
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception)
+
 typedef libCLImate_internal::general_exception_root_<STLSOFT_NS_QUAL_STD(exception)>        libCLImate_pte_root_type_t_;
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error)
+
 typedef libCLImate_internal::general_exception_root_<STLSOFT_NS_QUAL_STD(runtime_error)>    libCLImate_pte_root_type_t_;
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable)
+
 typedef libCLImate_internal::stlsoft_unrecoverable_exception_root_                          libCLImate_pte_root_type_t_;
 #else
+
 # error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 #endif
 
@@ -303,11 +336,12 @@ public:
   explicit quiet_program_termination_exception(int exitCode)
     : parent_class_type(exitCode)
   {}
-  ~quiet_program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT 
+  ~quiet_program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT
   {}
 private:
   class_type &operator =(class_type const&);	// copy-assignment proscribed
 };
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 
