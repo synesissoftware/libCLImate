@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/main/api.h
+ * File:    libclimate/main/api.h
  *
- * Purpose:     libCLImate core API for C programs.
+ * Purpose: libCLImate core API for C programs.
  *
- * Created:     13th July 2015
- * Updated:     13th October 2015
+ * Created: 13th July 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,6 +43,7 @@
 #ifndef SYNSOFT_INCL_LIBCLIMATE_MAIN_H_API
 #define SYNSOFT_INCL_LIBCLIMATE_MAIN_H_API
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
@@ -53,6 +55,7 @@
 #include <systemtools/clasp/clasp.h>
 
 #include <stdio.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API globals
@@ -66,6 +69,7 @@ extern "C"
 extern
 #endif /* __cplusplus */
 clasp_alias_t const libCLImate_aliases[];
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API callbacks
@@ -106,6 +110,7 @@ libCLImate_program_main_Cpp(
 
 #endif /* __cplusplus */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
  */
@@ -117,7 +122,8 @@ extern "C"
 
 /* main */
 
-#if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
+#if 0
+#elif defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     defined(__cplusplus)
 /** The main() implementation for C++
  *
@@ -131,7 +137,8 @@ libCLImate_main_entry_point_Cpp(
 );
 #endif /* __cplusplus */
 
-#if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
+#if 0
+#elif defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     !defined(__cplusplus)
 /** The main() implementation for C
  *
@@ -177,7 +184,8 @@ libCLImate_exit_immediately(
 ) /* noexcept */
 ;
 
-#if defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
+#if 0
+#elif defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     defined(__cplusplus)
 /** This function causes the executing program to exit by a
  * library-internal exception throw-catch.
@@ -271,8 +279,10 @@ libCLImate_show_version(
 } /* extern "C" */
 #endif /* __cplusplus */
 
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_INCL_LIBCLIMATE_MAIN_H_API */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

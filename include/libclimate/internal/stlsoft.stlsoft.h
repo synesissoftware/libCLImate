@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/internal/stlsoft.stlsoft.h
+ * File:    libclimate/internal/stlsoft.stlsoft.h
  *
- * Purpose:     Version-ensuring include of stlsoft/stlsoft.h
+ * Purpose: Version-ensuring include of stlsoft/stlsoft.h
  *
- * Created:     9th September 2015
- * Updated:     13th October 2015
+ * Created: 9th September 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,16 +48,24 @@
 
 #include <stlsoft/stlsoft.h>
 
-#if defined(STLSOFT_VER)
+#if 0
+#elif defined(STLSOFT_VER)
+
 # if STLSOFT_VER < 0x010978ff
+
 #  error Requires STLSoft 1.9.120 or later
 # endif
 #elif defined(_STLSOFT_VER)
-# if _STLSOFT_VER < 0x010978ff
-#  error Requires STLSoft 1.9.120 or later
+
+# if _STLSOFT_VER < 0x010b0153
+
+#  error Requires STLSoft 1.11.1 (alpha 19) or later
 # endif
 #else
+
 # error Requires STLSoft 1.9.120 or later
 #endif
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

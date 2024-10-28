@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/internal/pantheios.extras.main.h
+ * File:    libclimate/internal/pantheios.extras.main.h
  *
- * Purpose:     Version-ensuring include of pantheios/extras/main.h
+ * Purpose: Version-ensuring include of pantheios/extras/main.h
  *
- * Created:     9th September 2015
- * Updated:     13th October 2015
+ * Created: 9th September 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,9 +46,11 @@
 
 #include <libclimate/internal/common.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * feature discrimination
  */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes - 2
@@ -55,12 +58,15 @@
 
 #include <pantheios/extras/main.h>
 
-#if defined(PANTHEIOS_EXTRAS_MAIN_VER)
-# if PANTHEIOS_EXTRAS_MAIN_VER < 0x00010105
-#  error Requires Pantheios.Extras.Main 0.1.5 or later
+#if 0
+#elif defined(PANTHEIOS_EXTRAS_MAIN_VER)
+# if PANTHEIOS_EXTRAS_MAIN_VER < 0x00020141
+#  error Requires Pantheios.Extras.Main 0.2.1 or later
 # endif
 #else
 # error Error in Pantheios.Extras.Main include
 #endif
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

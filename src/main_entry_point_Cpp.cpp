@@ -1,16 +1,17 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        main_entry_point_Cpp.cpp
+ * File:    main_entry_point_Cpp.cpp
  *
- * Purpose:     Implementation of main for C++-clients. The implementation
- *              employs call-around for diagnostic logging (Pantheios) and
- *              command-line argument handling (CLASP).
+ * Purpose: Implementation of main for C++-clients. The implementation
+ *          employs call-around for diagnostic logging (Pantheios) and
+ *          command-line argument handling (CLASP).
  *
- * Created:     13th July 2015
- * Updated:     27th January 2017
+ * Created: 13th July 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015-2017, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,9 +60,11 @@
 
 #include <stdarg.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * feature discrimination
  */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * implementation
@@ -78,7 +81,7 @@ main_CLASP_inner_(
     return libCLImate_program_main_Cpp(args);
   }
   // 2. CLASP
-  catch(clasp::unused_argument_exception& x)
+  catch (clasp::unused_argument_exception& x)
   {
     pantheios::logprintf(
       PANTHEIOS_SEV_ALERT
@@ -93,7 +96,7 @@ main_CLASP_inner_(
     , int(x.optionName.size()), x.optionName.data()
     );
   }
-  catch(clasp::clasp_exception &x)
+  catch (clasp::clasp_exception &x)
   {
     pantheios::logprintf(
       PANTHEIOS_SEV_ALERT
@@ -135,7 +138,8 @@ main_CLASP_outer_(
     {
       STLSOFT_SUPPRESS_UNUSED(context);
 
-#if defined(PANTHEIOS_USE_WIDE_STRINGS) && \
+#if 0
+#elif defined(PANTHEIOS_USE_WIDE_STRINGS) && \
     !defined(CLASP_USE_WIDE_STRINGS)
       STLSOFT_SUPPRESS_UNUSED(severity);
       STLSOFT_SUPPRESS_UNUSED(fmt);
@@ -164,7 +168,7 @@ main_CLASP_outer_(
   // 1. OOM failures caught by Pantheios.Extras.Main
 
   // 2. Some part of the program wants to finish
-  catch(quiet_program_termination_exception &x)
+  catch (quiet_program_termination_exception &x)
   {
     return x.ExitCode;
   }
@@ -184,6 +188,7 @@ main_memory_leak_trace_(
 {
   return ::pantheios::extras::diagutil::main_leak_trace::invoke(argc, argv, main_CLASP_outer_);
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -209,4 +214,6 @@ libCLImate_main_entry_point_Cpp(
   return ::pantheios::extras::main::invoke(argc, argv, main_memory_leak_trace_);
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

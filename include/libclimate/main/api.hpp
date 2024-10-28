@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/main/api.hpp
+ * File:    libclimate/main/api.hpp
  *
- * Purpose:     libCLImate core API for C++ programs.
+ * Purpose: libCLImate core API for C++ programs.
  *
- * Created:     13th July 2015
- * Updated:     11th October 2015
+ * Created: 13th July 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,6 +47,7 @@
 # error This file may only be included in a C++ compilation unit
 #endif /* __cplusplus */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
@@ -54,12 +56,14 @@
 
 #include <libclimate/internal/clasp.clasp.hpp>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
 
 namespace libCLImate
 {
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -217,14 +221,17 @@ show_version(
   );
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
 
 } /* namespace libCLImate */
 
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_INCL_LIBCLIMATE_MAIN_HPP_API */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

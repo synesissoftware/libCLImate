@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        exit_immediately.c
+ * File:    exit_immediately.c
  *
- * Purpose:     Implementation of exit_immediately API function.
+ * Purpose: Implementation of exit_immediately API function.
  *
- * Created:     13th July 2015
- * Updated:     9th September 2015
+ * Created: 13th July 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,6 +48,7 @@
 
 #include <stdlib.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
  */
@@ -58,7 +60,7 @@ libCLImate_exit_immediately(
 , void* param
 )
 {
-  if(NULL != pfn)
+  if (NULL != pfn)
   {
     pfn(programExitCode, param);
   }
@@ -66,4 +68,6 @@ libCLImate_exit_immediately(
   exit(programExitCode);
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

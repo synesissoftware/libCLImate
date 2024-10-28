@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/internal/clasp.main.h
+ * File:    libclimate/internal/clasp.main.h
  *
- * Purpose:     Version-ensuring include of systemtools/clasp/main.h
+ * Purpose: Version-ensuring include of systemtools/clasp/main.h
  *
- * Created:     9th September 2015
- * Updated:     13th October 2015
+ * Created: 9th September 2015
+ * Updated: 25th October 2024
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,4 +50,6 @@
 
 #include <libclimate/internal/clasp.clasp.h>
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

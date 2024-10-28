@@ -7,6 +7,7 @@
 extern int dummy_for_nonempty_translation_unit_78247B56_81AD_49c9_8903_04EAFFEE7D66;
 #endif
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
@@ -22,4 +23,6 @@ extern int dummy_for_nonempty_translation_unit_78247B56_81AD_49c9_8903_04EAFFEE7
 
 #include <recls/implicit_link.h>
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

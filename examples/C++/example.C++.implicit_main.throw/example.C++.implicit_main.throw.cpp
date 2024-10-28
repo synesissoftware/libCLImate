@@ -9,8 +9,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#if defined(_MSC_VER) && \
-    _MSC_VER >= 1200
+#if 0
+#elif defined(_MSC_VER) && \
+      _MSC_VER >= 1200
 # pragma warning(disable : 4702)
 #endif
 
@@ -35,5 +36,7 @@ ExampleProgramMain(
 
   return EXIT_FAILURE;
 }
+
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
