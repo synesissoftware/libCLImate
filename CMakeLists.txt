@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libCLImate
 #
 # Created:  23rd October 2024
-# Updated:  25th October 2024
+# Updated:  1st February 2025
 #
 # ######################################################################## #
 
@@ -96,13 +96,13 @@ option(BUILD_EXAMPLES "Build examples" ON)
 # required:
 # - CLASP;
 # - Pantheios;
-# - Pantheios.Extras.DiagUtil - Windows-only;
 # - Pantheios.Extras.Main;
 # - recls - Windows-only;
 # - STLSoft;
 #
 # optional:
 # - b64 - may be needed by Pantheios;
+# - Pantheios.Extras.DiagUtil - Windows-only;
 # - xTests - required for testing;
 
 
@@ -282,7 +282,6 @@ endif(BUILD_TESTING)
 
 set(EXPORT_NAME ${PROJECT_NAME})
 
-#[====[
 configure_package_config_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in
 	${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake
@@ -311,7 +310,6 @@ install(FILES
 	"${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config-version.cmake"
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
 )
-#]====]
 
 
 # ##########################################################

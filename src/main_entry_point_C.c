@@ -6,11 +6,11 @@
  *          argument handling (CLASP).
  *
  * Created: 12nd July 2015
- * Updated: 25th October 2024
+ * Updated: 31st January 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -50,7 +50,9 @@
 
 #include <libclimate/internal/clasp.main.h>
 
-#include <libclimate/internal/pantheios.extras.diagutil.h>
+#ifndef PANTHEIOS_NO_DIAGUTIL
+# include <libclimate/internal/pantheios.extras.diagutil.h>
+#endif
 
 #include <libclimate/internal/pantheios.extras.main.h>
 
@@ -118,7 +120,13 @@ main_memory_leak_trace_(
 , char**  argv
 )
 {
+#ifdef PANTHEIOS_NO_DIAGUTIL
+
+  return main_CLASP_(argc, argv);
+#else
+
   return pantheios_extras_diagutil_main_leak_trace_invoke(argc, argv, main_CLASP_);
+#endif
 }
 
 
