@@ -1,6 +1,6 @@
 
 #define ExampleProgramMain  libCLImate_program_main
-#define ExampleAliases      libCLImate_aliases
+#define ExampleAliases      libCLImate_specifications
 
 #include <libclimate/main/api.h>
 

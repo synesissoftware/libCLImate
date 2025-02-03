@@ -107,7 +107,7 @@ main_CLASP_(
             , argv
             , libCLImate_program_main_C
             , NULL
-            , libCLImate_aliases
+            , libCLImate_specifications
             , flags
             , &ctxt
             );

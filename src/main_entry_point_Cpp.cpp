@@ -161,7 +161,7 @@ main_CLASP_outer_(
             , argv
             , main_CLASP_inner_
             , NULL
-            , libCLImate_aliases
+            , libCLImate_specifications
             , flags
             , &ctxt
 //            , ST_USAGE_HELP_SUFFIX

@@ -61,14 +61,17 @@
  * API globals
  */
 
-/** The application-defined CLASP aliases array
+/** The application-defined CLASP aliases array.
  */
 #ifdef __cplusplus
 extern "C"
 #else /* ? __cplusplus */
 extern
 #endif /* __cplusplus */
-clasp_alias_t const libCLImate_aliases[];
+clasp_alias_t const libCLImate_specifications[];
+
+/* for backwards compatibility */
+#define libCLImate_aliases                                  libCLImate_specifications
 
 
 /* /////////////////////////////////////////////////////////////////////////
