@@ -4,7 +4,7 @@
 
 #include <libclimate/main.h>
 
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 clasp_alias_t const ExampleAliases[] =
 {

@@ -4,7 +4,7 @@
 
 #include <libclimate/main.hpp>
 
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 #include <stdio.h>
 #include <stdlib.h>
