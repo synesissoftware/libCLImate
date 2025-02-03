@@ -2,6 +2,7 @@
 #ifndef SYNSOFT_INCL_SYNESISSOFTWARE_COMMANDLINEINTERFACE_MAIN_H_API
 #define SYNSOFT_INCL_SYNESISSOFTWARE_COMMANDLINEINTERFACE_MAIN_H_API
 
+
 #include <stlsoft/stlsoft.h>
 
 #ifdef STLSOFT_PPF_pragma_message_SUPPORT
@@ -9,6 +10,7 @@
 #endif
 
 #include <libclimate/main/api.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * backwards compatibility
@@ -34,6 +36,6 @@
 
 /* ////////////////////////////////////////////////////////////////////// */
 
-#endif /* SYNSOFT_INCL_SYNESISSOFTWARE_COMMANDLINEINTERFACE_MAIN_H_API */
+#endif /* !SYNSOFT_INCL_SYNESISSOFTWARE_COMMANDLINEINTERFACE_MAIN_H_API */
 
 /* ///////////////////////////// end of file //////////////////////////// */

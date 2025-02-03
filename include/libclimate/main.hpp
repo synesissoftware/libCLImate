@@ -4,11 +4,11 @@
  * Purpose: libCLImate implicit-main include for C++ programs.
  *
  * Created: 13th July 2015
- * Updated: 25th October 2024
+ * Updated: 3rd February 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -56,7 +56,7 @@
 
 #ifndef __cplusplus
 # error This file may only be included in a C++ compilation unit
-#endif /* __cplusplus */
+#endif /* !__cplusplus */
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -64,6 +64,7 @@
 
 #include <libclimate/main.h>
 #include <libclimate/main/api.hpp>
+
 
 /* ////////////////////////////////////////////////////////////////////// */
 

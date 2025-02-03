@@ -5,11 +5,13 @@
 
 int
 wmain(
-  int       argc
-, wchar_t** argv
+    int         argc
+    wchar_t*    argv[]
 )
 {
-  return libCLImate_wmain_entry_point_Cpp(argc, argv, NULL);
+    return libCLImate_wmain_entry_point_Cpp(argc, argv, NULL);
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -6,7 +6,7 @@
  *          argument handling (CLASP).
  *
  * Created: 12nd July 2015
- * Updated: 31st January 2025
+ * Updated: 3rd February 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -68,64 +68,66 @@
 static
 void
 CLASP_CALLCONV CLASP_Pantheios_log_(
-  void*                 context
-, int                   severity
-, clasp_char_t const*   fmt
-, va_list               args
+    void*               context
+,   int                 severity
+,   clasp_char_t const* fmt
+,   va_list             args
 )
 {
-  STLSOFT_SUPPRESS_UNUSED(context);
+    STLSOFT_SUPPRESS_UNUSED(context);
 
 #if 0
 #elif defined(PANTHEIOS_USE_WIDE_STRINGS) && \
     !defined(CLASP_USE_WIDE_STRINGS)
-  STLSOFT_SUPPRESS_UNUSED(severity);
-  STLSOFT_SUPPRESS_UNUSED(fmt);
-  STLSOFT_SUPPRESS_UNUSED(args);
+
+    STLSOFT_SUPPRESS_UNUSED(severity);
+    STLSOFT_SUPPRESS_UNUSED(fmt);
+    STLSOFT_SUPPRESS_UNUSED(args);
 #else
-  pantheios_logvprintf(severity, fmt, args);
+
+    pantheios_logvprintf(severity, fmt, args);
 #endif
 }
 
 static
 int
 main_CLASP_(
-  int     argc
-, char**  argv
+    int     argc
+,   char*   argv[]
 )
 {
-  unsigned const  flags = 0
-                        | CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE
-                        ;
+    unsigned const  flags   =   0
+                            |   CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE
+                            ;
 
-  clasp_diagnostic_context_t  ctxt = { 0 };
+    clasp_diagnostic_context_t ctxt = { 0 };
 
-  ctxt.pfnLog = &CLASP_Pantheios_log_;
+    ctxt.pfnLog = &CLASP_Pantheios_log_;
 
-  return clasp_main_invoke(
-              argc
-            , argv
-            , libCLImate_program_main_C
-            , NULL
-            , libCLImate_specifications
-            , flags
-            , &ctxt
+    return clasp_main_invoke(
+                argc
+            ,   argv
+            ,   libCLImate_program_main_C
+            ,   NULL
+            ,   libCLImate_specifications
+            ,   flags
+            ,   &ctxt
             );
 }
 
 static
 int
 main_memory_leak_trace_(
-  int     argc
-, char**  argv
+    int     argc
+,   char*   argv[]
 )
 {
 #ifdef PANTHEIOS_NO_DIAGUTIL
 
-  return main_CLASP_(argc, argv);
+    return main_CLASP_(argc, argv);
 #else
 
-  return pantheios_extras_diagutil_main_leak_trace_invoke(argc, argv, main_CLASP_);
+    return pantheios_extras_diagutil_main_leak_trace_invoke(argc, argv, main_CLASP_);
 #endif
 }
 
@@ -136,14 +138,14 @@ main_memory_leak_trace_(
 
 int
 libCLImate_main_entry_point_C(
-  int     argc
-, char**  argv
-, void*   reserved
+    int     argc
+,   char*   argv[]
+,   void*   reserved
 )
 {
-  ((void)reserved);
+    ((void)reserved);
 
-  return pantheios_extras_main_invoke(argc, argv, main_memory_leak_trace_, NULL, NULL);
+    return pantheios_extras_main_invoke(argc, argv, main_memory_leak_trace_, NULL, NULL);
 }
 
 

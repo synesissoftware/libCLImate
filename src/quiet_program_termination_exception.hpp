@@ -5,11 +5,11 @@
  *          class.
  *
  * Created: 13th July 2015
- * Updated: 25th October 2024
+ * Updated: 3rd February 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -203,10 +203,10 @@
         defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error) ||\
         0)
 
-# define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT		throw()
+# define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT         throw()
 #else
 
-# define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT		STLSOFT_NOEXCEPT
+# define LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT         STLSOFT_NOEXCEPT
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -218,65 +218,68 @@ namespace libCLImate_internal
 
 #if 0
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)
+
 class NONE_exception_root_
 {
 public: // types
-  typedef NONE_exception_root_                  class_type;
+    typedef NONE_exception_root_                            class_type;
 protected: // construction
-  explicit
-  NONE_exception_root_(
-    int          /* exitCode */
-  )
-  {}
+    explicit
+    NONE_exception_root_(
+        int /* exitCode */
+    )
+    {}
 };
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception) || \
       defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error)
+
 template <typename C>
 class general_exception_root_
-  : public C
+    : public C
 {
 public: // types
-  typedef C                                     parent_class_type;
-  typedef general_exception_root_<C>            class_type;
+    typedef C                                               parent_class_type;
+    typedef general_exception_root_<C>                      class_type;
 protected: // construction
-  explicit
-  general_exception_root_(
-    int          /* exitCode */
-  )
+    explicit
+    general_exception_root_(
+        int /* exitCode */
+    )
 # if 0
 # elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception)
-    : parent_class_type()
+        : parent_class_type()
 # elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error)
-    : parent_class_type("program terminating")
+        : parent_class_type("program terminating")
 # else
 #  error
 #endif
-  {}
+    {}
 };
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable)
+
 class stlsoft_unrecoverable_exception_root_
-  : public STLSOFT_NS_QUAL(unrecoverable)
+    : public STLSOFT_NS_QUAL(unrecoverable)
 {
 public: // types
-  typedef STLSOFT_NS_QUAL(unrecoverable)        parent_class_type;
-  typedef stlsoft_unrecoverable_exception_root_ class_type;
+    typedef STLSOFT_NS_QUAL(unrecoverable)                  parent_class_type;
+    typedef stlsoft_unrecoverable_exception_root_           class_type;
 protected: // construction
-  explicit
-  stlsoft_unrecoverable_exception_root_(
-    int             exitCode
-  )
-    : STLSOFT_NS_QUAL(unrecoverable)(handler, reinterpret_cast<void*>(exitCode))
-  {}
+    explicit
+    stlsoft_unrecoverable_exception_root_(
+        int exitCode
+    )
+        : STLSOFT_NS_QUAL(unrecoverable)(handler, reinterpret_cast<void*>(exitCode))
+    {}
 
 private:
-  static
-  void
-  handler(
-    void* param
-  )
-  {
-    ::exit(reinterpret_cast<int>(param));
-  }
+    static
+    void
+    handler(
+        void* param
+    )
+    {
+        ::exit(reinterpret_cast<int>(param));
+    }
 };
 #else
 # error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
@@ -303,23 +306,23 @@ typedef libCLImate_internal::stlsoft_unrecoverable_exception_root_              
 #endif
 
 class program_termination_exception
-  : public libCLImate_pte_root_type_t_
+    : public libCLImate_pte_root_type_t_
 {
 public:
-  typedef libCLImate_pte_root_type_t_     parent_class_type;
-  typedef program_termination_exception   class_type;
+    typedef libCLImate_pte_root_type_t_                     parent_class_type;
+    typedef program_termination_exception                   class_type;
 
 protected:
-  explicit program_termination_exception(int exitCode)
-    : parent_class_type(exitCode)
-    , ExitCode(exitCode)
-  {}
-  virtual ~program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT = 0;
+    explicit program_termination_exception(int exitCode)
+        : parent_class_type(exitCode)
+        , ExitCode(exitCode)
+    {}
+    virtual ~program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT = 0;
 private:
-  class_type &operator =(class_type const&);	// copy-assignment proscribed
+    void operator =(class_type const&); // copy-assignment proscribed
 
 public:
-  int const   ExitCode;
+    int const   ExitCode;
 };
 
 inline
@@ -327,19 +330,21 @@ program_termination_exception::~program_termination_exception() LIBCLIMATE_TERMI
 {}
 
 class quiet_program_termination_exception
-  : public program_termination_exception
+    : public program_termination_exception
 {
 public:
-  typedef program_termination_exception       parent_class_type;
-  typedef quiet_program_termination_exception class_type;
+    typedef program_termination_exception                   parent_class_type;
+    typedef quiet_program_termination_exception             class_type;
+
 public:
-  explicit quiet_program_termination_exception(int exitCode)
-    : parent_class_type(exitCode)
-  {}
-  ~quiet_program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT
-  {}
+    explicit quiet_program_termination_exception(int exitCode)
+        : parent_class_type(exitCode)
+    {}
+    ~quiet_program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT
+    {}
+
 private:
-  class_type &operator =(class_type const&);	// copy-assignment proscribed
+    void operator =(class_type const&); // copy-assignment proscribed
 };
 
 

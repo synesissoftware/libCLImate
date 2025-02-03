@@ -7,11 +7,13 @@ PANTHEIOS_EXTERN_C PAN_CHAR_T const PANTHEIOS_FE_PROCESS_IDENTITY[] = PANTHEIOS_
 
 int
 main(
-  int     argc
-, char**  argv
+    int     argc
+,   char*   argv[]
 )
 {
-  return libCLImate_main_entry_point_C(argc, argv, NULL);
+    return libCLImate_main_entry_point_C(argc, argv, NULL);
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

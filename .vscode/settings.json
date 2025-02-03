@@ -7,12 +7,12 @@
 	"[c]": {
 		"editor.insertSpaces": true,
 		"editor.rulers": [ 60, 76 ],
-		"editor.tabSize": 2,
+		"editor.tabSize": 4,
 	},
 	"[cpp]": {
 		"editor.insertSpaces": true,
 		"editor.rulers": [ 60, 64, 68, 76 ],
-		"editor.tabSize": 2,
+		"editor.tabSize": 4,
 	},
 	"[cmake]": {
 		"editor.insertSpaces": false,
