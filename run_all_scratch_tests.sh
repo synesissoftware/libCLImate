@@ -29,8 +29,8 @@ while [[ $# -gt 0 ]]; do
       cat << EOF
 libCLImate is a portable, lightweight mini-framework that encapsulates the common aspects of Command-Line I**nterface boilerplate.
 Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
-Copyright (c) 2003-2019, Matthew Wilson and Synesis Software
-Runs all (matching) example programs
+Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
+Runs all (matching) scratch-test programs
 
 $ScriptPath [ ... flags/options ... ]
 
@@ -76,8 +76,7 @@ status=0
 if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
-
-    echo "Executing build (via command \`$MakeCmd\`) and then running all example programs"
+    echo "Executing make and then running all scratch test programs"
 
     mkdir -p $CMakeDir || exit 1
 
@@ -100,13 +99,13 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all example programs"
+    echo "Listing all scratch test programs"
   else
 
-    echo "Running all example programs"
+    echo "Running all scratch test programs"
   fi
 
-  for f in $(find $CMakeDir -type f '(' -name 'example?[cC]*' -o -name 'example?[cC][pP+][pP+]*' ')' -exec test -x {} \; -print)
+  for f in $(find $CMakeDir -type f '(' -name 'test_scratch*' -o -name 'test.scratch.*' ')' -exec test -x {} \; -print)
   do
 
     if [ $ListOnly -ne 0 ]; then
@@ -119,8 +118,13 @@ if [ $status -eq 0 ]; then
     echo
     echo "executing $f:"
 
-    # NOTE: we do not break on fail because these tests are not always intended to succeed
-    $f
+    if $f; then
+
+      :
+    else
+
+      status=$?
+    fi
   done
 fi
 

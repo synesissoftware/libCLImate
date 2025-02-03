@@ -58,7 +58,7 @@ while [[ $# -gt 0 ]]; do
 
       cat << EOF
 libCLImate is a portable, lightweight mini-framework that encapsulates the common aspects of Command-Line I**nterface boilerplate.
-Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
 Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
 Removes all known CMake artefacts
 
