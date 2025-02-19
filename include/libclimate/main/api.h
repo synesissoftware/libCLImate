@@ -4,11 +4,11 @@
  * Purpose: libCLImate core API for C programs.
  *
  * Created: 13th July 2015
- * Updated: 25th October 2024
+ * Updated: 3rd February 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -52,7 +52,7 @@
 
 #include <libclimate/basic_types.h>
 
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 #include <stdio.h>
 
@@ -61,24 +61,29 @@
  * API globals
  */
 
-/** The application-defined CLASP aliases array
+/** The application-defined CLASP aliases array.
  */
 #ifdef __cplusplus
 extern "C"
 #else /* ? __cplusplus */
 extern
 #endif /* __cplusplus */
-clasp_alias_t const libCLImate_aliases[];
+clasp_alias_t const libCLImate_specifications[];
+
+/* for backwards compatibility */
+#define libCLImate_aliases                                  libCLImate_specifications
 
 
 /* /////////////////////////////////////////////////////////////////////////
  * API callbacks
  */
 
-/** The application-defined program entry point for C programs
+/** The application-defined program entry point for C programs.
  *
  * \param args A non-mutating pointer to a clasp_arguments_t structure
- *   representing the parsed and sorted command-line arguments.
+ *  representing the parsed and sorted command-line arguments.
+ *
+ * \return A value suitable for use as the process exit code.
  */
 #ifdef __cplusplus
 extern "C"
@@ -87,27 +92,27 @@ extern
 #endif /* __cplusplus */
 int
 libCLImate_program_main_C(
-  clasp_arguments_t const* args
+    clasp_arguments_t const* args
 );
 
 /** The application-defined program entry point for C++ programs
  *
  * \param args A non-mutating pointer to a clasp_arguments_t structure
- *   representing the parsed and sorted command-line arguments.
+ *  representing the parsed and sorted command-line arguments.
+ *
+ * \return A value suitable for use as the process exit code.
  */
 #ifdef __cplusplus
 extern "C++"
 int
 libCLImate_program_main_Cpp(
-  clasp_arguments_t const* args
+    clasp_arguments_t const* args
 );
 
-# define libCLImate_program_main   libCLImate_program_main_Cpp
-
+# define libCLImate_program_main                            libCLImate_program_main_Cpp
 #else /* ? __cplusplus */
 
-# define libCLImate_program_main   libCLImate_program_main_C
-
+# define libCLImate_program_main                            libCLImate_program_main_C
 #endif /* __cplusplus */
 
 
@@ -125,30 +130,36 @@ extern "C"
 #if 0
 #elif defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     defined(__cplusplus)
+
 /** The main() implementation for C++
  *
- * \param This must be called only once in a C++ program
+ * \note This must be called only once in a C++ program
+ *
+ * \return A return code suitable for the process exit code.
  */
 int
 libCLImate_main_entry_point_Cpp(
-  int     argc
-, char**  argv
-, void*   reserved
+    int     argc
+,   char*   argv[]
+,   void*   reserved
 );
 #endif /* __cplusplus */
 
 #if 0
 #elif defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
     !defined(__cplusplus)
+
 /** The main() implementation for C
  *
- * \param This must be called only once in a C program
+ * \note This must be called only once in a C program
+ *
+ * \return A return code suitable for the process exit code.
  */
 int
 libCLImate_main_entry_point_C(
-  int     argc
-, char**  argv
-, void*   reserved
+    int     argc
+,   char*   argv[]
+,   void*   reserved
 );
 #endif /* !__cplusplus */
 
@@ -162,11 +173,12 @@ libCLImate_main_entry_point_C(
     defined(_WIN32) && \
     defined(LIBCLIMATE_USE_wmain) && \
     defined(__cplusplus)
+
 int
 libCLImate_wmain_entry_point_Cpp(
-  int       argc
-, wchar_t** argv
-, void*     reserved
+    int         argc
+,   wchar_t*    argv[]
+,   void*       reserved
 );
 #endif /* LIBCLIMATE_USE_wmain && C++ */
 
@@ -175,25 +187,30 @@ libCLImate_wmain_entry_point_Cpp(
 
 /** This function causes the executing program to exit, either by a
  * caller-supplied function, or by <code>exit</code>.
+ *
+ * \param programExitCode A value suitable for use as the process exit code;
  */
 void
 libCLImate_exit_immediately(
-  int   programExitCode
-, void (*pfn)(int programExitCode, void* param)
-, void* param
+    int     programExitCode
+,   void  (*pfn)(int programExitCode, void* param)
+,   void*   param
 ) /* noexcept */
 ;
 
 #if 0
 #elif defined(LIBCLIMATE_DOCUMENTATION_SKIP_SECTION) || \
-    defined(__cplusplus)
+      defined(__cplusplus)
+
 /** This function causes the executing program to exit by a
  * library-internal exception throw-catch.
+ *
+ * \param programExitCode A value suitable for use as the process exit code;
  */
 extern "C++"
 void
 libCLImate_unwind_and_exit(
-  int   programExitCode
+    int programExitCode
 );
 #endif /* __cplusplus */
 
@@ -202,22 +219,24 @@ libCLImate_unwind_and_exit(
 
 /** This function causes a stock-form usage to be emitted, via CLASP,
  * to the given file-stream.
+ *
+ * \return A value suitable for use as the process exit code.
  */
 int
 libCLImate_show_usage(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        aliases
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems
 );
 
 /** This function causes a stock-form usage to be emitted, via CLASP,
@@ -225,54 +244,58 @@ libCLImate_show_usage(
  */
 int
 libCLImate_show_usage_header(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        aliases
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems
 );
 
 /** This function causes a stock-form usage to be emitted, via CLASP,
  * to the given file-stream.
+ *
+ * \return A value suitable for use as the process exit code.
  */
 int
 libCLImate_show_usage_body(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        aliases
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems
 );
 
 /** This function causes a stock-form version to be emitted, via CLASP,
  * to the given file-stream.
+ *
+ * \return A value suitable for use as the process exit code.
  */
 int
 libCLImate_show_version(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        aliases
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
 );
 
 #ifdef __cplusplus

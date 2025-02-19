@@ -1,10 +1,11 @@
 
 #define ExampleProgramMain  libCLImate_program_main
-#define ExampleAliases      libCLImate_aliases
+#define ExampleAliases      libCLImate_specifications
 
 #include <libclimate/main/api.h>
 
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
+
 
 clasp_alias_t const ExampleAliases[] =
 {
@@ -17,9 +18,9 @@ ExampleProgramMain(
     clasp_arguments_t const* args
 )
 {
-  ((void)args);
+    ((void)args);
 
-  return 0;
+    return 0;
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */

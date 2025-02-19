@@ -2,6 +2,7 @@
 #ifndef SYNSOFT_INCL_SYNESISSOFTWARE_COMMANDLINEINTERFACE_HPP_MAIN
 #define SYNSOFT_INCL_SYNESISSOFTWARE_COMMANDLINEINTERFACE_HPP_MAIN
 
+
 #include <stlsoft/stlsoft.h>
 
 #ifdef STLSOFT_PPF_pragma_message_SUPPORT
@@ -13,12 +14,14 @@
 #include <SynesisSoftware/CommandLineInterface/main/api.h>
 #include <SynesisSoftware/CommandLineInterface/main/api.hpp>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * backwards compatibility
  */
 
+
 /* ////////////////////////////////////////////////////////////////////// */
 
-#endif /* SYNSOFT_INCL_SYNESISSOFTWARE_COMMANDLINEINTERFACE_HPP_MAIN */
+#endif /* !SYNSOFT_INCL_SYNESISSOFTWARE_COMMANDLINEINTERFACE_HPP_MAIN */
 
 /* ///////////////////////////// end of file //////////////////////////// */
