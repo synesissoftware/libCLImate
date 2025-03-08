@@ -76,11 +76,15 @@ CLASP_CALLCONV CLASP_Pantheios_log_(
 {
     STLSOFT_SUPPRESS_UNUSED(context);
 
+    if (severity < 0)
+    {
+        return;
+    }
+
 #if 0
 #elif defined(PANTHEIOS_USE_WIDE_STRINGS) && \
     !defined(CLASP_USE_WIDE_STRINGS)
 
-    STLSOFT_SUPPRESS_UNUSED(severity);
     STLSOFT_SUPPRESS_UNUSED(fmt);
     STLSOFT_SUPPRESS_UNUSED(args);
 #else
@@ -103,7 +107,7 @@ main_CLASP_(
     clasp_diagnostic_context_t ctxt = { 0 };
 
     ctxt.pfnLog = &CLASP_Pantheios_log_;
-    ctxt.severities[0] = PANTHEIOS_SEV_DEBUG;
+    ctxt.severities[0] = -1;
     ctxt.severities[1] = PANTHEIOS_SEV_WARNING;
     ctxt.severities[2] = PANTHEIOS_SEV_ERROR;
     ctxt.severities[3] = PANTHEIOS_SEV_ALERT;
