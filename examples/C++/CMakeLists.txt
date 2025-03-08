@@ -8,3 +8,4 @@ if(WIN32)
 
 	add_subdirectory(example.C++.wmain)
 endif(WIN32)
+add_subdirectory(example.C++.minimal)
