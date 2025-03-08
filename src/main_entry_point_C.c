@@ -6,7 +6,7 @@
  *          argument handling (CLASP).
  *
  * Created: 12nd July 2015
- * Updated: 3rd February 2025
+ * Updated: 8th March 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -103,6 +103,11 @@ main_CLASP_(
     clasp_diagnostic_context_t ctxt = { 0 };
 
     ctxt.pfnLog = &CLASP_Pantheios_log_;
+    ctxt.severities[0] = PANTHEIOS_SEV_DEBUG;
+    ctxt.severities[1] = PANTHEIOS_SEV_WARNING;
+    ctxt.severities[2] = PANTHEIOS_SEV_ERROR;
+    ctxt.severities[3] = PANTHEIOS_SEV_ALERT;
+    ctxt.severities[4] = PANTHEIOS_SEV_EMERGENCY;
 
     return clasp_main_invoke(
                 argc
