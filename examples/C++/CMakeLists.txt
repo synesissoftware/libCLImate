@@ -6,5 +6,5 @@ if(WIN32)
 
 	endif(USE_MFC)
 
-	add_subdirectory(example.C.wmain)
+	add_subdirectory(example.C++.wmain)
 endif(WIN32)
