@@ -4,7 +4,7 @@
  * Purpose: Stock usage, version functions.
  *
  * Created: 6th August 2015
- * Updated: 3rd February 2025
+ * Updated: 10th March 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -71,7 +71,7 @@ static
 int
 libCLImate_show_usage_to_(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -112,11 +112,11 @@ libCLImate_show_usage_to_(
 
     if (NULL != pfnHeader)
     {
-        (*pfnHeader)(args, &info, aliases);
+        (*pfnHeader)(args, &info, specifications);
     }
     if (NULL != pfnBody)
     {
-        (*pfnBody)(args, &info, aliases);
+        (*pfnBody)(args, &info, specifications);
     }
 
     return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
@@ -130,7 +130,7 @@ libCLImate_show_usage_to_(
 int
 libCLImate_show_usage(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -146,7 +146,7 @@ libCLImate_show_usage(
 {
     return libCLImate_show_usage_to_(
         args
-    ,   aliases
+    ,   specifications
     ,   stm
     ,   verMajor
     ,   verMinor
@@ -166,7 +166,7 @@ libCLImate_show_usage(
 int
 libCLImate_show_usage_header(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -182,7 +182,7 @@ libCLImate_show_usage_header(
 {
     return libCLImate_show_usage_to_(
         args
-    ,   aliases
+    ,   specifications
     ,   stm
     ,   verMajor
     ,   verMinor
@@ -202,7 +202,7 @@ libCLImate_show_usage_header(
 int
 libCLImate_show_usage_body(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -218,7 +218,7 @@ libCLImate_show_usage_body(
 {
     return libCLImate_show_usage_to_(
         args
-    ,   aliases
+    ,   specifications
     ,   stm
     ,   verMajor
     ,   verMinor
@@ -238,7 +238,7 @@ libCLImate_show_usage_body(
 int
 libCLImate_show_version(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -258,7 +258,7 @@ libCLImate_show_version(
 
     info.param              =   stm;
 
-    clasp_showVersionByFILE(args, &info, aliases);
+    clasp_showVersionByFILE(args, &info, specifications);
 
     return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
