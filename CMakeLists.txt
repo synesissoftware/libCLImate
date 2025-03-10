@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libCLImate
 #
 # Created:  23rd October 2024
-# Updated:  1st February 2025
+# Updated:  9th March 2025
 #
 # ######################################################################## #
 
@@ -125,7 +125,7 @@ endif(b64_FOUND)
 # ############################
 # CLASP
 
-set(CLASP_REQUIRED_VERSION_ 0.14)
+set(CLASP_REQUIRED_VERSION_ 0.15)
 
 find_package(CLASP ${CLASP_REQUIRED_VERSION_} REQUIRED)
 
@@ -163,7 +163,7 @@ endif(Pantheios.Extras.DiagUtil_FOUND)
 # ############################
 # Pantheios.Extras.Main
 
-set(Pantheios.Extras.Main_REQUIRED_VERSION_ 0.1)
+set(Pantheios.Extras.Main_REQUIRED_VERSION_ 0.2)
 
 find_package(Pantheios.Extras.Main ${Pantheios.Extras.Main_REQUIRED_VERSION_} REQUIRED)
 
@@ -215,7 +215,7 @@ endif()
 
 if(BUILD_TESTING)
 
-	set(xTests_REQUIRED_VERSION_ 0.25)
+	set(xTests_REQUIRED_VERSION_ 0.26)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
