@@ -1,7 +1,8 @@
 
-#include <libclimate/main/api.h>
+#include <libclimate/main/api.h> /* include the explicit-main API header */
 
 #include <clasp/clasp.h>
+#include <pantheios/frontends/stock.h>
 
 const int PROGRAM_VER_MAJOR =   0;
 const int PROGRAM_VER_MINOR =   0;
@@ -39,3 +40,14 @@ libCLImate_program_main(
     }
     return 0;
 }
+
+/* define the explicit-wmain() ... */
+int
+wmain(
+    int         argc
+    wchar_t*    argv[]
+)
+{
+    return libCLImate_wmain_entry_point_Cpp(argc, argv, NULL);
+}
+
