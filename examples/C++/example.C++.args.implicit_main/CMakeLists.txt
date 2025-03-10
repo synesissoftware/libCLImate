@@ -1,2 +1,2 @@
 # SIS:AUTO_GENERATED: Remove this line if you edit the file, otherwise it will be overwritten
-define_example_program(example.C++.args.implicit_main diagnostics.cpp main.cpp)
+define_example_program(example.C++.args.implicit_main main.cpp)

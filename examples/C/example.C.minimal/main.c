@@ -1,5 +1,5 @@
 
-#include <libclimate/main.h>
+#include <libclimate/main.h> /* include the implicit-main API header */
 
 #include <clasp/clasp.h>
 #include <pantheios/frontends/stock.h>

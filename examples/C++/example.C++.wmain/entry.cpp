@@ -11,7 +11,3 @@ wmain(
 {
     return libCLImate_wmain_entry_point_Cpp(argc, argv, NULL);
 }
-
-
-/* ///////////////////////////// end of file //////////////////////////// */
-
