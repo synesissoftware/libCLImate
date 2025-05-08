@@ -283,9 +283,7 @@ if(BUILD_TESTING)
 
 	message("-- enabled building of tests ...")
 
-#[====[
 	add_subdirectory(test)
-#]====]
 else(BUILD_TESTING)
 
 	message("-- disabled building of tests - define BUILD_TESTING to enable")
