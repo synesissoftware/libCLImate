@@ -27,9 +27,16 @@ endif(WIN32)
 
 if(MSVC)
 
+	if(MSVC_VERSION LESS 1920)
+
+		add_compile_options("/wd4822")
+	endif()
+
 	if(MSVC_VERSION GREATER_EQUAL 1914)
 
 		add_compile_options("/Zc:__cplusplus")
+
+		add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
 	endif()
 endif(MSVC)
 
