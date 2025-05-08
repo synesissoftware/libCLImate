@@ -42,13 +42,15 @@ libCLImate_program_main(
     return 0;
 }
 
-/* define the explicit-main() ... */
+/* define the explicit-main(), ... */
 int
 main(
     int     argc
 ,   char*   argv[]
 )
 {
-    /* ... in terms of libCLImate_main_entry_point_C() */
+    /* ... do whatever initialisation is required before handling the command-line, ...  */
+
+    /* ... and initialise/execute CLASP explicitly. */
     return libCLImate_main_entry_point_C(argc, argv, NULL);
 }

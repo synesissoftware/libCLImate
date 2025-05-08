@@ -41,13 +41,16 @@ libCLImate_program_main(
     return 0;
 }
 
-/* define the explicit-wmain() ... */
+/* define the explicit-wmain(), ... */
 int
 wmain(
     int         argc
     wchar_t*    argv[]
 )
 {
+    /* ... do whatever initialisation is required before handling the command-line, ...  */
+
+    /* ... and initialise/execute CLASP explicitly. */
     return libCLImate_wmain_entry_point_Cpp(argc, argv, NULL);
 }
 
