@@ -4,7 +4,7 @@
  * Purpose: libCLImate core API for C++ programs.
  *
  * Created: 13th July 2015
- * Updated: 3rd February 2025
+ * Updated: 10th March 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -95,7 +95,7 @@ inline
 int
 show_usage(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -111,7 +111,7 @@ show_usage(
 {
     return libCLImate_show_usage(
         args
-    ,   aliases
+    ,   specifications
     ,   stm
     ,   verMajor
     ,   verMinor
@@ -130,7 +130,7 @@ inline
 int
 show_usage_header(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -146,7 +146,7 @@ show_usage_header(
 {
     return libCLImate_show_usage_header(
         args
-    ,   aliases
+    ,   specifications
     ,   stm
     ,   verMajor
     ,   verMinor
@@ -165,7 +165,7 @@ inline
 int
 show_usage_body(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -181,7 +181,7 @@ show_usage_body(
 {
     return libCLImate_show_usage_body(
         args
-    ,   aliases
+    ,   specifications
     ,   stm
     ,   verMajor
     ,   verMinor
@@ -200,7 +200,7 @@ inline
 int
 show_version(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -211,7 +211,7 @@ show_version(
 {
     return libCLImate_show_version(
         args
-    ,   aliases
+    ,   specifications
     ,   stm
     ,   verMajor
     ,   verMinor

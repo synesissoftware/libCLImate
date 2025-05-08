@@ -39,6 +39,79 @@ macro(define_target_compile_options target_name)
 endmacro(define_target_compile_options)
 
 
+macro(target_link_b64_OPTIONAL target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			$<$<BOOL:${b64_FOUND}>:b64::core>
+	)
+endmacro(target_link_b64_OPTIONAL)
+
+macro(target_link_CLASP_core target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			CLASP::core
+	)
+endmacro(target_link_CLASP_core)
+
+macro(target_link_Pantheios_core target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			Pantheios::Pantheios.core
+	)
+endmacro(target_link_Pantheios_core)
+
+macro(target_link_Pantheios_util target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			Pantheios::Pantheios.util
+	)
+endmacro(target_link_Pantheios_util)
+
+macro(target_link_Pantheios_Extras_DiagUtil target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			Pantheios.Extras.DiagUtil
+	)
+endmacro(target_link_Pantheios_Extras_DiagUtil)
+
+macro(target_link_Pantheios_Extras_Main target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			Pantheios.Extras.Main
+	)
+endmacro(target_link_Pantheios_Extras_Main)
+
+macro(target_link_STLSoft target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+	)
+endmacro(target_link_STLSoft)
+
+macro(target_link_shwild_OPTIONAL target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			$<$<BOOL:${shwild_FOUND}>:shwild::core>
+	)
+endmacro(target_link_shwild_OPTIONAL)
+
+macro(target_link_xTests target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			$<IF:$<VERSION_LESS:${xTests_VERSION},"0.23">,xTests::xTests.core,xTests::core>
+	)
+endmacro(target_link_xTests)
+
+
 function(define_automated_test_program program_name entry_point_source_name)
 
 	set(X_EXTRA_ARGUMENTS_ ${ARGN})
@@ -51,9 +124,10 @@ function(define_automated_test_program program_name entry_point_source_name)
 	target_link_libraries(${program_name}
 		PRIVATE
 			core
-			$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
-			$<IF:$<VERSION_LESS:${xTests_VERSION},"0.23">,xTests::xTests.core,xTests::core>
 	)
+
+	target_link_STLSoft(${program_name})
+	target_link_xTests(${program_name})
 
 	if(WIN32)
 
@@ -79,14 +153,21 @@ function(define_example_program program_name entry_point_source_name)
 	target_link_libraries(${program_name}
 		PRIVATE
 			core
-			CLASP::core
-			Pantheios::Pantheios.core
-			Pantheios::Pantheios.fe.all
+	)
+
+	# target_link_b64_OPTIONAL(${program_name}) # this brought in by Pantheios
+	target_link_CLASP_core(${program_name})
+	target_link_Pantheios_core(${program_name})
+	target_link_libraries(${program_name}
+		PRIVATE
 			Pantheios::Pantheios.be.AnsiConsole
 			Pantheios::Pantheios.bec.AnsiConsole
-			Pantheios::Pantheios.util
-			$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+			Pantheios::Pantheios.fe.all
 	)
+	target_link_Pantheios_util(${program_name})
+	target_link_Pantheios_Extras_Main(${program_name})
+	target_link_shwild_OPTIONAL(${program_name})
+	target_link_STLSoft(${program_name})
 
 	if(WIN32)
 
@@ -98,6 +179,16 @@ function(define_example_program program_name entry_point_source_name)
 
 	define_target_compile_options(${program_name})
 endfunction(define_example_program)
+
+
+macro(install_file subdir file_list)
+
+	install(
+		FILES
+			${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${subdir}/${file_list}
+		DESTINATION include/${PROJECT_NAME_LOWER}/${subdir}/
+	)
+endmacro(install_file)
 
 
 # ############################## end of file ############################# #

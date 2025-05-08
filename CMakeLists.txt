@@ -151,6 +151,11 @@ if(NOT (CMAKE_NO_B64))
 	endif(BUILD_TESTING)
 endif()
 
+if(b64_FOUND)
+
+	add_compile_definitions(LIBCLIMATE_HAS_b64)
+endif(b64_FOUND)
+
 
 # ############################
 # CLASP
@@ -160,6 +165,11 @@ set(CLASP_REQUIRED_VERSION_ 0.15)
 find_package(CLASP ${CLASP_REQUIRED_VERSION_} REQUIRED)
 
 message("-- CMake package CLASP found (version ${CLASP_VERSION}; ${CLASP_REQUIRED_VERSION_} requested)")
+
+if(CLASP_FOUND)
+
+	add_compile_definitions(LIBCLIMATE_HAS_CLASP)
+endif(CLASP_FOUND)
 
 
 # ############################
@@ -181,6 +191,11 @@ if(NOT (CMAKE_NO_PANTHEIOS))
 		endif(Pantheios_FOUND)
 	endif(BUILD_TESTING)
 endif()
+
+if(Pantheios_FOUND)
+
+	add_compile_definitions(LIBCLIMATE_HAS_Pantheios)
+endif(Pantheios_FOUND)
 
 
 # ############################
@@ -204,6 +219,11 @@ if(NOT (CMAKE_NO_PANTHEIOS))
 	endif(Pantheios.Extras.DiagUtil_FOUND)
 endif()
 
+if(Pantheios_Extras_DiagUtil_FOUND)
+
+	add_compile_definitions(LIBCLIMATE_HAS_Pantheios_Extras_DiagUtil)
+endif(Pantheios_Extras_DiagUtil_FOUND)
+
 
 # ############################
 # Pantheios.Extras.Main
@@ -216,6 +236,11 @@ if(NOT (CMAKE_NO_PANTHEIOS))
 
 	message("-- CMake package Pantheios.Extras.Main found (version ${Pantheios.Extras.Main_VERSION}; ${Pantheios.Extras.Main_REQUIRED_VERSION_} requested)")
 endif()
+
+if(Pantheios_Extras_Main_FOUND)
+
+	add_compile_definitions(LIBCLIMATE_HAS_Pantheios_Extras_Main)
+endif(Pantheios_Extras_Main_FOUND)
 
 
 # ############################
@@ -255,6 +280,11 @@ else()
 	add_compile_definitions(RECLS_NO_SHWILD)
 	add_compile_definitions(XTESTS_NO_SHWILD)
 endif()
+
+if(shwild_FOUND)
+
+	add_compile_definitions(LIBCLIMATE_HAS_shwild)
+endif(shwild_FOUND)
 
 
 # ############################
@@ -313,6 +343,11 @@ if((USE_UNIXEM) AND (WIN32))
 	add_compile_definitions(RECLS_HAS_UNIXEM)
 	add_compile_definitions(STLSOFT_HAS_UNIXEM)
 endif()
+
+if(UNIXem_FOUND)
+
+	add_compile_definitions(LIBCLIMATE_HAS_UNIXem)
+endif(UNIXem_FOUND)
 
 
 # ############################
