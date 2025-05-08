@@ -16,11 +16,11 @@ RunMake=1
 while [[ $# -gt 0 ]]; do
 
   case $1 in
-    -l|--list-only)
+    --list-only|-l)
 
       ListOnly=1
       ;;
-    -M|--no-make)
+    --no-make|-M)
 
       RunMake=0
       ;;
@@ -76,7 +76,8 @@ status=0
 if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
-    echo "Executing make and then running all scratch test programs"
+
+    echo "Executing build (via command \`$MakeCmd\`) and then running all scratch (and performance) test programs"
 
     mkdir -p $CMakeDir || exit 1
 
@@ -99,13 +100,13 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all scratch test programs"
+    echo "Listing all scratch (and performance) test programs"
   else
 
-    echo "Running all scratch test programs"
+    echo "Running all scratch (and performance) test programs"
   fi
 
-  for f in $(find $CMakeDir -type f '(' -name 'test_scratch*' -o -name 'test.scratch.*' ')' -exec test -x {} \; -print)
+  for f in $(find $CMakeDir -type f '(' -name 'test_scratch*' -o -name 'test.scratch.*' -o -name 'test_performance*' -o -name 'test.performance.*' ')' -exec test -x {} \; -print)
   do
 
     if [ $ListOnly -ne 0 ]; then
@@ -115,8 +116,14 @@ if [ $status -eq 0 ]; then
       continue
     fi
 
-    echo
-    echo "executing $f:"
+    if [ $Verbosity -ge 3 ]; then
+
+      echo
+    fi
+    if [ $Verbosity -ge 2 ]; then
+
+      echo "executing $f:"
+    fi
 
     if $f; then
 
