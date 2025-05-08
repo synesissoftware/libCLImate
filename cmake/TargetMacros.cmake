@@ -41,8 +41,11 @@ endmacro(define_target_compile_options)
 
 function(define_automated_test_program program_name entry_point_source_name)
 
+	set(X_EXTRA_ARGUMENTS_ ${ARGN})
+
 	add_executable(${program_name}
 		${entry_point_source_name}
+		${X_EXTRA_ARGUMENTS_}
 	)
 
 	target_link_libraries(${program_name}
@@ -66,13 +69,22 @@ endfunction(define_automated_test_program)
 
 function(define_example_program program_name entry_point_source_name)
 
+	set(X_EXTRA_ARGUMENTS_ ${ARGN})
+
 	add_executable(${program_name}
 		${entry_point_source_name}
+		${X_EXTRA_ARGUMENTS_}
 	)
 
 	target_link_libraries(${program_name}
 		PRIVATE
 			core
+			CLASP::core
+			Pantheios::Pantheios.core
+			Pantheios::Pantheios.fe.all
+			Pantheios::Pantheios.be.AnsiConsole
+			Pantheios::Pantheios.bec.AnsiConsole
+			Pantheios::Pantheios.util
 			$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
 	)
 
