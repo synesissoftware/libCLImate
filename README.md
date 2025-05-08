@@ -24,12 +24,12 @@
 
 - command-line argument parsing and sorting (using the **[CLASP](https://github.com/synesissoftware/CLASP)** library);
 - diagnostic logging library (**[Pantheios](https://github.com/synesissoftware/Pantheios)**) initialisation / lifetime scoping;
-- provision of de-facto standard CLI facilities, such as responding to '--help' and '--version';
+- provision of de-facto standard CLI facilities, such as responding to `'--help'` and `'--version'` flags;
 
 
 ## Installation
 
-T.B.C.
+Detailed instructions - via **CMake**, via bundling, via custom makefile parameters - are provided in the accompanying [INSTALL.md](./INSTALL.md) file.
 
 
 ## Components
@@ -51,6 +51,7 @@ Examples are provided in the ```examples``` directory. A detailed list TOC of th
 
 ## Project Information
 
+
 ### Where to get help
 
 [GitHub Page](https://github.com/synesissoftware/libCLImate "GitHub Page")
@@ -65,7 +66,7 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 **libCLImate** depends directly on the following libraries:
 
- - **[CLASP](https://github.com/synesissoftware/CLASP)**, v**0.15.0 (alpha 5)** or later - **CLASP** - **c**ommand-**l**ine **a**rgument **s**orting and **p**arsing - is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API. Current working version at https://github.com/synesissoftware/STLSoft-1.9;
+ - **[CLASP](https://github.com/synesissoftware/CLASP)**, v**0.15.0 (alpha 5)** or later - **CLASP** - **c**ommand-**l**ine **a**rgument **s**orting and **p**arsing - is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API. Current working version at https://github.com/synesissoftware/STLSoft-1.11 (but will be at https://github.com/synesissoftware/STLSoft in Q3 2025 and onwards);
  - **[Pantheios](https://github.com/synesissoftware/Pantheios/)**, v**1.0.1 (beta 22)** or later - **Pantheios** is an Open Source C/C++ Diagnostic Logging API library, offering an optimal combination of 100% type-safety, efficiency, genericity and extensibility. It is simple to use and extend, highly-portable (platform and compiler-independent) and, best of all, it upholds the C tradition of *you only pay for what you use*;
  - **[Pantheios.Extras.DiagUtil](https://github.com/synesissoftware/Pantheios.Extras.DiagUtil/)**, v**0.1.2 (beta 1)** or later - **Pantheios.Extras.Main** is a header-only library that provides a suite of functions that aid diagnostics. Currently, this is a Windows-only dependency;
  - **[Pantheios.Extras.Main](https://github.com/synesissoftware/Pantheios.Extras.Main/)**, v**0.2.1 (alpha 2)** or later - **Pantheios.Extras.Main** is a header-only library that provides a suite of functions that simplify the implementation of ```main()```;
@@ -112,10 +113,7 @@ The dependencies graph is:
 ```
 
 
-
 ### Related projects
-
-Projects in which **libCLImate** is used include:
 
 T.B.C.
 
