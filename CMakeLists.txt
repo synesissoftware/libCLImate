@@ -122,29 +122,40 @@ option(BUILD_EXAMPLES "Build examples" ON)
 # optional:
 # - b64 - may be needed by Pantheios;
 # - Pantheios.Extras.DiagUtil - Windows-only;
+# - shwild - required for testing;
 # - xTests - required for testing;
 
 
 # ############################
 # b64
 
-find_package(b64 QUIET)
+if(NOT (CMAKE_NO_B64))
 
-if(b64_FOUND)
+	if(BUILD_TESTING)
 
-    message("-- CMake package b64 found (version ${b64_VERSION})")
+		set(b64_REQUIRED_VERSION_ 1.5)
 
-    add_compile_definitions(HAS_b64)
-else(b64_FOUND)
+		find_package(b64 ${b64_REQUIRED_VERSION_} QUIET)
 
-    add_compile_definitions(PANTHEIOS_NO_B64)
-endif(b64_FOUND)
+		if(b64_FOUND)
+
+			message("-- CMake package b64 found (version ${b64_VERSION}; ${b64_REQUIRED_VERSION_} requested)")
+
+			add_compile_definitions(HAS_b64)
+		else(b64_FOUND)
+
+			add_compile_definitions(PANTHEIOS_NO_B64)
+			add_compile_definitions(RECLS_NO_B64)
+			add_compile_definitions(SHWILD_NO_B64)
+		endif(b64_FOUND)
+	endif(BUILD_TESTING)
+endif()
 
 
 # ############################
 # CLASP
 
-set(CLASP_REQUIRED_VERSION_ 0.14)
+set(CLASP_REQUIRED_VERSION_ 0.15)
 
 find_package(CLASP ${CLASP_REQUIRED_VERSION_} REQUIRED)
 
@@ -154,39 +165,96 @@ message("-- CMake package CLASP found (version ${CLASP_VERSION}; ${CLASP_REQUIRE
 # ############################
 # Pantheios
 
-set(Pantheios_REQUIRED_VERSION_ 1.0.1)
+if(NOT (CMAKE_NO_PANTHEIOS))
 
-find_package(Pantheios ${Pantheios_REQUIRED_VERSION_} REQUIRED)
+	if(BUILD_TESTING)
 
-message("-- CMake package Pantheios found (version ${Pantheios_VERSION}; ${Pantheios_REQUIRED_VERSION_} requested)")
+		set(Pantheios_REQUIRED_VERSION_ 1.0)
+
+		find_package(Pantheios ${Pantheios_REQUIRED_VERSION_} QUIET)
+
+		if(Pantheios_FOUND)
+
+			message("-- CMake package Pantheios found (version ${Pantheios_VERSION}; ${Pantheios_REQUIRED_VERSION_} requested)")
+
+			add_compile_definitions(HAS_Pantheios)
+		endif(Pantheios_FOUND)
+	endif(BUILD_TESTING)
+endif()
 
 
 # ############################
 # Pantheios.Extras.DiagUtil
 
+if(NOT (CMAKE_NO_PANTHEIOS))
 
-find_package(Pantheios.Extras.DiagUtil QUIET)
+	set(Pantheios.Extras.DiagUtil_REQUIRED_VERSION_ 0.1)
 
-if(Pantheios.Extras.DiagUtil_FOUND)
+	find_package(Pantheios.Extras.DiagUtil ${Pantheios.Extras.Main_REQUIRED_VERSION_} QUIET)
 
-	message("-- CMake package Pantheios.Extras.DiagUtil found (version ${Pantheios.Extras.DiagUtil_VERSION})")
+	if(Pantheios.Extras.DiagUtil_FOUND)
 
-	add_compile_definitions(HAS_Pantheios_Extras_DiagUtil)
-	add_compile_definitions(HAS_DIAGUTIL)
-else(Pantheios.Extras.DiagUtil_FOUND)
+		message("-- CMake package Pantheios.Extras.DiagUtil found (version ${Pantheios.Extras.DiagUtil_VERSION}; ${Pantheios.Extras.DiagUtil_REQUIRED_VERSION_} requested)")
 
-	add_compile_definitions(PANTHEIOS_NO_DIAGUTIL)
-endif(Pantheios.Extras.DiagUtil_FOUND)
+		add_compile_definitions(HAS_Pantheios_Extras_DiagUtil)
+		add_compile_definitions(HAS_DIAGUTIL)
+	else(Pantheios.Extras.DiagUtil_FOUND)
+
+		add_compile_definitions(PANTHEIOS_NO_DIAGUTIL)
+	endif(Pantheios.Extras.DiagUtil_FOUND)
+endif()
 
 
 # ############################
 # Pantheios.Extras.Main
 
-set(Pantheios.Extras.Main_REQUIRED_VERSION_ 0.1)
+if(NOT (CMAKE_NO_PANTHEIOS))
 
-find_package(Pantheios.Extras.Main ${Pantheios.Extras.Main_REQUIRED_VERSION_} REQUIRED)
+	set(Pantheios.Extras.Main_REQUIRED_VERSION_ 0.2)
 
-message("-- CMake package Pantheios.Extras.Main found (version ${Pantheios.Extras.Main_VERSION}; ${Pantheios.Extras.Main_REQUIRED_VERSION_} requested)")
+	find_package(Pantheios.Extras.Main ${Pantheios.Extras.Main_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package Pantheios.Extras.Main found (version ${Pantheios.Extras.Main_VERSION}; ${Pantheios.Extras.Main_REQUIRED_VERSION_} requested)")
+endif()
+
+
+# ############################
+# shwild
+
+if(NOT (CMAKE_NO_SHWILD))
+
+	if(BUILD_TESTING)
+
+		set(shwild_REQUIRED_VERSION_ 0.12)
+
+		find_package(shwild ${shwild_REQUIRED_VERSION_} QUIET)
+
+		if(shwild_FOUND)
+
+			message("-- CMake package shwild found (version ${shwild_VERSION}; ${shwild_REQUIRED_VERSION_} requested)")
+
+			add_compile_definitions(HAS_shwild)
+			add_compile_definitions(PANTHEIOS_HAS_SHWILD)
+			add_compile_definitions(RECLS_HAS_SHWILD)
+			add_compile_definitions(XTESTS_HAS_SHWILD)
+		else(shwild_FOUND)
+
+			add_compile_definitions(PANTHEIOS_NO_SHWILD)
+			add_compile_definitions(RECLS_NO_SHWILD)
+			add_compile_definitions(XTESTS_NO_SHWILD)
+		endif(shwild_FOUND)
+	else(BUILD_TESTING)
+
+		add_compile_definitions(PANTHEIOS_NO_SHWILD)
+		add_compile_definitions(RECLS_NO_SHWILD)
+		add_compile_definitions(XTESTS_NO_SHWILD)
+	endif(BUILD_TESTING)
+else()
+
+	add_compile_definitions(PANTHEIOS_NO_SHWILD)
+	add_compile_definitions(RECLS_NO_SHWILD)
+	add_compile_definitions(XTESTS_NO_SHWILD)
+endif()
 
 
 # ############################
@@ -230,11 +298,29 @@ endif()
 
 
 # ############################
+# UNIXem
+
+if((USE_UNIXEM) AND (WIN32))
+
+	set(UNIXem_REQUIRED_VERSION_ 1.12.7)
+
+	find_package(UNIXem ${UNIXem_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package UNIXem found (version ${UNIXem_VERSION}; ${UNIXem_REQUIRED_VERSION_} requested)")
+
+	add_compile_definitions(_STLSOFT_FORCE_ANY_COMPILER)
+	add_compile_definitions(EMULATE_UNIX_ON_WINDOWS)
+	add_compile_definitions(RECLS_HAS_UNIXEM)
+	add_compile_definitions(STLSOFT_HAS_UNIXEM)
+endif()
+
+
+# ############################
 # xTests
 
 if(BUILD_TESTING)
 
-	set(xTests_REQUIRED_VERSION_ 0.25)
+	set(xTests_REQUIRED_VERSION_ 0.26.3)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
@@ -255,6 +341,36 @@ include(GNUInstallDirs)
 
 # ##########################################################
 # targets
+
+# ################################################
+# custom definitions
+
+if(UNIX)
+
+	set(_BUILD_AS_UNIX 1)
+
+	message("-- Operating system Unix")
+else(UNIX)
+
+	if(WIN32)
+
+		if(USE_UNIXEM)
+
+			set(_BUILD_AS_UNIX 1)
+
+			message("-- Operating system Unix (synthesised on Windows)")
+		else(USE_UNIXEM)
+
+			set(_BUILD_AS_WIN32 1)
+
+			message("-- Operating system Windows")
+		endif(USE_UNIXEM)
+	else(WIN32)
+
+		message("-- Operating system unknown")
+	endif(WIN32)
+endif(UNIX)
+
 
 # ################################################
 # main libraries
