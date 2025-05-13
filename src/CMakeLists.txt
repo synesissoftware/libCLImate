@@ -5,18 +5,18 @@
 # Purpose:  CMake lists file for libCLImate core library
 #
 # Created:  ...
-# Updated:  18th October 2024
+# Updated:  8th May 2025
 #
 # ######################################################################## #
 
 
-if(UNIX)
+if(_BUILD_AS_UNIX)
 
 	add_definitions(-DUNIX)
 	add_definitions(-Dunix)
-endif(UNIX)
+endif(_BUILD_AS_UNIX)
 
-if(WIN32)
+if(_BUILD_AS_WIN32)
 
 	if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 
@@ -34,17 +34,22 @@ if(WIN32)
 	add_definitions(-DCSTRING_INCL_CSTRING_H_IMPLICIT_LINK)
 
 	add_definitions(-DCLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS)
-endif(WIN32)
+endif(_BUILD_AS_WIN32)
 
-if((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
+if(MSVC)
 
-	target_compile_definitions(core
-		PRIVATE
-			"/Zc:__cplusplus"
-	)
+	if(MSVC_VERSION LESS 1920)
 
-	add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
-endif()
+		add_compile_options("/wd4822")
+	endif()
+
+	if(MSVC_VERSION GREATER_EQUAL 1914)
+
+		add_compile_options("/Zc:__cplusplus")
+
+		add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
+	endif()
+endif(MSVC)
 
 
 SET (CORE_SRC_DIR .)
