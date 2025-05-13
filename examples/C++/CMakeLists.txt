@@ -1,10 +1,8 @@
-add_subdirectory(example.C++.args.implicit_main)
-add_subdirectory(example.C++.implicit_main.throw)
+add_subdirectory(explicit_main)
+add_subdirectory(implicit_main)
+add_subdirectory(minimal)
+add_subdirectory(throw)
 if(WIN32)
 
-	if(USE_MFC)
-
-	endif(USE_MFC)
-
-	add_subdirectory(example.C.wmain)
+	add_subdirectory(explicit_main.wmain)
 endif(WIN32)

@@ -4,7 +4,7 @@
  * Purpose: libCLImate core API for C programs.
  *
  * Created: 13th July 2015
- * Updated: 3rd February 2025
+ * Updated: 10th March 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -61,7 +61,7 @@
  * API globals
  */
 
-/** The application-defined CLASP aliases array.
+/** The application-defined CLASP specifications array.
  */
 #ifdef __cplusplus
 extern "C"
@@ -225,7 +225,7 @@ libCLImate_unwind_and_exit(
 int
 libCLImate_show_usage(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -245,7 +245,7 @@ libCLImate_show_usage(
 int
 libCLImate_show_usage_header(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -267,7 +267,7 @@ libCLImate_show_usage_header(
 int
 libCLImate_show_usage_body(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
@@ -289,7 +289,7 @@ libCLImate_show_usage_body(
 int
 libCLImate_show_version(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const*        specifications
 ,   FILE*                       stm
 ,   int                         verMajor
 ,   int                         verMinor
