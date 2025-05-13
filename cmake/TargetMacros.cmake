@@ -95,6 +95,14 @@ macro(target_link_STLSoft target_name)
 	)
 endmacro(target_link_STLSoft)
 
+macro(target_link_shwild target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			shwild::core
+	)
+endmacro(target_link_shwild)
+
 macro(target_link_shwild_OPTIONAL target_name)
 
 	target_link_libraries(${target_name}

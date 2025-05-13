@@ -78,7 +78,7 @@ Installation steps:
    1. Assuming an (almost) simplest possible program to verify the installation:
 
       ```c
-      /* examples/C/example.C.minimal/main.c */
+      /* examples/C/minimal/main.c */
       #include <libclimate/main.h>
 
       #include <clasp/clasp.h>
