@@ -22,10 +22,11 @@ The following instructions assume the **requisites** have been processed via the
 2. [**CLASP**](https://github.com/synesissoftware/CLASP) has been obtained and then built and installed via **CMake**;
 3. [**Pantheios**](https://github.com/synesissoftware/Pantheios) has been obtained and then built and installed via **CMake**;
 4. (optionally) [**bPantheios.Extras.DiagUtil64**](https://github.com/synesissoftware/Pantheios.Extras.DiagUtil) has been obtained and then built and installed via **CMake**. **bPantheios.Extras.DiagUtil64** currently provides useful facilities only for Windows platform, so if you are intending to use **libCLImate** on other platforms this step can be skipped;
-5. [**Pantheios.Extras.Main**](https://github.com/synesissoftware/Pantheios.Extras.Main) has been installed
-6. [**STLSoft**](https://github.com/synesissoftware/STLSoft) has been obtained and then built and installed via **CMake**;
-7. (optionally) [**shwild**](https://github.com/synesissoftware/STLSoft) has been obtained and then built and installed via **CMake**. **b64** is not required by [**libCLImate**](https://github.com/synesissoftware/libCLImate), rather it is an optional dependency of **xTests** (for which it enables several additional match test constructs). If you are not otherwise using **xTests**, or your use does not require **shwild**, this step can be skipped
-8. [**xTests**](https://github.com/synesissoftware/xTests) has been obtained and then built and installed via **CMake**;
+5. [**Pantheios.Extras.Main**](https://github.com/synesissoftware/Pantheios.Extras.Main) has been installed;
+6. (optionally) [**shwild**](https://github.com/synesissoftware/shwild) has been obtained and then built and installed via **CMake**. **shwild** is not required by [**libCLImate**](https://github.com/synesissoftware/libCLImate), rather it is an optional dependency of **xTests**. This step can be skipped;
+7. [**STLSoft**](https://github.com/synesissoftware/STLSoft) has been obtained and then built and installed via **CMake**;
+8. (optionally) [**shwild**](https://github.com/synesissoftware/STLSoft) has been obtained and then built and installed via **CMake**. **b64** is not required by [**libCLImate**](https://github.com/synesissoftware/libCLImate), rather it is an optional dependency of **xTests** (for which it enables several additional match test constructs). If you are not otherwise using **xTests**, or your use does not require **shwild**, this step can be skipped;
+9. [**xTests**](https://github.com/synesissoftware/xTests) has been obtained and then built and installed via **CMake**;
 
 ### **libCLImate**
 
@@ -77,7 +78,7 @@ Installation steps:
    1. Assuming an (almost) simplest possible program to verify the installation:
 
       ```c
-      /* examples/C/example.C.minimal/main.c */
+      /* examples/C/minimal/main.c */
       #include <libclimate/main.h>
 
       #include <clasp/clasp.h>

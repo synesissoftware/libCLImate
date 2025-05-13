@@ -21,9 +21,8 @@ if(_BUILD_AS_WIN32)
 		add_definitions(-DWIN32)
 	endif()
 
-	add_definitions(-DNOMINMAX)
+	add_definitions(-DRECLS_API_FTP)
 endif(_BUILD_AS_WIN32)
-
 
 if(MSVC)
 
@@ -41,16 +40,7 @@ if(MSVC)
 endif(MSVC)
 
 
-set(GCC_WARN_NO_cxx11_long_long "")
-if(X_CMAKE_CXX_FULLSTANDARD LESS 2011)
-
-	set(GCC_WARN_NO_cxx11_long_long -Wno-c++11-long-long)
-endif()
-
-
-add_subdirectory(C)
-add_subdirectory(C++)
-
-
-# ############################## end of file ############################# #
+add_subdirectory(component)
+add_subdirectory(scratch)
+add_subdirectory(unit)
 

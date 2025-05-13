@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libCLImate
 #
 # Created:  23rd October 2024
-# Updated:  9th March 2025
+# Updated:  8th May 2025
 #
 # ######################################################################## #
 
@@ -46,7 +46,7 @@ string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_MAJOR${RX_WS}+
 set(_VERSION_MAJOR ${CMAKE_MATCH_1})
 string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_MINOR${RX_WS}+([0-9]+)" MINOR_DUMMY ${_header_file})
 set(_VERSION_MINOR ${CMAKE_MATCH_1})
-string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_REVISION${RX_WS}+([0-9]+)" PATCH_DUMMY ${_header_file})
+string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_PATCH${RX_WS}+([0-9]+)" PATCH_DUMMY ${_header_file})
 set(_VERSION_PATCH ${CMAKE_MATCH_1})
 
 # set project version number here
@@ -71,11 +71,23 @@ if(MSVC)
 		set(CMAKE_C_STANDARD 90)
 		set(CMAKE_CXX_STANDARD 98)
 	endif()
+
+	if(MSVC_USE_MT)
+
+		set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+	endif(MSVC_USE_MT)
+else(MSVC)
+
+	if(MSVC_USE_MT)
+
+		# this here just to absorb warning about not using `MSVC_USE_MT` (to
+		# enable **prepare_cmake.sh** to be simple)
+	endif(MSVC_USE_MT)
 endif(MSVC)
 
 
 # ##########################################################
-# dependencies, includes, options
+# dependencies, features, includes, and options
 
 # ################################################
 # includes - 1
@@ -86,9 +98,16 @@ include(TargetMacros)
 
 
 # ################################################
-# dependencies and options
+# dependencies, features, and options
+
+# ######################################
+# options
 
 option(BUILD_EXAMPLES "Build examples" ON)
+
+# ######################################
+# features
+
 
 # ######################################
 # dependencies
@@ -103,23 +122,34 @@ option(BUILD_EXAMPLES "Build examples" ON)
 # optional:
 # - b64 - may be needed by Pantheios;
 # - Pantheios.Extras.DiagUtil - Windows-only;
+# - shwild - required for testing;
 # - xTests - required for testing;
 
 
 # ############################
 # b64
 
-find_package(b64 QUIET)
+if(NOT (CMAKE_NO_B64))
 
-if(b64_FOUND)
+	if(BUILD_TESTING)
 
-    message("-- CMake package b64 found (version ${b64_VERSION})")
+		set(b64_REQUIRED_VERSION_ 1.5)
 
-    add_compile_definitions(HAS_b64)
-else(b64_FOUND)
+		find_package(b64 ${b64_REQUIRED_VERSION_} QUIET)
 
-    add_compile_definitions(PANTHEIOS_NO_B64)
-endif(b64_FOUND)
+		if(b64_FOUND)
+
+			message("-- CMake package b64 found (version ${b64_VERSION}; ${b64_REQUIRED_VERSION_} requested)")
+
+			add_compile_definitions(HAS_b64)
+		else(b64_FOUND)
+
+			add_compile_definitions(PANTHEIOS_NO_B64)
+			add_compile_definitions(RECLS_NO_B64)
+			add_compile_definitions(SHWILD_NO_B64)
+		endif(b64_FOUND)
+	endif(BUILD_TESTING)
+endif()
 
 
 # ############################
@@ -135,39 +165,96 @@ message("-- CMake package CLASP found (version ${CLASP_VERSION}; ${CLASP_REQUIRE
 # ############################
 # Pantheios
 
-set(Pantheios_REQUIRED_VERSION_ 1.0.1)
+if(NOT (CMAKE_NO_PANTHEIOS))
 
-find_package(Pantheios ${Pantheios_REQUIRED_VERSION_} REQUIRED)
+	if(BUILD_TESTING)
 
-message("-- CMake package Pantheios found (version ${Pantheios_VERSION}; ${Pantheios_REQUIRED_VERSION_} requested)")
+		set(Pantheios_REQUIRED_VERSION_ 1.0)
+
+		find_package(Pantheios ${Pantheios_REQUIRED_VERSION_} QUIET)
+
+		if(Pantheios_FOUND)
+
+			message("-- CMake package Pantheios found (version ${Pantheios_VERSION}; ${Pantheios_REQUIRED_VERSION_} requested)")
+
+			add_compile_definitions(HAS_Pantheios)
+		endif(Pantheios_FOUND)
+	endif(BUILD_TESTING)
+endif()
 
 
 # ############################
 # Pantheios.Extras.DiagUtil
 
+if(NOT (CMAKE_NO_PANTHEIOS))
 
-find_package(Pantheios.Extras.DiagUtil QUIET)
+	set(Pantheios.Extras.DiagUtil_REQUIRED_VERSION_ 0.1)
 
-if(Pantheios.Extras.DiagUtil_FOUND)
+	find_package(Pantheios.Extras.DiagUtil ${Pantheios.Extras.Main_REQUIRED_VERSION_} QUIET)
 
-	message("-- CMake package Pantheios.Extras.DiagUtil found (version ${Pantheios.Extras.DiagUtil_VERSION})")
+	if(Pantheios.Extras.DiagUtil_FOUND)
 
-	add_compile_definitions(HAS_Pantheios_Extras_DiagUtil)
-	add_compile_definitions(HAS_DIAGUTIL)
-else(Pantheios.Extras.DiagUtil_FOUND)
+		message("-- CMake package Pantheios.Extras.DiagUtil found (version ${Pantheios.Extras.DiagUtil_VERSION}; ${Pantheios.Extras.DiagUtil_REQUIRED_VERSION_} requested)")
 
-	add_compile_definitions(PANTHEIOS_NO_DIAGUTIL)
-endif(Pantheios.Extras.DiagUtil_FOUND)
+		add_compile_definitions(HAS_Pantheios_Extras_DiagUtil)
+		add_compile_definitions(HAS_DIAGUTIL)
+	else(Pantheios.Extras.DiagUtil_FOUND)
+
+		add_compile_definitions(PANTHEIOS_NO_DIAGUTIL)
+	endif(Pantheios.Extras.DiagUtil_FOUND)
+endif()
 
 
 # ############################
 # Pantheios.Extras.Main
 
-set(Pantheios.Extras.Main_REQUIRED_VERSION_ 0.2)
+if(NOT (CMAKE_NO_PANTHEIOS))
 
-find_package(Pantheios.Extras.Main ${Pantheios.Extras.Main_REQUIRED_VERSION_} REQUIRED)
+	set(Pantheios.Extras.Main_REQUIRED_VERSION_ 0.2)
 
-message("-- CMake package Pantheios.Extras.Main found (version ${Pantheios.Extras.Main_VERSION}; ${Pantheios.Extras.Main_REQUIRED_VERSION_} requested)")
+	find_package(Pantheios.Extras.Main ${Pantheios.Extras.Main_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package Pantheios.Extras.Main found (version ${Pantheios.Extras.Main_VERSION}; ${Pantheios.Extras.Main_REQUIRED_VERSION_} requested)")
+endif()
+
+
+# ############################
+# shwild
+
+if(NOT (CMAKE_NO_SHWILD))
+
+	if(BUILD_TESTING)
+
+		set(shwild_REQUIRED_VERSION_ 0.12)
+
+		find_package(shwild ${shwild_REQUIRED_VERSION_} QUIET)
+
+		if(shwild_FOUND)
+
+			message("-- CMake package shwild found (version ${shwild_VERSION}; ${shwild_REQUIRED_VERSION_} requested)")
+
+			add_compile_definitions(HAS_shwild)
+			add_compile_definitions(PANTHEIOS_HAS_SHWILD)
+			add_compile_definitions(RECLS_HAS_SHWILD)
+			add_compile_definitions(XTESTS_HAS_SHWILD)
+		else(shwild_FOUND)
+
+			add_compile_definitions(PANTHEIOS_NO_SHWILD)
+			add_compile_definitions(RECLS_NO_SHWILD)
+			add_compile_definitions(XTESTS_NO_SHWILD)
+		endif(shwild_FOUND)
+	else(BUILD_TESTING)
+
+		add_compile_definitions(PANTHEIOS_NO_SHWILD)
+		add_compile_definitions(RECLS_NO_SHWILD)
+		add_compile_definitions(XTESTS_NO_SHWILD)
+	endif(BUILD_TESTING)
+else()
+
+	add_compile_definitions(PANTHEIOS_NO_SHWILD)
+	add_compile_definitions(RECLS_NO_SHWILD)
+	add_compile_definitions(XTESTS_NO_SHWILD)
+endif()
 
 
 # ############################
@@ -211,11 +298,29 @@ endif()
 
 
 # ############################
+# UNIXem
+
+if((USE_UNIXEM) AND (WIN32))
+
+	set(UNIXem_REQUIRED_VERSION_ 1.12.7)
+
+	find_package(UNIXem ${UNIXem_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package UNIXem found (version ${UNIXem_VERSION}; ${UNIXem_REQUIRED_VERSION_} requested)")
+
+	add_compile_definitions(_STLSOFT_FORCE_ANY_COMPILER)
+	add_compile_definitions(EMULATE_UNIX_ON_WINDOWS)
+	add_compile_definitions(RECLS_HAS_UNIXEM)
+	add_compile_definitions(STLSOFT_HAS_UNIXEM)
+endif()
+
+
+# ############################
 # xTests
 
 if(BUILD_TESTING)
 
-	set(xTests_REQUIRED_VERSION_ 0.26)
+	set(xTests_REQUIRED_VERSION_ 0.26.3)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
@@ -238,7 +343,37 @@ include(GNUInstallDirs)
 # targets
 
 # ################################################
-# main library
+# custom definitions
+
+if(UNIX)
+
+	set(_BUILD_AS_UNIX 1)
+
+	message("-- Operating system Unix")
+else(UNIX)
+
+	if(WIN32)
+
+		if(USE_UNIXEM)
+
+			set(_BUILD_AS_UNIX 1)
+
+			message("-- Operating system Unix (synthesised on Windows)")
+		else(USE_UNIXEM)
+
+			set(_BUILD_AS_WIN32 1)
+
+			message("-- Operating system Windows")
+		endif(USE_UNIXEM)
+	else(WIN32)
+
+		message("-- Operating system unknown")
+	endif(WIN32)
+endif(UNIX)
+
+
+# ################################################
+# main libraries
 
 add_subdirectory(src)
 
@@ -264,9 +399,7 @@ if(BUILD_TESTING)
 
 	message("-- enabled building of tests ...")
 
-#[====[
 	add_subdirectory(test)
-#]====]
 else(BUILD_TESTING)
 
 	message("-- disabled building of tests - define BUILD_TESTING to enable")
@@ -285,7 +418,7 @@ set(EXPORT_NAME ${PROJECT_NAME})
 configure_package_config_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in
 	${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake
-	INSTALL_DESTINATION ${LIB_INSTALL_DIR}/${EXPORT_NAME}/cmake
+	INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/${EXPORT_NAME}/cmake
 )
 
 write_basic_package_version_file(
@@ -315,7 +448,7 @@ install(FILES
 # ##########################################################
 # completion
 
-message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}, for C${CMAKE_C_STANDARD} C++${CMAKE_CXX_STANDARD}")
+message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}, for C${CMAKE_C_STANDARD} C++${CMAKE_CXX_STANDARD}, with build type ${CMAKE_BUILD_TYPE}")
 
 
 # ############################## end of file ############################# #
