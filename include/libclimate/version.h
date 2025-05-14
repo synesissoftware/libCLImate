@@ -51,7 +51,7 @@
 #define LIBCLIMATE_VER_MAJOR            0
 #define LIBCLIMATE_VER_MINOR            4
 #define LIBCLIMATE_VER_PATCH            1
-#define LIBCLIMATE_VER_ALPHABETA        41
+#define LIBCLIMATE_VER_ALPHABETA        42
 
 #define LIBCLIMATE_VER \
     (0\

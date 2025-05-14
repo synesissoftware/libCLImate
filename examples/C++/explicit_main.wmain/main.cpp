@@ -43,10 +43,7 @@ libCLImate_program_main(
 
 /* define the explicit-wmain(), ... */
 int
-wmain(
-    int         argc
-    wchar_t*    argv[]
-)
+wmain(int argc, wchar_t* argv[])
 {
     /* ... do whatever initialisation is required before handling the command-line, ...  */
 

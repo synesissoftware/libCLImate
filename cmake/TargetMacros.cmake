@@ -39,6 +39,14 @@ macro(define_target_compile_options target_name)
 endmacro(define_target_compile_options)
 
 
+macro(target_link_b64_OPTIONAL target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			$<$<BOOL:${b64_FOUND}>:b64::core>
+	)
+endmacro(target_link_b64_OPTIONAL)
+
 macro(target_link_CLASP_core target_name)
 
 	target_link_libraries(${target_name}
@@ -95,6 +103,14 @@ macro(target_link_shwild target_name)
 	)
 endmacro(target_link_shwild)
 
+macro(target_link_shwild_OPTIONAL target_name)
+
+	target_link_libraries(${target_name}
+		PRIVATE
+			$<$<BOOL:${shwild_FOUND}>:shwild::core>
+	)
+endmacro(target_link_shwild_OPTIONAL)
+
 macro(target_link_xTests target_name)
 
 	target_link_libraries(${target_name}
@@ -147,6 +163,7 @@ function(define_example_program program_name entry_point_source_name)
 			core
 	)
 
+	# target_link_b64_OPTIONAL(${program_name}) # this brought in by Pantheios
 	target_link_CLASP_core(${program_name})
 	target_link_Pantheios_core(${program_name})
 	target_link_libraries(${program_name}
@@ -157,6 +174,7 @@ function(define_example_program program_name entry_point_source_name)
 	)
 	target_link_Pantheios_util(${program_name})
 	target_link_Pantheios_Extras_Main(${program_name})
+	target_link_shwild_OPTIONAL(${program_name})
 	target_link_STLSoft(${program_name})
 
 	if(WIN32)

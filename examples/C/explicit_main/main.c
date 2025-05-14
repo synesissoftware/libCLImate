@@ -44,10 +44,7 @@ libCLImate_program_main(
 
 /* define the explicit-main(), ... */
 int
-main(
-    int     argc
-,   char*   argv[]
-)
+main(int argc, char* argv[])
 {
     /* ... do whatever initialisation is required before handling the command-line, ...  */
 
