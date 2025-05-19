@@ -4,7 +4,7 @@
  * Purpose: Stock usage, version functions.
  *
  * Created: 6th August 2015
- * Updated: 10th March 2025
+ * Updated: 20th March 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -66,6 +66,7 @@ libCLImate_get_console_width_(void)
 
     return (~(size_t)0 == r) ? -1 : (int)r;
 }
+#if 0
 
 static
 int
@@ -121,6 +122,7 @@ libCLImate_show_usage_to_(
 
     return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
+#endif
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -144,6 +146,8 @@ libCLImate_show_usage(
 ,   int                         showBlanksBetweenItems
 )
 {
+#if 0
+
     return libCLImate_show_usage_to_(
         args
     ,   specifications
@@ -161,6 +165,40 @@ libCLImate_show_usage(
     ,   clasp_showHeaderByFILE
     ,   clasp_showBodyByFILE
     );
+#else
+
+    int const   flags               =   0;
+    int const   consoleWidth        =   libCLImate_get_console_width_();
+#ifdef PLATFORMSTL_OS_IS_WINDOWS
+    int const   tabSize             =   -4;
+#else /* ? OS */
+    int const   tabSize             =   +4;
+#endif /* OS */
+    int const   blanksBetweenItems  =   showBlanksBetweenItems;
+
+    // TODO: use this when CLASP has been updated
+    ((void)&buildNumber);
+
+    return clasp_showUsage(
+        args
+    ,   specifications
+    ,   programName
+    ,   summary
+    ,   copyright
+    ,   description
+    ,   usage
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   clasp_showHeaderByFILE
+    ,   clasp_showBodyByFILE
+    ,   stm
+    ,   flags
+    ,   consoleWidth
+    ,   tabSize
+    ,   blanksBetweenItems
+    );
+#endif
 }
 
 int
@@ -180,6 +218,8 @@ libCLImate_show_usage_header(
 ,   int                         showBlanksBetweenItems
 )
 {
+#if 0
+
     return libCLImate_show_usage_to_(
         args
     ,   specifications
@@ -197,6 +237,39 @@ libCLImate_show_usage_header(
     ,   clasp_showHeaderByFILE
     ,   NULL
     );
+#else
+
+    int const   flags               =   0;
+    int const   consoleWidth        =   libCLImate_get_console_width_();
+#ifdef PLATFORMSTL_OS_IS_WINDOWS
+    int const   tabSize             =   -4;
+#else /* ? OS */
+    int const   tabSize             =   +4;
+#endif /* OS */
+    int const   blanksBetweenItems  =   showBlanksBetweenItems;
+
+    // TODO: use this when CLASP has been updated
+    ((void)&buildNumber);
+
+    return clasp_showHeader(
+        args
+    ,   specifications
+    ,   programName
+    ,   summary
+    ,   copyright
+    ,   description
+    ,   usage
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   clasp_showBodyByFILE
+    ,   stm
+    ,   flags
+    ,   consoleWidth
+    ,   tabSize
+    ,   blanksBetweenItems
+    );
+#endif
 }
 
 int
@@ -216,6 +289,8 @@ libCLImate_show_usage_body(
 ,   int                         showBlanksBetweenItems
 )
 {
+#if 0
+
     return libCLImate_show_usage_to_(
         args
     ,   specifications
@@ -233,6 +308,39 @@ libCLImate_show_usage_body(
     ,   NULL
     ,   clasp_showBodyByFILE
     );
+#else
+
+    int const   flags               =   0;
+    int const   consoleWidth        =   libCLImate_get_console_width_();
+#ifdef PLATFORMSTL_OS_IS_WINDOWS
+    int const   tabSize             =   -4;
+#else /* ? OS */
+    int const   tabSize             =   +4;
+#endif /* OS */
+    int const   blanksBetweenItems  =   showBlanksBetweenItems;
+
+    ((void)&verMajor);
+    ((void)&verMinor);
+    ((void)&verRevision);
+    ((void)&buildNumber);
+
+    ((void)&programName);
+    ((void)&summary);
+    ((void)&copyright);
+    ((void)&description);
+    ((void)&usage);
+
+    return clasp_showBody(
+        args
+    ,   specifications
+    ,   clasp_showBodyByFILE
+    ,   stm
+    ,   flags
+    ,   consoleWidth
+    ,   tabSize
+    ,   blanksBetweenItems
+    );
+#endif
 }
 
 int
