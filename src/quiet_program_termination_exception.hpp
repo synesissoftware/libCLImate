@@ -401,9 +401,54 @@ public:
     {}
     ~quiet_program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT
     {}
-
 private:
     void operator =(class_type const&); // copy-assignment proscribed
+};
+
+class contingent_program_termination_exception
+    : public program_termination_exception
+{
+public:
+    typedef program_termination_exception                   parent_class_type;
+    typedef contingent_program_termination_exception        class_type;
+
+public:
+    contingent_program_termination_exception(
+        int         programExitCode
+    ,   char const* message
+    ,   char const* qualifier
+    )
+        : parent_class_type(programExitCode, create_message_(message, qualifier))
+    {}
+    ~contingent_program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT
+    {}
+private:
+    void operator =(class_type const&); // copy-assignment proscribed
+
+private: // implementation
+    static
+    string_type_
+    create_message_(
+        char const* message
+    ,   char const* qualifier
+    )
+    {
+        stlsoft::exception_string_creator xsc;
+
+        xsc.append(message);
+
+        if (NULL != message &&
+            '\0' != message[0] &&
+            NULL != qualifier &&
+            '\0' != qualifier[0])
+        {
+            xsc.append(": ", 2);
+        }
+
+        xsc.append(qualifier);
+
+        return xsc.create();
+    }
 };
 
 

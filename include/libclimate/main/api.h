@@ -4,7 +4,7 @@
  * Purpose: libCLImate core API for C programs.
  *
  * Created: 13th July 2015
- * Updated: 10th March 2025
+ * Updated: 8th May 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -211,6 +211,34 @@ extern "C++"
 void
 libCLImate_unwind_and_exit(
     int programExitCode
+);
+
+/** This function causes the executing program to exit by a
+ * library-internal exception throw-catch.
+ *
+ * \param programExitCode A value suitable for use as the process exit code;
+ * \param message The contingent report message;
+ * \param qualifier An optional qualifier to the report message;
+ */
+extern "C++"
+void
+libCLImate_contingent_report_unwind_and_exit(
+    int         programExitCode
+,   char const* message
+,   char const* qualifier
+);
+
+/** This function causes the executing program to issue a contingent report
+ * and exit (with `EXIT_FAILURE`).
+ *
+ * \param message The contingent report message;
+ * \param qualifier An optional qualifier to the report message;
+ */
+extern "C++"
+void
+libCLImate_contingent_report(
+    char const* message
+,   char const* qualifier
 );
 #endif /* __cplusplus */
 
