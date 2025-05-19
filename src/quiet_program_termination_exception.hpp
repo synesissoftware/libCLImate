@@ -5,7 +5,7 @@
  *          class.
  *
  * Created: 13th July 2015
- * Updated: 3rd February 2025
+ * Updated: 8th May 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -313,7 +313,8 @@ public:
     typedef program_termination_exception                   class_type;
 
 protected:
-    explicit program_termination_exception(int exitCode)
+    explicit
+    program_termination_exception(int exitCode)
         : parent_class_type(exitCode)
         , ExitCode(exitCode)
     {}

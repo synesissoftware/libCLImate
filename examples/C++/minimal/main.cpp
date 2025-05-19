@@ -20,6 +20,5 @@ libCLImate_program_main(
 {
     pan::log_NOTICE("args->numArguments=", pan::i(args->numArguments));
 
-
     return 0;
 }
