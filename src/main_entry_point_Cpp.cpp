@@ -6,7 +6,7 @@
  *          command-line argument handling (CLASP).
  *
  * Created: 13th July 2015
- * Updated: 8th March 2025
+ * Updated: 8th May 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -66,6 +66,17 @@
 /* /////////////////////////////////////////////////////////////////////////
  * feature discrimination
  */
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * constants
+ */
+
+namespace {
+
+    char const ST_USAGE_HELP_SUFFIX[] = "use --help for usage";
+
+} // anonymous namespace
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -179,7 +190,7 @@ main_CLASP_outer_(
                 ,   libCLImate_specifications
                 ,   flags
                 ,   &ctxt
-//                , ST_USAGE_HELP_SUFFIX
+                ,   ST_USAGE_HELP_SUFFIX
                 );
     }
     // 1. OOM failures caught by Pantheios.Extras.Main
