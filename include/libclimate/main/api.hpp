@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/main/api.hpp
+ * File:    libclimate/main/api.hpp
  *
- * Purpose:     libCLImate core API for C++ programs.
+ * Purpose: libCLImate core API for C++ programs.
  *
- * Created:     13th July 2015
- * Updated:     11th October 2015
+ * Created: 13th July 2015
+ * Updated: 10th March 2025
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,7 +45,8 @@
 
 #ifndef __cplusplus
 # error This file may only be included in a C++ compilation unit
-#endif /* __cplusplus */
+#endif /* !__cplusplus */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -54,12 +56,14 @@
 
 #include <libclimate/internal/clasp.clasp.hpp>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
 
 namespace libCLImate
 {
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -70,19 +74,19 @@ namespace libCLImate
 inline
 void
 exit_immediately(
-  int programExitCode
+    int programExitCode
 ) /* noexcept */
 {
-  ::libCLImate_exit_immediately(programExitCode, NULL, NULL);
+    ::libCLImate_exit_immediately(programExitCode, NULL, NULL);
 }
 
 inline
 void
 unwind_and_exit(
-  int programExitCode
+    int programExitCode
 )
 {
-  ::libCLImate_unwind_and_exit(programExitCode);
+    ::libCLImate_unwind_and_exit(programExitCode);
 }
 
 /* usage */
@@ -90,132 +94,133 @@ unwind_and_exit(
 inline
 int
 show_usage(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems = 1
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        specifications
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems = 1
 )
 {
-  return libCLImate_show_usage(
-    args
-  , aliases
-  , stm
-  , verMajor
-  , verMinor
-  , verRevision
-  , buildNumber
-  , programName
-  , summary
-  , copyright
-  , description
-  , usage
-  , showBlanksBetweenItems
-  );
+    return libCLImate_show_usage(
+        args
+    ,   specifications
+    ,   stm
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   buildNumber
+    ,   programName
+    ,   summary
+    ,   copyright
+    ,   description
+    ,   usage
+    ,   showBlanksBetweenItems
+    );
 }
 
 inline
 int
 show_usage_header(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems = 1
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        specifications
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems = 1
 )
 {
-  return libCLImate_show_usage_header(
-    args
-  , aliases
-  , stm
-  , verMajor
-  , verMinor
-  , verRevision
-  , buildNumber
-  , programName
-  , summary
-  , copyright
-  , description
-  , usage
-  , showBlanksBetweenItems
-  );
+    return libCLImate_show_usage_header(
+        args
+    ,   specifications
+    ,   stm
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   buildNumber
+    ,   programName
+    ,   summary
+    ,   copyright
+    ,   description
+    ,   usage
+    ,   showBlanksBetweenItems
+    );
 }
 
 inline
 int
 show_usage_body(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems = 1
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        specifications
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems = 1
 )
 {
-  return libCLImate_show_usage_body(
-    args
-  , aliases
-  , stm
-  , verMajor
-  , verMinor
-  , verRevision
-  , buildNumber
-  , programName
-  , summary
-  , copyright
-  , description
-  , usage
-  , showBlanksBetweenItems
-  );
+    return libCLImate_show_usage_body(
+        args
+    ,   specifications
+    ,   stm
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   buildNumber
+    ,   programName
+    ,   summary
+    ,   copyright
+    ,   description
+    ,   usage
+    ,   showBlanksBetweenItems
+    );
 }
 
 inline
 int
 show_version(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        specifications
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
 )
 {
-  return libCLImate_show_version(
-    args
-  , aliases
-  , stm
-  , verMajor
-  , verMinor
-  , verRevision
-  , buildNumber
-  , programName
-  );
+    return libCLImate_show_version(
+        args
+    ,   specifications
+    ,   stm
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   buildNumber
+    ,   programName
+    );
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
@@ -223,8 +228,10 @@ show_version(
 
 } /* namespace libCLImate */
 
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_INCL_LIBCLIMATE_MAIN_HPP_API */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

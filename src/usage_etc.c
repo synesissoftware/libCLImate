@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        usage_etc.c
+ * File:    usage_etc.c
  *
- * Purpose:     Stock usage, version functions.
+ * Purpose: Stock usage, version functions.
  *
- * Created:     6th August 2015
- * Updated:     9th September 2015
+ * Created: 6th August 2015
+ * Updated: 10th March 2025
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,73 +53,75 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions
  */
 
 static
 int
-libCLImate_get_console_width_()
+libCLImate_get_console_width_(void)
 {
-  size_t const r = platformstl_C_get_console_width();
+    size_t const r = platformstl_C_get_console_width();
 
-  return (~(size_t)0 == r) ? -1 : (int)r;
+    return (~(size_t)0 == r) ? -1 : (int)r;
 }
 
 static
 int
 libCLImate_show_usage_to_(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems
-, void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-, void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        specifications
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems
+,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 )
 {
-  clasp_usageinfo_t info  = { 0 };
+    clasp_usageinfo_t info  =   { 0 };
 
-  info.version.major      = verMajor;
-  info.version.minor      = verMinor;
-  info.version.revision   = verRevision;
-  info.version.build      = buildNumber;
+    info.version.major      =   verMajor;
+    info.version.minor      =   verMinor;
+    info.version.revision   =   verRevision;
+    info.version.build      =   buildNumber;
 
-  info.toolName           = programName;
-  info.summary            = summary;
-  info.copyright          = copyright;
-  info.description        = description;
-  info.usage              = usage;
+    info.toolName           =   programName;
+    info.summary            =   summary;
+    info.copyright          =   copyright;
+    info.description        =   description;
+    info.usage              =   usage;
 
-  info.param              = stm;
-  info.width              = libCLImate_get_console_width_();
+    info.param              =   stm;
+    info.width              =   libCLImate_get_console_width_();
 #ifdef PLATFORMSTL_OS_IS_WINDOWS
-  info.assumedTabWidth    = -4;
+    info.assumedTabWidth    =   -4;
 #else /* ? OS */
-  info.assumedTabWidth    = 4;
+    info.assumedTabWidth    =   4;
 #endif /* OS */
-  info.blanksBetweenItems = showBlanksBetweenItems;
+    info.blanksBetweenItems =   showBlanksBetweenItems;
 
 
-  if(NULL != pfnHeader)
-  {
-    (*pfnHeader)(args, &info, aliases);
-  }
-  if(NULL != pfnBody)
-  {
-    (*pfnBody)(args, &info, aliases);
-  }
+    if (NULL != pfnHeader)
+    {
+        (*pfnHeader)(args, &info, specifications);
+    }
+    if (NULL != pfnBody)
+    {
+        (*pfnBody)(args, &info, specifications);
+    }
 
-  return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
+    return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -126,139 +129,140 @@ libCLImate_show_usage_to_(
 
 int
 libCLImate_show_usage(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        specifications
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems
 )
 {
-  return libCLImate_show_usage_to_(
-    args
-  , aliases
-  , stm
-  , verMajor
-  , verMinor
-  , verRevision
-  , buildNumber
-  , programName
-  , summary
-  , copyright
-  , description
-  , usage
-  , showBlanksBetweenItems
-  , clasp_showHeaderByFILE
-  , clasp_showBodyByFILE
-  );
+    return libCLImate_show_usage_to_(
+        args
+    ,   specifications
+    ,   stm
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   buildNumber
+    ,   programName
+    ,   summary
+    ,   copyright
+    ,   description
+    ,   usage
+    ,   showBlanksBetweenItems
+    ,   clasp_showHeaderByFILE
+    ,   clasp_showBodyByFILE
+    );
 }
 
 int
 libCLImate_show_usage_header(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        specifications
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems
 )
 {
-  return libCLImate_show_usage_to_(
-    args
-  , aliases
-  , stm
-  , verMajor
-  , verMinor
-  , verRevision
-  , buildNumber
-  , programName
-  , summary
-  , copyright
-  , description
-  , usage
-  , showBlanksBetweenItems
-  , clasp_showHeaderByFILE
-  , NULL
-  );
+    return libCLImate_show_usage_to_(
+        args
+    ,   specifications
+    ,   stm
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   buildNumber
+    ,   programName
+    ,   summary
+    ,   copyright
+    ,   description
+    ,   usage
+    ,   showBlanksBetweenItems
+    ,   clasp_showHeaderByFILE
+    ,   NULL
+    );
 }
 
 int
 libCLImate_show_usage_body(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
-, char const*               summary
-, char const*               copyright
-, char const*               description
-, char const*               usage
-, int                       showBlanksBetweenItems
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        specifications
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
+,   char const*                 summary
+,   char const*                 copyright
+,   char const*                 description
+,   char const*                 usage
+,   int                         showBlanksBetweenItems
 )
 {
-  return libCLImate_show_usage_to_(
-    args
-  , aliases
-  , stm
-  , verMajor
-  , verMinor
-  , verRevision
-  , buildNumber
-  , programName
-  , summary
-  , copyright
-  , description
-  , usage
-  , showBlanksBetweenItems
-  , NULL
-  , clasp_showBodyByFILE
-  );
+    return libCLImate_show_usage_to_(
+        args
+    ,   specifications
+    ,   stm
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   buildNumber
+    ,   programName
+    ,   summary
+    ,   copyright
+    ,   description
+    ,   usage
+    ,   showBlanksBetweenItems
+    ,   NULL
+    ,   clasp_showBodyByFILE
+    );
 }
 
 int
 libCLImate_show_version(
-  clasp_arguments_t const*  args
-, clasp_alias_t const*      aliases
-, FILE*                     stm
-, int                       verMajor
-, int                       verMinor
-, int                       verRevision
-, int                       buildNumber
-, char const*               programName
+    clasp_arguments_t const*    args
+,   clasp_alias_t const*        specifications
+,   FILE*                       stm
+,   int                         verMajor
+,   int                         verMinor
+,   int                         verRevision
+,   int                         buildNumber
+,   char const*                 programName
 )
 {
-  clasp_usageinfo_t info  = { 0 };
+    clasp_usageinfo_t info  =   { 0 };
 
-  info.version.major      = verMajor;
-  info.version.minor      = verMinor;
-  info.version.revision   = verRevision;
-  info.version.build      = buildNumber;
+    info.version.major      =   verMajor;
+    info.version.minor      =   verMinor;
+    info.version.revision   =   verRevision;
+    info.version.build      =   buildNumber;
 
-  info.toolName           = programName;
+    info.toolName           =   programName;
 
-  info.param              = stm;
+    info.param              =   stm;
 
-  clasp_showVersionByFILE(args, &info, aliases);
+    clasp_showVersionByFILE(args, &info, specifications);
 
-  return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
+    return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

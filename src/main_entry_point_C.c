@@ -1,16 +1,17 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        main_entry_point_C.c
+ * File:    main_entry_point_C.c
  *
- * Purpose:     Implementation of main for C-clients. The implementation
- *              employs call-around for diagnostic logging (Pantheios) and
- *              command-line argument handling (CLASP).
+ * Purpose: Implementation of main for C-clients. The implementation employs
+ *          call-around for diagnostic logging (Pantheios) and command-line
+ *          argument handling (CLASP).
  *
- * Created:     12nd July 2015
- * Updated:     10th January 2017
+ * Created: 12nd July 2015
+ * Updated: 8th March 2025
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,13 +50,16 @@
 
 #include <libclimate/internal/clasp.main.h>
 
-#include <libclimate/internal/pantheios.extras.diagutil.h>
+#ifndef PANTHEIOS_NO_DIAGUTIL
+# include <libclimate/internal/pantheios.extras.diagutil.h>
+#endif
 
 #include <libclimate/internal/pantheios.extras.main.h>
 
 #include <libclimate/internal/pantheios.pantheios.h>
 
 #include <stdarg.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * implementation
@@ -64,59 +68,78 @@
 static
 void
 CLASP_CALLCONV CLASP_Pantheios_log_(
-  void*                 context
-, int                   severity
-, clasp_char_t const*   fmt
-, va_list               args
+    void*               context
+,   int                 severity
+,   clasp_char_t const* fmt
+,   va_list             args
 )
 {
-  STLSOFT_SUPPRESS_UNUSED(context);
+    STLSOFT_SUPPRESS_UNUSED(context);
 
-#if defined(PANTHEIOS_USE_WIDE_STRINGS) && \
+    if (severity < 0)
+    {
+        return;
+    }
+
+#if 0
+#elif defined(PANTHEIOS_USE_WIDE_STRINGS) && \
     !defined(CLASP_USE_WIDE_STRINGS)
-  STLSOFT_SUPPRESS_UNUSED(severity);
-  STLSOFT_SUPPRESS_UNUSED(fmt);
-  STLSOFT_SUPPRESS_UNUSED(args);
+
+    STLSOFT_SUPPRESS_UNUSED(fmt);
+    STLSOFT_SUPPRESS_UNUSED(args);
 #else
-  pantheios_logvprintf(severity, fmt, args);
+
+    pantheios_logvprintf(severity, fmt, args);
 #endif
 }
 
 static
 int
 main_CLASP_(
-  int     argc
-, char**  argv
+    int     argc
+,   char*   argv[]
 )
 {
-  unsigned const  flags = 0
-                        | CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE
-                        ;
+    unsigned const  flags   =   0
+                            |   CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE
+                            ;
 
-  clasp_diagnostic_context_t  ctxt = { 0 };
+    clasp_diagnostic_context_t ctxt = { 0 };
 
-  ctxt.pfnLog = &CLASP_Pantheios_log_;
+    ctxt.pfnLog = &CLASP_Pantheios_log_;
+    ctxt.severities[0] = -1;
+    ctxt.severities[1] = PANTHEIOS_SEV_WARNING;
+    ctxt.severities[2] = PANTHEIOS_SEV_ERROR;
+    ctxt.severities[3] = PANTHEIOS_SEV_ALERT;
+    ctxt.severities[4] = PANTHEIOS_SEV_EMERGENCY;
 
-  return clasp_main_invoke(
-              argc
-            , argv
-            , libCLImate_program_main_C
-            , NULL
-            , libCLImate_aliases
-            , flags
-            , &ctxt
+    return clasp_main_invoke(
+                argc
+            ,   argv
+            ,   libCLImate_program_main_C
+            ,   NULL
+            ,   libCLImate_specifications
+            ,   flags
+            ,   &ctxt
             );
 }
 
 static
 int
 main_memory_leak_trace_(
-  int     argc
-, char**  argv
+    int     argc
+,   char*   argv[]
 )
 {
-  return pantheios_extras_diagutil_main_leak_trace_invoke(argc, argv, main_CLASP_);
+#ifdef PANTHEIOS_NO_DIAGUTIL
+
+    return main_CLASP_(argc, argv);
+#else
+
+    return pantheios_extras_diagutil_main_leak_trace_invoke(argc, argv, main_CLASP_);
+#endif
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -124,14 +147,16 @@ main_memory_leak_trace_(
 
 int
 libCLImate_main_entry_point_C(
-  int     argc
-, char**  argv
-, void*   reserved
+    int     argc
+,   char*   argv[]
+,   void*   reserved
 )
 {
-  ((void)reserved);
+    ((void)reserved);
 
-  return pantheios_extras_main_invoke(argc, argv, main_memory_leak_trace_, NULL, NULL);
+    return pantheios_extras_main_invoke(argc, argv, main_memory_leak_trace_, NULL, NULL);
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

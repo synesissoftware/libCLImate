@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        common_implicit_link.inl
+ * File:    common_implicit_link.inl
  *
- * Purpose:     Common implicit link functionality for libCLImate
+ * Purpose: Common implicit link functionality for libCLImate
  *
- * Created:     6th August 2015
- * Updated:     5th June 2016
+ * Created: 6th August 2015
+ * Updated: 3rd February 2025
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015-2016, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,7 +48,7 @@
 #include <libclimate/implicit_link/core.h>
 
 /* SystemTools::CLASP header files */
-#include <systemtools/clasp/implicit_link.h>
+#include <clasp/implicit_link.h>
 
 /* Pantheios header files */
 #include <pantheios/implicit_link/util.h>
@@ -58,4 +59,6 @@
 # include <recls/implicit_link.h>
 #endif
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

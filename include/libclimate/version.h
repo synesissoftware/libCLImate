@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/version.h
+ * File:    libclimate/version.h
  *
- * Purpose:     libCLImate library version.
+ * Purpose: libCLImate library version.
  *
- * Created:     13th July 2015
- * Updated:     27th January 2017
+ * Created: 13th July 2015
+ * Updated: 8th May 2025
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015-2017, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,13 +43,25 @@
 #ifndef SYNSOFT_INCL_LIBCLIMATE_H_VERSION
 #define SYNSOFT_INCL_LIBCLIMATE_H_VERSION
 
+
 /* /////////////////////////////////////////////////////////////////////////
- * includes
+ * version information
  */
 
 #define LIBCLIMATE_VER_MAJOR            0
-#define LIBCLIMATE_VER_MINOR            3
-#define LIBCLIMATE_VER_REVISION         7
+#define LIBCLIMATE_VER_MINOR            4
+#define LIBCLIMATE_VER_PATCH            1
+#define LIBCLIMATE_VER_ALPHABETA        42
+
+#define LIBCLIMATE_VER \
+    (0\
+        |   (   LIBCLIMATE_VER_MAJOR       << 24   ) \
+        |   (   LIBCLIMATE_VER_MINOR       << 16   ) \
+        |   (   LIBCLIMATE_VER_PATCH       <<  8   ) \
+        |   (   LIBCLIMATE_VER_ALPHABETA   <<  0   ) \
+    )
+
+#define LIBCLIMATE_VER_REVISION         LIBCLIMATE_VER_PATCH
 
 #ifndef LIBCLIMATE_DOCUMENTATION_SKIP_SECTION
  /* libCLImate completely supercedes Synesis Software Command Line Interface library */
@@ -56,6 +69,7 @@
 # define SSCLI_VER_MINOR                LIBCLIMATE_VER_MINOR
 # define SSCLI_VER_REVISION             LIBCLIMATE_VER_REVISION
 #endif /* !LIBCLIMATE_DOCUMENTATION_SKIP_SECTION */
+
 
 /* ////////////////////////////////////////////////////////////////////// */
 

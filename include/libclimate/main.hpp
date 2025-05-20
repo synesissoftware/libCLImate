@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/main.hpp
+ * File:    libclimate/main.hpp
  *
- * Purpose:     libCLImate implicit-main include for C++ programs.
+ * Purpose: libCLImate implicit-main include for C++ programs.
  *
- * Created:     13th July 2015
- * Updated:     9th September 2015
+ * Created: 13th July 2015
+ * Updated: 3rd February 2025
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,7 +56,7 @@
 
 #ifndef __cplusplus
 # error This file may only be included in a C++ compilation unit
-#endif /* __cplusplus */
+#endif /* !__cplusplus */
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -63,6 +64,7 @@
 
 #include <libclimate/main.h>
 #include <libclimate/main/api.hpp>
+
 
 /* ////////////////////////////////////////////////////////////////////// */
 

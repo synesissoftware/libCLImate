@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libclimate/main.h
+ * File:    libclimate/main.h
  *
- * Purpose:     libCLImate implicit-main include for C programs.
+ * Purpose: libCLImate implicit-main include for C programs.
  *
- * Created:     13th July 2015
- * Updated:     9th September 2015
+ * Created: 13th July 2015
+ * Updated: 3rd February 2025
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -71,25 +72,27 @@
  */
 int
 main(
-  int     argc
-, char**  argv
+    int     argc
+,   char*   argv[]
 )
 {
-  void* reserved = NULL;
+    void* reserved = NULL;
 
-  int (*pfn)(int, char**, void*);
+    int (*pfn)(int, char**, void*);
 
 #ifdef __cplusplus
-  pfn = libCLImate_main_entry_point_Cpp;
+    pfn = libCLImate_main_entry_point_Cpp;
 #else /* ? __cplusplus */
-  pfn = libCLImate_main_entry_point_C;
+    pfn = libCLImate_main_entry_point_C;
 #endif /* __cplusplus */
 
-  return (*pfn)(argc, argv, reserved);
+    return (*pfn)(argc, argv, reserved);
 }
+
 
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_INCL_LIBCLIMATE_H_MAIN */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        unwind_and_exit.cpp
+ * File:    unwind_and_exit.cpp
  *
- * Purpose:     Implementation of unwind_and_exit API function.
+ * Purpose: Implementation of unwind_and_exit API function.
  *
- * Created:     13th July 2015
- * Updated:     10th October 2015
+ * Created: 13th July 2015
+ * Updated: 3rd February 2025
  *
- * Home:        http://synesissoftware.com/software/libclimate/
+ * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,6 +48,7 @@
 
 #include "quiet_program_termination_exception.hpp"
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
  */
@@ -54,10 +56,12 @@
 extern "C++"
 void
 libCLImate_unwind_and_exit(
-  int   programExitCode
+    int programExitCode
 )
 {
-  throw quiet_program_termination_exception(programExitCode);
+    throw quiet_program_termination_exception(programExitCode);
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+
