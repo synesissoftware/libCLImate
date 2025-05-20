@@ -6,7 +6,7 @@
  *          command-line argument handling (CLASP).
  *
  * Created: 13th July 2015
- * Updated: 8th March 2025
+ * Updated: 20th May 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -60,12 +60,25 @@
 
 #include <libclimate/internal/pantheios.pantheios.h>
 
+#include <platformstl/filesystem/path_functions.h>
+
 #include <stdarg.h>
 
 
 /* /////////////////////////////////////////////////////////////////////////
  * feature discrimination
  */
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * constants
+ */
+
+namespace {
+
+    char const ST_USAGE_HELP_SUFFIX[] = "use --help for usage";
+
+} // anonymous namespace
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -82,24 +95,30 @@ main_CLASP_inner_(
     {
         return libCLImate_program_main_Cpp(args);
     }
-    // 2. CLASP
+    // 3. CLASP
     catch (clasp::unused_argument_exception& x)
     {
+        // TODO: provide mechanism to suppress the diagnostics
+
         pantheios::logprintf(
-            PANTHEIOS_SEV_ALERT
+            PANTHEIOS_SEV_CRITICAL
         ,   PANTHEIOS_LITERAL_STRING("unrecognised command-line argument: %s")
         ,   x.optionName.c_str()
         );
 
         fprintf(
             stderr
-        ,   "%s: invalid argument '%.*s'\n"
+        ,   "%s: invalid argument '%.*s'; %s\n"
         ,   pantheios::getProcessIdentity()
         ,   int(x.optionName.size()), x.optionName.data()
+        ,   ST_USAGE_HELP_SUFFIX
         );
     }
+    // 3. CLASP
     catch (clasp::clasp_exception &x)
     {
+        // TODO: provide mechanism to suppress the diagnostics
+
         pantheios::logprintf(
             PANTHEIOS_SEV_ALERT
         ,   PANTHEIOS_LITERAL_STRING("invalid command-line: %s")
@@ -108,10 +127,37 @@ main_CLASP_inner_(
 
         fprintf(
             stderr
-        ,   "%s: invalid command-line: %s\n"
+        ,   "%s: invalid command-line: %s; %s\n"
         ,   pantheios::getProcessIdentity()
         ,   x.what()
+        ,   ST_USAGE_HELP_SUFFIX
         );
+    }
+    // 4. Some part of the program wants to finish, either normatively or
+    // contingent
+    catch (contingent_program_termination_exception &x)
+    {
+        // TODO: provide mechanism to suppress the diagnostics
+
+        pantheios::logprintf(
+            (EXIT_SUCCESS == x.ExitCode) ? PANTHEIOS_SEV_NOTICE :  PANTHEIOS_SEV_CRITICAL
+        ,   PANTHEIOS_LITERAL_STRING("program operation terminated intentionally: %s")
+        ,   x.what()
+        );
+
+        // char const* const program_name = platformstl_ns_qual(get_executable_name_from_path)(argv[0]).ptr;
+        char const* const program_name = pantheios::getProcessIdentity();
+
+        if (EXIT_SUCCESS == x.ExitCode)
+        {
+            fprintf(stderr, "%s: %s\n", program_name, x.what());
+        }
+        else
+        {
+            fprintf(stderr, "%s: %s; %s\n", program_name, x.what(), ST_USAGE_HELP_SUFFIX);
+        }
+
+        return x.ExitCode;
     }
 
     return EXIT_FAILURE;
@@ -179,7 +225,7 @@ main_CLASP_outer_(
                 ,   libCLImate_specifications
                 ,   flags
                 ,   &ctxt
-//                , ST_USAGE_HELP_SUFFIX
+                ,   ST_USAGE_HELP_SUFFIX
                 );
     }
     // 1. OOM failures caught by Pantheios.Extras.Main

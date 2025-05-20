@@ -4,7 +4,7 @@
  * Purpose: libCLImate core API for C++ programs.
  *
  * Created: 13th July 2015
- * Updated: 10th March 2025
+ * Updated: 8th May 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -87,6 +87,36 @@ unwind_and_exit(
 )
 {
     ::libCLImate_unwind_and_exit(programExitCode);
+}
+
+inline
+void
+contingent_report_unwind_and_exit(
+    int         programExitCode
+,   char const* message
+,   char const* qualifier
+)
+{
+    ::libCLImate_contingent_report_unwind_and_exit(programExitCode, message, qualifier);
+}
+
+inline
+void
+contingent_report(
+    char const* message
+,   char const* qualifier
+)
+{
+    ::libCLImate_contingent_report(message, qualifier);
+}
+
+inline
+void
+contingent_report(
+    char const* message
+)
+{
+    ::libCLImate_contingent_report(message, NULL);
 }
 
 /* usage */

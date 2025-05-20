@@ -4,7 +4,7 @@
  * Purpose: Implementation of unwind_and_exit API function.
  *
  * Created: 13th July 2015
- * Updated: 3rd February 2025
+ * Updated: 8th May 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -48,6 +48,8 @@
 
 #include "quiet_program_termination_exception.hpp"
 
+#include <stdlib.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -60,6 +62,27 @@ libCLImate_unwind_and_exit(
 )
 {
     throw quiet_program_termination_exception(programExitCode);
+}
+
+extern "C++"
+void
+libCLImate_contingent_report_unwind_and_exit(
+    int         programExitCode
+,   char const* message
+,   char const* qualifier
+)
+{
+    throw contingent_program_termination_exception(programExitCode, message, qualifier);
+}
+
+extern "C++"
+void
+libCLImate_contingent_report(
+    char const* message
+,   char const* qualifier
+)
+{
+    throw contingent_program_termination_exception(EXIT_FAILURE, message, qualifier);
 }
 
 
