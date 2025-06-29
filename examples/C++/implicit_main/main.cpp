@@ -1,5 +1,5 @@
 
-#include <libclimate/main.h>
+#include <libclimate/main.hpp>
 
 #include <clasp/clasp.hpp>
 #include <pantheios/frontends/stock.h>
