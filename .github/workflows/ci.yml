@@ -182,7 +182,7 @@ jobs:
         run: |
           set -euo pipefail
           test -f "${INSTALL_PREFIX}/include/libclimate/version.h"
-          config="${INSTALL_PREFIX}/lib/cmake/libCLImate/libCLImate-config.cmake"
+          config="${INSTALL_PREFIX}/lib/cmake/libclimate/libclimate-config.cmake"
           test -f "$config"
           if ! grep -q '^if(TRUE)' "$config"; then
             echo "expected the find_dependency(STLSoft) guard to be TRUE" >&2

@@ -17,6 +17,7 @@
 * Gated Windows **wmain** example behind **`LIBCLIMATE_USE_wmain`** (matches library wide-entry build mode);
 * Made **examples/C/minimal** use a MinGW-safe format for `size_t`;
 * Requires **CLASP** **0.15.1** or later (fixed **`CLASP_VER`** composite);
+* Installed CMake package files under lowercase **libclimate** (so `find_package(libCLImate)` resolves on case-sensitive filesystems);
 
 
 ## 0.4.0-alpha1 - 8th May 2025
