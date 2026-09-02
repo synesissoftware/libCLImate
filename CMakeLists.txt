@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libCLImate
 #
 # Created:  23rd October 2024
-# Updated:  13th May 2025
+# Updated:  2nd September 2026
 #
 # ######################################################################## #
 
@@ -205,7 +205,7 @@ if(NOT (CMAKE_NO_PANTHEIOS))
 
 	set(Pantheios.Extras.DiagUtil_REQUIRED_VERSION_ 0.1)
 
-	find_package(Pantheios.Extras.DiagUtil ${Pantheios.Extras.Main_REQUIRED_VERSION_} QUIET)
+	find_package(Pantheios.Extras.DiagUtil ${Pantheios.Extras.DiagUtil_REQUIRED_VERSION_} QUIET)
 
 	if(Pantheios.Extras.DiagUtil_FOUND)
 
@@ -290,37 +290,36 @@ endif(shwild_FOUND)
 # ############################
 # STLSoft
 
-if(DEFINED STLSOFT)
+set(STLSoft_REQUIRED_VERSION_ 1.11)
 
-	message("-- STLSOFT provided as CMake variable with value '${STLSOFT}'")
+if(NOT DEFINED STLSOFT AND NOT DEFINED ENV{STLSOFT})
 
-	set(STLSOFT_INCLUDE_DIR ${STLSOFT}/include)
-elseif(DEFINED ENV{STLSOFT})
-
-	message("-- STLSOFT provided as environment variable with value '$ENV{STLSOFT}'")
-
-	set(STLSOFT_INCLUDE_DIR $ENV{STLSOFT}/include)
-else()
-
-	set(STLSoft_REQUIRED_VERSION_ 1.11)
+	set(STLSoft_IS_PACKAGE_ TRUE)
 
 	find_package(STLSoft ${STLSoft_REQUIRED_VERSION_} REQUIRED)
 
 	message("-- CMake package STLSoft found (version ${STLSoft_VERSION}; ${STLSoft_REQUIRED_VERSION_} requested)")
-endif()
+else()
 
-if(DEFINED STLSOFT_INCLUDE_DIR)
+	set(STLSoft_IS_PACKAGE_ FALSE)
+
+	if(DEFINED STLSOFT)
+
+		message("-- STLSOFT provided as CMake variable with value '${STLSOFT}'")
+
+		set(STLSOFT_INCLUDE_DIR ${STLSOFT}/include)
+	elseif(DEFINED ENV{STLSOFT})
+
+		message("-- STLSOFT provided as environment variable with value '$ENV{STLSOFT}'")
+
+		set(STLSOFT_INCLUDE_DIR $ENV{STLSOFT}/include)
+	endif()
+
+	get_filename_component(STLSOFT_INCLUDE_DIR "${STLSOFT_INCLUDE_DIR}" ABSOLUTE)
 
 	if(BUILD_TESTING)
+
 		find_package(STLSoft REQUIRED)
-
-		if(NOT STLSoft_FOUND)
-
-			# message(FATAL_ERROR "When specifying STLSOFT explicitly it it still required to have an existing CMake installation of STLSoft in testing to satisfy xTest's dependency requirements. The specified STLSoft will be used for all compilation")
-		else()
-
-			# message("-- CMake package STLSoft found (version ${STLSoft_VERSION}) - required only to enable xTests package; the current project's header files will be used for all compilation")
-		endif()
 	endif(BUILD_TESTING)
 
 	include_directories(${STLSOFT_INCLUDE_DIR})
@@ -453,7 +452,7 @@ set(EXPORT_NAME ${PROJECT_NAME})
 configure_package_config_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in
 	${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake
-	INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/${EXPORT_NAME}/cmake
+	INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
 )
 
 write_basic_package_version_file(
