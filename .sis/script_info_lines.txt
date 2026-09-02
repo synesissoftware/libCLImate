@@ -1,0 +1,3 @@
+libCLImate is a portable, lightweight mini-framework that encapsulates the common aspects of Command-Line I**nterface boilerplate.
+Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
+Copyright (c) 2015-2019, Matthew Wilson and Synesis Software

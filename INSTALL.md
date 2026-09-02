@@ -8,7 +8,6 @@
 - [CMake](#cmake)
   - [Requisites](#requisites)
   - [**libCLImate**](#libclimate)
-- [Custom makefile](#custom-makefile)
 
 
 ## CMake
@@ -139,11 +138,6 @@ Installation steps:
       [example.C.minimal.1, Mar 09 09:04:22.067; Notice]: args->numArguments=6
       $
       ```
-
-
-## Custom makefile
-
-T.B.C.
 
 
 <!-- ########################### end of file ########################### -->
