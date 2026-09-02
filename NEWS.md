@@ -1,4 +1,4 @@
-# libCLImate - News
+# libCLImate - News <!-- omit in toc -->
 ------------
 
 

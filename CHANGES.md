@@ -1,4 +1,4 @@
-# libCLImate - History
+# libCLImate - History <!-- omit in toc -->
 
 
 8th May 2025 - 0.4.0 (alpha 1)
