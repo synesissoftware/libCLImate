@@ -120,7 +120,7 @@ jobs:
           c-compiler: ${{ matrix.c_compiler }}
           cpp-compiler: ${{ matrix.cpp_compiler }}
           dependencies: >-
-            STLSoft CLASP Pantheios.Extras.Main
+            STLSoft CLASP Pantheios Pantheios.Extras.Main
           toolchain: ${{ matrix.toolchain }}
 
       - name: Configure

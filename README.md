@@ -88,7 +88,7 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 **libCLImate** depends directly on the following libraries:
 
-* **[CLASP](https://github.com/synesissoftware/CLASP)**, v**0.15** or later;
+* **[CLASP](https://github.com/synesissoftware/CLASP)**, v**0.15.1** or later;
 * **[Pantheios.Extras.Main](https://github.com/synesissoftware/Pantheios.Extras.Main/)**, v**0.2** or later;
 * **[STLSoft](https://github.com/synesissoftware/STLSoft)**, v**1.11** or later;
 

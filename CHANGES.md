@@ -13,6 +13,10 @@
 * Corrected **INSTALL.md**, **EXAMPLES.md**, and **README.md** documentation debt;
 * Fixed **Pantheios.Extras.DiagUtil** `find_package()` version-variable typo in **CMakeLists.txt**;
 * Aligned CMake package config and exported **libCLImate::core** interface dependencies;
+* Fixed install-smoke CI dependencies to install **Pantheios** before **Pantheios.Extras.Main**;
+* Gated Windows **wmain** example behind **`LIBCLIMATE_USE_wmain`** (matches library wide-entry build mode);
+* Made **examples/C/minimal** use a MinGW-safe format for `size_t`;
+* Requires **CLASP** **0.15.1** or later (fixed **`CLASP_VER`** composite);
 
 
 ## 0.4.0-alpha1 - 8th May 2025

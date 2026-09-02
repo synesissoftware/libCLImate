@@ -105,6 +105,18 @@ include(TargetMacros)
 
 option(BUILD_EXAMPLES "Build examples" ON)
 
+option(LIBCLIMATE_USE_wmain "Build with wide-string wmain() entry (Windows)" OFF)
+
+if(LIBCLIMATE_USE_wmain)
+
+	if(NOT WIN32)
+
+		message(FATAL_ERROR "LIBCLIMATE_USE_wmain is only supported on Windows")
+	endif()
+
+	add_compile_definitions(LIBCLIMATE_USE_wmain)
+endif(LIBCLIMATE_USE_wmain)
+
 # ######################################
 # features
 
@@ -160,7 +172,7 @@ endif(b64_FOUND)
 # ############################
 # CLASP
 
-set(CLASP_REQUIRED_VERSION_ 0.15)
+set(CLASP_REQUIRED_VERSION_ 0.15.1)
 
 find_package(CLASP ${CLASP_REQUIRED_VERSION_} REQUIRED)
 
