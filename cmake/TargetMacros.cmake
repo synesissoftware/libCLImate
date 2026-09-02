@@ -131,11 +131,16 @@ function(define_automated_test_program program_name entry_point_source_name)
 
 	target_link_libraries(${program_name}
 		PRIVATE
-			core
+			libCLImate::core
 	)
 
 	target_link_STLSoft(${program_name})
 	target_link_xTests(${program_name})
+
+	add_test(
+		NAME ${program_name}
+		COMMAND ${program_name}
+	)
 
 	if(WIN32)
 
@@ -160,7 +165,7 @@ function(define_example_program program_name entry_point_source_name)
 
 	target_link_libraries(${program_name}
 		PRIVATE
-			core
+			libCLImate::core
 	)
 
 	# target_link_b64_OPTIONAL(${program_name}) # this brought in by Pantheios

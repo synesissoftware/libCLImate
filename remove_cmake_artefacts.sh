@@ -1,9 +1,11 @@
 #! /bin/bash
 
 ScriptPath=$0
-Dir=$(cd $(dirname "$ScriptPath"); pwd)
+Dir=$(cd "$(dirname "$ScriptPath")"; pwd)
 Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
+ProjectNameFile="$Dir/.sis/project_name.txt"
+ProjectName=$(tr -d '[:space:]' < "$ProjectNameFile")
 
 Directories=(
   CMakeFiles
@@ -98,12 +100,12 @@ if [ ! -d "$CMakeDir" ]; then
   exit 0
 else
 
-  echo "Removing all cmake artefacts in '$CMakeDir'"
+  echo "Removing all ${ProjectName} cmake artefacts in '$CMakeDir'"
 
   num_dirs_removed=0
   num_files_removed=0
 
-  for d in ${Directories[@]}
+  for d in "${Directories[@]}"
   do
 
     fq_dir_path="$CMakeDir/$d"
@@ -119,7 +121,7 @@ else
 
   cd "$CMakeDir"
 
-  for f in ${Files[@]}
+  for f in "${Files[@]}"
   do
 
     for fq_file_path in $f
@@ -148,4 +150,3 @@ fi
 
 
 # ############################## end of file ############################# #
-

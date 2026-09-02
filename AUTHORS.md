@@ -1,4 +1,4 @@
-# libCLImate - Authors
+# libCLImate - Authors <!-- omit in toc -->
 
 Bug reports, fixes and suggestions (for which we are very grateful):
 

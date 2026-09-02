@@ -1,14 +1,17 @@
 #! /bin/bash
 
 ScriptPath=$0
-Dir=$(cd $(dirname "$ScriptPath"); pwd)
+Dir=$(cd "$(dirname "$ScriptPath")"; pwd)
 Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
 [[ -n "$MSYSTEM" ]] && DefaultMakeCmd=mingw32-make.exe || DefaultMakeCmd=make
 MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
+ProjectNameFile="$Dir/.sis/project_name.txt"
+ProjectName=$(tr -d '[:space:]' < "$ProjectNameFile")
 
 ListOnly=0
 RunMake=1
+Verbosity=${XTESTS_VERBOSITY:-${TEST_VERBOSITY:-3}}
 
 
 # ##########################################################
@@ -24,6 +27,11 @@ while [[ $# -gt 0 ]]; do
     --no-make|-M)
 
       RunMake=0
+      ;;
+    --verbosity)
+
+      shift
+      Verbosity=$1
       ;;
     --help)
 
@@ -44,6 +52,9 @@ Flags/options:
     -M
     --no-make
         does not execute CMake and make before running tests
+
+    --verbosity <verbosity>
+        specifies an explicit verbosity for the unit-test(s)
 
 
     standard flags:
@@ -76,11 +87,11 @@ if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
 
-    echo "Executing build (via command \`$MakeCmd\`) and then running all scratch (and performance) test programs"
+    echo "Executing build (via command \`$MakeCmd\`) and then running all ${ProjectName} scratch test programs"
 
-    mkdir -p $CMakeDir || exit 1
+    mkdir -p "$CMakeDir" || exit 1
 
-    cd $CMakeDir
+    cd "$CMakeDir"
 
     $MakeCmd
     status=$?
@@ -92,6 +103,8 @@ else
   if [ ! -d "$CMakeDir" ] || [ ! -f "$CMakeDir/CMakeCache.txt" ] || [ ! -d "$CMakeDir/CMakeFiles" ]; then
 
     >&2 echo "$ScriptPath: cannot run in '--no-make' mode without a previous successful build step"
+
+    exit 1
   fi
 fi
 
@@ -99,14 +112,17 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all scratch (and performance) test programs"
+    echo "Listing all ${ProjectName} scratch test programs"
   else
 
-    echo "Running all scratch (and performance) test programs"
+    echo "Running all ${ProjectName} scratch test programs"
   fi
 
-  for f in $(find $CMakeDir -type f '(' -name 'test_scratch*' -o -name 'test.scratch.*' -o -name 'test_performance*' -o -name 'test.performance.*' ')' -exec test -x {} \; -print)
-  do
+  NumPrograms=0
+
+  while IFS= read -r -d '' f; do
+
+    NumPrograms=$((NumPrograms + 1))
 
     if [ $ListOnly -ne 0 ]; then
 
@@ -124,18 +140,19 @@ if [ $status -eq 0 ]; then
       echo "executing $f:"
     fi
 
-    if $f; then
+    # NOTE: we do not break on fail, because scratch tests are sketches
+    "$f"
+  done < <(find "$CMakeDir" -type f \( -name 'test_scratch*' -o -name 'test.scratch.*' -o -name 'test_performance*' -o -name 'test.performance.*' \) -exec test -x {} \; -print0 | sort -z)
 
-      :
-    else
+  if [ $NumPrograms -eq 0 ]; then
 
-      status=$?
-    fi
-  done
+    >&2 echo "$ScriptPath: found no scratch test programs under '$CMakeDir'"
+
+    exit 1
+  fi
 fi
 
 exit $status
 
 
 # ############################## end of file ############################# #
-

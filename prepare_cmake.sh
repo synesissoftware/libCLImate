@@ -1,16 +1,27 @@
 #! /bin/bash
 
 ScriptPath=$0
-Dir=$(cd $(dirname "$ScriptPath"); pwd)
+Dir=$(cd "$(dirname "$ScriptPath")"; pwd)
 Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
-[[ -n "$MSYSTEM" ]] && DefaultMakeCmd=mingw32-make.exe || DefaultMakeCmd=make
-MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
+# MSYSTEM selects the default make driver in Git Bash/MSYS2 only; it does not
+# imply the MinGW Makefiles generator (cl.exe builds are common from MSYS2).
+if [[ -n "$MSYSTEM" ]]; then
 
+  DefaultMakeCmd=mingw32-make.exe
+else
+
+  DefaultMakeCmd=make
+fi
+MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
+ProjectNameFile="$Dir/.sis/project_name.txt"
+ProjectName=$(tr -d '[:space:]' < "$ProjectNameFile")
+
+BuildSharedLibs=0
 Configuration=Release
 ExamplesDisabled=0
 MSVC_MT=0
-MinGW=0
+MinGW="${MinGW:=0}"
 NO_b64=0
 NO_shwild=0
 RunMake=0
@@ -26,6 +37,10 @@ VerboseMakefile=0
 while [[ $# -gt 0 ]]; do
 
   case $1 in
+    --build-shared-libs)
+
+      BuildSharedLibs=1
+      ;;
     --cmake-verbose-makefile|-v)
 
       VerboseMakefile=1
@@ -45,6 +60,8 @@ while [[ $# -gt 0 ]]; do
     --mingw)
 
       MinGW=1
+      DefaultMakeCmd=mingw32-make.exe
+      MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
       ;;
     --msvc-mt)
 
@@ -82,6 +99,10 @@ $ScriptPath [ ... flags/options ... ]
 Flags/options:
 
     behaviour:
+
+    --build-shared-libs
+        builds ${ProjectName} as a shared library (by setting
+        BUILD_SHARED_LIBS=ON); the default is a static library
 
     -v
     --cmake-verbose-makefile
@@ -156,57 +177,54 @@ done
 # ##########################################################
 # main()
 
-mkdir -p $CMakeDir || exit 1
+mkdir -p "$CMakeDir" || exit 1
 
-cd $CMakeDir
+cd "$CMakeDir"
 
-echo "Executing CMake (in ${CMakeDir})"
+echo "Executing CMake for ${ProjectName} (in ${CMakeDir})"
 
+if [ $BuildSharedLibs -eq 0 ]; then CMakeBuildSharedLibsFlag="OFF" ; else CMakeBuildSharedLibsFlag="ON" ; fi
 if [ $ExamplesDisabled -eq 0 ]; then CMakeBuildExamplesFlag="ON" ; else CMakeBuildExamplesFlag="OFF" ; fi
 if [ $MSVC_MT -eq 0 ]; then CMakeMsvcMtFlag="OFF" ; else CMakeMsvcMtFlag="ON" ; fi
 if [ $NO_b64 -eq 0 ]; then CMakeNoB64="OFF" ; else CMakeNoB64="ON" ; fi
 if [ $NO_shwild -eq 0 ]; then CMakeNoShwild="OFF" ; else CMakeNoShwild="ON" ; fi
-if [ -z $STLSoftDirGiven ]; then CMakeSTLSoftVariable="" ; else CMakeSTLSoftVariable="-DSTLSOFT=$STLSoftDirGiven/" ; fi
+if [ -z "$STLSoftDirGiven" ]; then CMakeSTLSoftVariable="" ; else CMakeSTLSoftVariable="-DSTLSOFT=$STLSoftDirGiven/" ; fi
 if [ $TestingDisabled -eq 0 ]; then CMakeBuildTestingFlag="ON" ; else CMakeBuildTestingFlag="OFF" ; fi
 if [ $USE_UNIXem -ne 0 ]; then CMakeUSE_UNIXem="ON" ; else CMakeUSE_UNIXem="OFF" ; fi
 if [ $VerboseMakefile -eq 0 ]; then CMakeVerboseMakefileFlag="OFF" ; else CMakeVerboseMakefileFlag="ON" ; fi
 
+# NOTE: the generator is the *only* thing that may differ between the MinGW
+# and the default paths; every -D option is passed in both cases, so that no
+# flag can be silently ignored according to the generator selected.
+
+CMakeGeneratorArgs=()
+
 if [ $MinGW -ne 0 ]; then
 
-  cmake \
-    $CMakeSTLSoftVariable \
-    -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
-    -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
-    -DCMAKE_BUILD_TYPE=$Configuration \
-    -DCMAKE_NO_B64:BOOL=$CMakeNoB64 \
-    -DCMAKE_NO_SHWILD:BOOL=$CMakeNoShwild \
-    -DUSE_UNIXEM:BOOL=$CMakeUSE_UNIXem \
-    -G "MinGW Makefiles" \
-    -S $Dir \
-    -B $CMakeDir \
-    || (cd ->/dev/null ; exit 1)
-else
-
-  cmake \
-    $CMakeSTLSoftVariable \
-    -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
-    -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
-    -DCMAKE_BUILD_TYPE=$Configuration \
-    -DCMAKE_NO_B64:BOOL=$CMakeNoB64 \
-    -DCMAKE_NO_SHWILD:BOOL=$CMakeNoShwild \
-    -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
-    -DMSVC_USE_MT:BOOL=$CMakeMsvcMtFlag \
-    -DUSE_UNIXEM:BOOL=$CMakeUSE_UNIXem \
-    -S $Dir \
-    -B $CMakeDir \
-    || (cd ->/dev/null ; exit 1)
+  CMakeGeneratorArgs=(-G "MinGW Makefiles")
 fi
+
+cmake \
+  $CMakeSTLSoftVariable \
+  -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
+  -DBUILD_SHARED_LIBS:BOOL=$CMakeBuildSharedLibsFlag \
+  -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
+  -DCMAKE_BUILD_TYPE=$Configuration \
+  -DCMAKE_NO_B64:BOOL=$CMakeNoB64 \
+  -DCMAKE_NO_SHWILD:BOOL=$CMakeNoShwild \
+  -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
+  -DMSVC_USE_MT:BOOL=$CMakeMsvcMtFlag \
+  -DUSE_UNIXEM:BOOL=$CMakeUSE_UNIXem \
+  "${CMakeGeneratorArgs[@]}" \
+  -S "$Dir" \
+  -B "$CMakeDir" \
+  || (cd ->/dev/null ; exit 1)
 
 status=0
 
 if [ $RunMake -ne 0 ]; then
 
-  echo "Executing build (via command \`$MakeCmd\`)"
+  echo "Executing build of ${ProjectName} (via command \`$MakeCmd\`)"
 
   $MakeCmd
   status=$?
@@ -217,11 +235,10 @@ cd ->/dev/null
 if [ $VerboseMakefile -ne 0 ]; then
 
   echo -e "contents of $CMakeDir:"
-  ls -al $CMakeDir
+  ls -al "$CMakeDir"
 fi
 
 exit $status
 
 
 # ############################## end of file ############################# #
-

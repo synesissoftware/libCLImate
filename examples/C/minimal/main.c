@@ -18,7 +18,7 @@ libCLImate_program_main(
     clasp_arguments_t const* args
 )
 {
-    pantheios_logprintf(PANTHEIOS_SEV_NOTICE, "args->numArguments=%zu", args->numArguments);
+    pantheios_logprintf(PANTHEIOS_SEV_NOTICE, "args->numArguments=%lu", (unsigned long)args->numArguments);
 
     return 0;
 }
