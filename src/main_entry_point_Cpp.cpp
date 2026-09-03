@@ -6,11 +6,11 @@
  *          command-line argument handling (CLASP).
  *
  * Created: 13th July 2015
- * Updated: 20th May 2025
+ * Updated: 4th September 2026
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -77,7 +77,6 @@
 namespace {
 
     char const ST_USAGE_HELP_SUFFIX[] = "use --help for usage";
-
 } // anonymous namespace
 
 
