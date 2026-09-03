@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(CLASP @CLASP_REQUIRED_VERSION_@)
+find_dependency(Pantheios.Extras.Main @Pantheios.Extras.Main_REQUIRED_VERSION_@)
+
+if(@STLSoft_IS_PACKAGE_@)
+
+	find_dependency(STLSoft @STLSoft_REQUIRED_VERSION_@)
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/@EXPORT_NAME@-targets.cmake")

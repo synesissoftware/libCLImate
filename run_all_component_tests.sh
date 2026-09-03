@@ -37,7 +37,7 @@ while [[ $# -gt 0 ]]; do
 
       [ -f "$Dir/.sis/script_info_lines.txt" ] && cat "$Dir/.sis/script_info_lines.txt"
       cat << EOF
-Runs all (matching) unit-test programs
+Runs all (matching) component-test programs
 
 $ScriptPath [ ... flags/options ... ]
 
@@ -87,7 +87,7 @@ if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
 
-    echo "Executing build (via command \`$MakeCmd\`) and then running all ${ProjectName} unit test programs"
+    echo "Executing build (via command \`$MakeCmd\`) and then running all ${ProjectName} component test programs"
 
     mkdir -p "$CMakeDir" || exit 1
 
@@ -112,10 +112,10 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all ${ProjectName} unit test programs"
+    echo "Listing all ${ProjectName} component test programs"
   else
 
-    echo "Running all ${ProjectName} unit test programs"
+    echo "Running all ${ProjectName} component test programs"
   fi
 
   NumPrograms=0
@@ -149,13 +149,11 @@ if [ $status -eq 0 ]; then
 
       break 1
     fi
-  done < <(find "$CMakeDir" -type f \( -name 'test_unit*' -o -name 'test.unit.*' \) -exec test -x {} \; -print0 | sort -z)
+  done < <(find "$CMakeDir" -type f \( -name 'test_component*' -o -name 'test.component.*' \) -exec test -x {} \; -print0 | sort -z)
 
   if [ $NumPrograms -eq 0 ]; then
 
-    >&2 echo "$ScriptPath: found no unit test programs under '$CMakeDir'"
-
-    exit 1
+    echo "$ScriptPath: found no ${ProjectName} component test programs under '$CMakeDir' (none required)"
   fi
 fi
 

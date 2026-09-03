@@ -5,7 +5,7 @@
 # Purpose:  CMake module file (for BuildType)
 #
 # Created:  16th October 2019
-# Updated:  11th December 2023
+# Updated:  2nd September 2026
 #
 # ######################################################################## #
 
@@ -45,7 +45,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 
     message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
 
-    set(CACHE CMAKE_BUILD_TYPE "${default_build_type}"
+    set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
         STRING "Choose the type of build." FORCE
     )
 

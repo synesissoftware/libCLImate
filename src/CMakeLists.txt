@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for libCLImate core library
 #
 # Created:  ...
-# Updated:  8th May 2025
+# Updated:  2nd September 2026
 #
 # ######################################################################## #
 
@@ -63,9 +63,15 @@ SET (CORE_SRCS
 	${CORE_SRC_DIR}/usage_etc.c
 )
 
-add_library(core
+# the real target is named for the library it produces, so that nothing as
+# generic as `core` is introduced into a parent project that adds libCLImate
+# via `add_subdirectory()`; EXPORT_NAME below keeps the exported target
+# `libCLImate::core`, as consumers already spell it
+add_library(libclimate.core
 	${CORE_SRCS}
 )
+
+add_library(libCLImate::core ALIAS libclimate.core)
 
 
 # specify the primary public headers for the library, which controls whether
@@ -82,24 +88,40 @@ set(CORE_PUBLIC_HEADERS
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version.h"
 )
 
-set_target_properties(core PROPERTIES
+set_target_properties(libclimate.core PROPERTIES
+	EXPORT_NAME "core"
 	OUTPUT_NAME "CLImate"
 	PUBLIC_HEADER "${CORE_PUBLIC_HEADERS}"
 )
 
-target_include_directories(core
+target_include_directories(libclimate.core
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
-		$<INSTALL_INTERFACE:include>
+		$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-target_link_libraries(core
-	PRIVATE
-		$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+target_link_libraries(libclimate.core
+	PUBLIC
+		CLASP::core
+		Pantheios.Extras.Main
 )
 
+if(STLSoft_IS_PACKAGE_)
 
-target_compile_options(core
+	target_link_libraries(libclimate.core
+		PUBLIC
+			STLSoft::STLSoft
+	)
+else()
+
+	target_include_directories(libclimate.core
+		PUBLIC
+			$<BUILD_INTERFACE:${STLSOFT_INCLUDE_DIR}>
+	)
+endif()
+
+
+target_compile_options(libclimate.core
 	PRIVATE
 		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
 			-Werror -Wall -Wextra -pedantic
@@ -113,7 +135,7 @@ target_compile_options(core
 # ##########################################################
 # install
 
-install(TARGETS core
+install(TARGETS libclimate.core
 	EXPORT project-targets
 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -121,60 +143,14 @@ install(TARGETS core
 	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER}
 )
 
-# for now, we just include xtests.h, as it's not clear how to use the
-# PUBLIC_HEADER mechanism to install files into subdirectories (such as xtests/util/temp_file.hpp)
-
 # additional headers into specific sub-directories
-
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}
-#     DESTINATION include
-#     FILES_MATCHING
-#     PATTERN "*.h*"
-# )
 
 install(
 	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/
-	DESTINATION include/${PROJECT_NAME_LOWER}
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER}
 	FILES_MATCHING
 	PATTERN "*.h*"
 )
 
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}
-#     DESTINATION include
-#     FILES_MATCHING
-#     PATTERN "*.hpp"
-# )
-
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}
-#     DESTINATION include
-#     FILES_MATCHING
-#     PATTERN "[im]*.h"
-# )
-
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/util
-#     DESTINATION include/${PROJECT_NAME_LOWER}
-#     FILES_MATCHING
-#     PATTERN "*.h*"
-# )
-
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/internal
-#     DESTINATION include/${PROJECT_NAME_LOWER}
-#     FILES_MATCHING
-#     PATTERN "*.h*"
-# )
-
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/systemtools
-#     DESTINATION include
-#     FILES_MATCHING
-#     PATTERN "*.h*"
-# )
-
 
 # ############################## end of file ############################# #
-

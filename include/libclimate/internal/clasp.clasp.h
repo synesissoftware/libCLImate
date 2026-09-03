@@ -4,11 +4,11 @@
  * Purpose: Version-ensuring include of clasp/clasp.h
  *
  * Created: 9th September 2015
- * Updated: 3rd February 2025
+ * Updated: 2nd September 2026
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -50,8 +50,8 @@
 
 #if 0
 #elif defined(CLASP_VER)
-# if CLASP_VER < 0x000e0081
-#  error Requires CLASP 0.14.0 beta-1 or later
+# if CLASP_VER < 0x000F01FF
+#  error Requires CLASP 0.15.1 or later
 # endif
 #else
 # error Error in CLASP clasp.h header

@@ -5,7 +5,7 @@
  *          class.
  *
  * Created: 13th July 2015
- * Updated: 3rd February 2025
+ * Updated: 8th May 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -186,6 +186,9 @@
 # error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 #endif
 
+#include <stlsoft/util/exception_string.hpp>
+#include <stlsoft/util/exception_string_creator.hpp>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * macros
@@ -240,6 +243,9 @@ class general_exception_root_
 public: // types
     typedef C                                               parent_class_type;
     typedef general_exception_root_<C>                      class_type;
+protected:
+    typedef stlsoft::exception_string                       string_type_;
+
 protected: // construction
     explicit
     general_exception_root_(
@@ -253,7 +259,31 @@ protected: // construction
 # else
 #  error
 #endif
+        , m_message()
     {}
+    general_exception_root_(
+        int          /* exitCode */
+    ,   string_type_    message
+    )
+# if 0
+# elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_exception)
+        : parent_class_type()
+# elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_std_runtime_error)
+        : parent_class_type("program terminating")
+# else
+#  error
+#endif
+        , m_message(message)
+    {}
+
+public: // overrides
+    virtual char const* what() const STLSOFT_NOEXCEPT ss_override_k
+    {
+        return m_message.c_str();
+    }
+
+private: // fields
+    string_type_ const  m_message;
 };
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_stlsoft_unrecoverable)
 
@@ -263,13 +293,30 @@ class stlsoft_unrecoverable_exception_root_
 public: // types
     typedef STLSOFT_NS_QUAL(unrecoverable)                  parent_class_type;
     typedef stlsoft_unrecoverable_exception_root_           class_type;
+protected:
+    typedef stlsoft::simple_string                          string_type_;
+
 protected: // construction
     explicit
     stlsoft_unrecoverable_exception_root_(
         int exitCode
     )
         : STLSOFT_NS_QUAL(unrecoverable)(handler, reinterpret_cast<void*>(exitCode))
+        , m_message()
     {}
+    general_exception_root_(
+        int          /* exitCode */
+    ,   string_type_    message
+    )
+        : STLSOFT_NS_QUAL(unrecoverable)(handler, reinterpret_cast<void*>(exitCode))
+        , m_message(message)
+    {}
+
+public: // overrides
+    virtual char const* what() const STLSOFT_NOEXCEPT ss_override_k
+    {
+        return m_message.c_str();
+    }
 
 private:
     static
@@ -280,6 +327,9 @@ private:
     {
         ::exit(reinterpret_cast<int>(param));
     }
+
+private: // fields
+    string_type_ const  m_message;
 };
 #else
 # error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
@@ -313,8 +363,16 @@ public:
     typedef program_termination_exception                   class_type;
 
 protected:
-    explicit program_termination_exception(int exitCode)
+    explicit
+    program_termination_exception(int exitCode)
         : parent_class_type(exitCode)
+        , ExitCode(exitCode)
+    {}
+    program_termination_exception(
+        int             exitCode
+    ,   string_type_    message
+    )
+        : parent_class_type(exitCode, message)
         , ExitCode(exitCode)
     {}
     virtual ~program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT = 0;
@@ -337,14 +395,60 @@ public:
     typedef quiet_program_termination_exception             class_type;
 
 public:
-    explicit quiet_program_termination_exception(int exitCode)
+    explicit
+    quiet_program_termination_exception(int exitCode)
         : parent_class_type(exitCode)
     {}
     ~quiet_program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT
     {}
-
 private:
     void operator =(class_type const&); // copy-assignment proscribed
+};
+
+class contingent_program_termination_exception
+    : public program_termination_exception
+{
+public:
+    typedef program_termination_exception                   parent_class_type;
+    typedef contingent_program_termination_exception        class_type;
+
+public:
+    contingent_program_termination_exception(
+        int         programExitCode
+    ,   char const* message
+    ,   char const* qualifier
+    )
+        : parent_class_type(programExitCode, create_message_(message, qualifier))
+    {}
+    ~contingent_program_termination_exception() LIBCLIMATE_TERMINATION_EXCEPTIONS_NOEXCEPT
+    {}
+private:
+    void operator =(class_type const&); // copy-assignment proscribed
+
+private: // implementation
+    static
+    string_type_
+    create_message_(
+        char const* message
+    ,   char const* qualifier
+    )
+    {
+        stlsoft::exception_string_creator xsc;
+
+        xsc.append(message);
+
+        if (NULL != message &&
+            '\0' != message[0] &&
+            NULL != qualifier &&
+            '\0' != qualifier[0])
+        {
+            xsc.append(": ", 2);
+        }
+
+        xsc.append(qualifier);
+
+        return xsc.create();
+    }
 };
 
 

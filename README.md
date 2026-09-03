@@ -1,5 +1,15 @@
 # libCLImate <!-- omit in toc -->
 
+Portable, lightweight mini-framework for **C**ommand-**L**ine **I**nterface boilerplate.
+
+![Language](https://img.shields.io/badge/c-000000?style=flat&logo=c&logoColor=white)
+![Language](https://img.shields.io/badge/c++-000000?style=flat&logo=c%2B%2B&logoColor=white)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![GitHub release](https://img.shields.io/github/v/release/synesissoftware/libCLImate.svg)](https://github.com/synesissoftware/libCLImate/releases/latest)
+[![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/libCLImate)](https://github.com/synesissoftware/libCLImate/commits/master)
+[![CI](https://github.com/synesissoftware/libCLImate/actions/workflows/ci.yml/badge.svg)](https://github.com/synesissoftware/libCLImate/actions/workflows/ci.yml)
+
+
 ## Table of Contents <!-- omit in toc -->
 
 
@@ -22,9 +32,9 @@
 
 **libCLImate** is a portable, lightweight mini-framework that encapsulates the common aspects of **C**ommand-**L**ine **I**nterface boilerplate, including:
 
-- command-line argument parsing and sorting (using the **[CLASP](https://github.com/synesissoftware/CLASP)** library);
-- diagnostic logging library (**[Pantheios](https://github.com/synesissoftware/Pantheios)**) initialisation / lifetime scoping;
-- provision of de-facto standard CLI facilities, such as responding to `'--help'` and `'--version'` flags;
+* command-line argument parsing and sorting (using the **[CLASP](https://github.com/synesissoftware/CLASP)** library);
+* diagnostic logging library (**[Pantheios](https://github.com/synesissoftware/Pantheios)**) initialisation / lifetime scoping;
+* provision of de-facto standard CLI facilities, such as responding to `'--help'` and `'--version'` flags;
 
 
 ## Installation
@@ -36,17 +46,29 @@ Detailed instructions — via **CMake** — are provided in the accompanying [IN
 
 ### C API
 
-T.B.C.
+The primary C headers live under **include/libclimate/**:
+
+* **libclimate/common.h** — common include (pulls in **version.h**);
+* **libclimate/version.h** — `LIBCLIMATE_VER_*` version macros;
+* **libclimate/main.h** — implicit-main include; defines `main()` in terms of `libCLImate_main_entry_point_C()`;
+* **libclimate/main/api.h** — explicit-main API:
+  * `libCLImate_program_main()` — application entry callback;
+  * `libCLImate_main_entry_point_C()` — explicit `main()` implementation;
+  * `libCLImate_show_usage()` / `libCLImate_show_version()` — stock `--help` / `--version` support;
+  * `libCLImate_specifications[]` — application-defined **CLASP** alias array;
 
 
 ### C++ API
 
-T.B.C.
+The C++ API builds on the C API:
+
+* **libclimate/main.hpp** — implicit-main include for C++ (defines `main()` via `libCLImate_main_entry_point_Cpp()`);
+* **libclimate/main/api.hpp** — C++ conveniences over **main/api.h**, including `clasp::` helpers for flag inspection;
 
 
 ## Examples
 
-Examples are provided in the ```examples``` directory. A detailed list TOC of them is provided in [EXAMPLES.md](./EXAMPLES.md).
+Examples are provided in the **examples/** directory. A detailed table is provided in [EXAMPLES.md](./EXAMPLES.md).
 
 
 ## Project Information
@@ -66,16 +88,18 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 **libCLImate** depends directly on the following libraries:
 
- - **[CLASP](https://github.com/synesissoftware/CLASP)**, v**0.15.0 (alpha 5)** or later - **CLASP** - **c**ommand-**l**ine **a**rgument **s**orting and **p**arsing - is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API. Current working version at https://github.com/synesissoftware/STLSoft-1.11 (but will be at https://github.com/synesissoftware/STLSoft in Q3 2025 and onwards);
- - **[Pantheios](https://github.com/synesissoftware/Pantheios/)**, v**1.0.1 (beta 22)** or later - **Pantheios** is an Open Source C/C++ Diagnostic Logging API library, offering an optimal combination of 100% type-safety, efficiency, genericity and extensibility. It is simple to use and extend, highly-portable (platform and compiler-independent) and, best of all, it upholds the C tradition of *you only pay for what you use*;
- - **[Pantheios.Extras.DiagUtil](https://github.com/synesissoftware/Pantheios.Extras.DiagUtil/)**, v**0.1.2 (beta 1)** or later - **Pantheios.Extras.Main** is a header-only library that provides a suite of functions that aid diagnostics. Currently, this is a Windows-only dependency;
- - **[Pantheios.Extras.Main](https://github.com/synesissoftware/Pantheios.Extras.Main/)**, v**0.2.1 (alpha 2)** or later - **Pantheios.Extras.Main** is a header-only library that provides a suite of functions that simplify the implementation of ```main()```;
- - **[STLSoft](https://github.com/synesissoftware/STLSoft-1.11)**, v**1.11.1 (beta 2)** or later - **STLSoft** is a header-only library that provides platform and compiler feature discrimination, as well as numerous utility components;
+* **[CLASP](https://github.com/synesissoftware/CLASP)**, v**0.15.1** or later;
+* **[Pantheios.Extras.Main](https://github.com/synesissoftware/Pantheios.Extras.Main/)**, v**0.2** or later;
+* **[STLSoft](https://github.com/synesissoftware/STLSoft)**, v**1.11** or later;
 
 **libCLImate** depends indirectly on the following libraries:
 
- - **[b64](https://github.com/synesissoftware/b64/)**, v**1.5.2** or later - **b64** provides Base-64 encoding/decoding, and is an optional dependency of **Pantheios**;
- - **[recls](https://github.com/synesissoftware/recls/)**, v**0.10.0 (beta 2)** or later - **recls** is a platform-independent recursive search library, and is an optional dependency of **CLASP**. **recls** is only required on Windows (where it's used for expanding command-line wildcards);
+* **[b64](https://github.com/synesissoftware/b64/)** — optional dependency of **Pantheios**;
+* **[Pantheios](https://github.com/synesissoftware/Pantheios/)** — required when building examples or tests;
+* **[Pantheios.Extras.DiagUtil](https://github.com/synesissoftware/Pantheios.Extras.DiagUtil/)** — optional; Windows-only facilities;
+* **[recls](https://github.com/synesissoftware/recls/)** — optional dependency of **CLASP** on Windows (disabled when `CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS` is defined);
+* **[shwild](https://github.com/synesissoftware/shwild)** — optional dependency of **xTests**;
+* **[xTests](https://github.com/synesissoftware/xTests)** — required when `BUILD_TESTING=ON`;
 
 
 The dependencies graph is:
@@ -87,21 +111,7 @@ The dependencies graph is:
     |   |
     |   +- (STLSoft)
     |   |
-    |   +- recls (Windows-only)
-    |       |
-    |       +- (STLSoft)
-    |
-    +- Pantheios
-    |   |
-    |   +- (b64)
-    |   |
-    |   +- (STLSoft)
-    |
-    +- Pantheios.Extras.DiagUtil (Windows-only)
-    |   |
-    |   +- (Pantheios)
-    |   |
-    |   +- (STLSoft)
+    |   +- recls (Windows-only, optional)
     |
     +- Pantheios.Extras.Main
     |   |
@@ -115,7 +125,9 @@ The dependencies graph is:
 
 ### Related projects
 
-T.B.C.
+* **[libCLImate.Go](https://github.com/synesissoftware/libCLImate.Go)** — Go language port;
+* **[libCLImate.Ruby](https://github.com/synesissoftware/libCLImate.Ruby)** — Ruby language port;
+* **[libCLImate.Python](https://github.com/synesissoftware/libCLImate.Python)** — Python language port;
 
 
 ### License
@@ -124,4 +136,3 @@ T.B.C.
 
 
 <!-- ########################### end of file ########################### -->
-

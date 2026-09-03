@@ -4,7 +4,7 @@
  * Purpose: Stock usage, version functions.
  *
  * Created: 6th August 2015
- * Updated: 10th March 2025
+ * Updated: 20th March 2025
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -67,61 +67,6 @@ libCLImate_get_console_width_(void)
     return (~(size_t)0 == r) ? -1 : (int)r;
 }
 
-static
-int
-libCLImate_show_usage_to_(
-    clasp_arguments_t const*    args
-,   clasp_alias_t const*        specifications
-,   FILE*                       stm
-,   int                         verMajor
-,   int                         verMinor
-,   int                         verRevision
-,   int                         buildNumber
-,   char const*                 programName
-,   char const*                 summary
-,   char const*                 copyright
-,   char const*                 description
-,   char const*                 usage
-,   int                         showBlanksBetweenItems
-,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-)
-{
-    clasp_usageinfo_t info  =   { 0 };
-
-    info.version.major      =   verMajor;
-    info.version.minor      =   verMinor;
-    info.version.revision   =   verRevision;
-    info.version.build      =   buildNumber;
-
-    info.toolName           =   programName;
-    info.summary            =   summary;
-    info.copyright          =   copyright;
-    info.description        =   description;
-    info.usage              =   usage;
-
-    info.param              =   stm;
-    info.width              =   libCLImate_get_console_width_();
-#ifdef PLATFORMSTL_OS_IS_WINDOWS
-    info.assumedTabWidth    =   -4;
-#else /* ? OS */
-    info.assumedTabWidth    =   4;
-#endif /* OS */
-    info.blanksBetweenItems =   showBlanksBetweenItems;
-
-
-    if (NULL != pfnHeader)
-    {
-        (*pfnHeader)(args, &info, specifications);
-    }
-    if (NULL != pfnBody)
-    {
-        (*pfnBody)(args, &info, specifications);
-    }
-
-    return (stdout == stm) ? EXIT_SUCCESS : EXIT_FAILURE;
-}
-
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -144,22 +89,36 @@ libCLImate_show_usage(
 ,   int                         showBlanksBetweenItems
 )
 {
-    return libCLImate_show_usage_to_(
+    int const   flags               =   0;
+    int const   consoleWidth        =   libCLImate_get_console_width_();
+#ifdef PLATFORMSTL_OS_IS_WINDOWS
+    int const   tabSize             =   -4;
+#else /* ? OS */
+    int const   tabSize             =   +4;
+#endif /* OS */
+    int const   blanksBetweenItems  =   showBlanksBetweenItems;
+
+    // TODO: use this when CLASP has been updated
+    ((void)&buildNumber);
+
+    return clasp_showUsage(
         args
     ,   specifications
-    ,   stm
-    ,   verMajor
-    ,   verMinor
-    ,   verRevision
-    ,   buildNumber
     ,   programName
     ,   summary
     ,   copyright
     ,   description
     ,   usage
-    ,   showBlanksBetweenItems
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
     ,   clasp_showHeaderByFILE
     ,   clasp_showBodyByFILE
+    ,   stm
+    ,   flags
+    ,   consoleWidth
+    ,   tabSize
+    ,   blanksBetweenItems
     );
 }
 
@@ -180,22 +139,35 @@ libCLImate_show_usage_header(
 ,   int                         showBlanksBetweenItems
 )
 {
-    return libCLImate_show_usage_to_(
+    int const   flags               =   0;
+    int const   consoleWidth        =   libCLImate_get_console_width_();
+#ifdef PLATFORMSTL_OS_IS_WINDOWS
+    int const   tabSize             =   -4;
+#else /* ? OS */
+    int const   tabSize             =   +4;
+#endif /* OS */
+    int const   blanksBetweenItems  =   showBlanksBetweenItems;
+
+    // TODO: use this when CLASP has been updated
+    ((void)&buildNumber);
+
+    return clasp_showHeader(
         args
     ,   specifications
-    ,   stm
-    ,   verMajor
-    ,   verMinor
-    ,   verRevision
-    ,   buildNumber
     ,   programName
     ,   summary
     ,   copyright
     ,   description
     ,   usage
-    ,   showBlanksBetweenItems
-    ,   clasp_showHeaderByFILE
-    ,   NULL
+    ,   verMajor
+    ,   verMinor
+    ,   verRevision
+    ,   clasp_showBodyByFILE
+    ,   stm
+    ,   flags
+    ,   consoleWidth
+    ,   tabSize
+    ,   blanksBetweenItems
     );
 }
 
@@ -216,22 +188,35 @@ libCLImate_show_usage_body(
 ,   int                         showBlanksBetweenItems
 )
 {
-    return libCLImate_show_usage_to_(
+    int const   flags               =   0;
+    int const   consoleWidth        =   libCLImate_get_console_width_();
+#ifdef PLATFORMSTL_OS_IS_WINDOWS
+    int const   tabSize             =   -4;
+#else /* ? OS */
+    int const   tabSize             =   +4;
+#endif /* OS */
+    int const   blanksBetweenItems  =   showBlanksBetweenItems;
+
+    ((void)&verMajor);
+    ((void)&verMinor);
+    ((void)&verRevision);
+    ((void)&buildNumber);
+
+    ((void)&programName);
+    ((void)&summary);
+    ((void)&copyright);
+    ((void)&description);
+    ((void)&usage);
+
+    return clasp_showBody(
         args
     ,   specifications
-    ,   stm
-    ,   verMajor
-    ,   verMinor
-    ,   verRevision
-    ,   buildNumber
-    ,   programName
-    ,   summary
-    ,   copyright
-    ,   description
-    ,   usage
-    ,   showBlanksBetweenItems
-    ,   NULL
     ,   clasp_showBodyByFILE
+    ,   stm
+    ,   flags
+    ,   consoleWidth
+    ,   tabSize
+    ,   blanksBetweenItems
     );
 }
 
