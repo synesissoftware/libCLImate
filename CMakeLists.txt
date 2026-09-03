@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libCLImate
 #
 # Created:  23rd October 2024
-# Updated:  2nd September 2026
+# Updated:  4th September 2026
 #
 # ######################################################################## #
 
@@ -231,10 +231,10 @@ if(NOT (CMAKE_NO_PANTHEIOS))
 	endif(Pantheios.Extras.DiagUtil_FOUND)
 endif()
 
-if(Pantheios_Extras_DiagUtil_FOUND)
+if(Pantheios.Extras.DiagUtil_FOUND)
 
 	add_compile_definitions(LIBCLIMATE_HAS_Pantheios_Extras_DiagUtil)
-endif(Pantheios_Extras_DiagUtil_FOUND)
+endif(Pantheios.Extras.DiagUtil_FOUND)
 
 
 # ############################
@@ -249,10 +249,10 @@ if(NOT (CMAKE_NO_PANTHEIOS))
 	message("-- CMake package Pantheios.Extras.Main found (version ${Pantheios.Extras.Main_VERSION}; ${Pantheios.Extras.Main_REQUIRED_VERSION_} requested)")
 endif()
 
-if(Pantheios_Extras_Main_FOUND)
+if(Pantheios.Extras.Main_FOUND)
 
 	add_compile_definitions(LIBCLIMATE_HAS_Pantheios_Extras_Main)
-endif(Pantheios_Extras_Main_FOUND)
+endif(Pantheios.Extras.Main_FOUND)
 
 
 # ############################

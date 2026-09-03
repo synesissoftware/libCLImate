@@ -1,7 +1,7 @@
 # libCLImate - Changes <!-- omit in toc -->
 
 
-## 0.4.1-alpha42 - 2nd September 2026
+## 0.4.1-alpha42 - 4th September 2026
 
 * Modernised Synesis C/C++ boilerplate (CI, helper scripts, documentation, CMake packaging);
 * Added GitHub Actions **ci.yml** with reusable **ci-cell.yml** and **install-sis-deps** composite action;
@@ -12,6 +12,7 @@
 * Merged **HISTORY.md** into **CHANGES.md** and removed **HISTORY.md**;
 * Corrected **INSTALL.md**, **EXAMPLES.md**, and **README.md** documentation debt;
 * Fixed **Pantheios.Extras.DiagUtil** `find_package()` version-variable typo in **CMakeLists.txt**;
+* Fixed **`LIBCLIMATE_HAS_Pantheios_Extras_*`** guards to use dotted **`Pantheios.Extras.*._FOUND`** names (underscore forms never matched `find_package()`);
 * Aligned CMake package config and exported **libCLImate::core** interface dependencies;
 * Fixed install-smoke CI dependencies to install **Pantheios** before **Pantheios.Extras.Main**;
 * Gated Windows **wmain** example behind **`LIBCLIMATE_USE_wmain`** (matches library wide-entry build mode);
