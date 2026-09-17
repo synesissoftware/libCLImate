@@ -1,5 +1,16 @@
+/* /////////////////////////////////////////////////////////////////////////
+ * File:    test/scratch/libver/main.cpp
+ *
+ * Purpose: Prints libCLImate composite version (and sibling VERs when
+ *          those public headers are included).
+ *
+ * Created: 17th September 2026
+ * Updated: 17th September 2026
+ *
+ * ////////////////////////////////////////////////////////////////////// */
 
-#include <libclimate/main.hpp> /* include the implicit-main API header */
+
+#include <libclimate/version.h>
 
 #ifdef LIBCLIMATE_HAS_b64
 # include <b64/b64.h>
@@ -20,22 +31,17 @@
 # include <shwild/shwild.h>
 #endif
 
+#include <stlsoft/stlsoft.h>
+
 #ifdef LIBCLIMATE_HAS_UNIXem
 # include <unixem/unixem.h>
 #endif
 
-
 #include <iomanip>
 #include <iostream>
 
-#include <cstdlib>
+#include <stdlib.h>
 
-
-const int PROGRAM_VER_MAJOR =   0;
-const int PROGRAM_VER_MINOR =   0;
-const int PROGRAM_VER_PATCH =   0;
-const int PROGRAM_VER_BUILD =   1;
-#define PROGRAM_VER_LIST                                    PROGRAM_VER_MAJOR, PROGRAM_VER_MINOR, PROGRAM_VER_PATCH, PROGRAM_VER_BUILD
 
 #define PROGRAM_NAME                                        "libver"
 
@@ -45,16 +51,6 @@ PANTHEIOS_EXTERN_C PAN_CHAR_T const PANTHEIOS_FE_PROCESS_IDENTITY[] = PANTHEIOS_
 #endif
 
 
-clasp_alias_t const libCLImate_specifications[] =
-{
-    CLASP_STOCK_FLAG_HELP,
-    CLASP_STOCK_FLAG_VERSION,
-    CLASP_FLAG(NULL, "--all-versions", "Show version of all constituents and terminate."),
-
-    CLASP_ALIAS_ARRAY_TERMINATOR
-};
-
-
 template<
     typename T_stream
 ,   typename T_integer
@@ -62,13 +58,16 @@ template<
 void
 version(
     T_stream&   stm
+,   char const* prefix
 ,   char const* libname
+,   char const* macroname
 ,   T_integer   libver
 )
 {
     stm
+        << prefix
         << libname
-        << " v"
+        << ": v"
         << ((libver >> 24) & 0xff)
         << '.'
         << ((libver >> 16) & 0xff)
@@ -76,137 +75,88 @@ version(
         << ((libver >> 8) & 0xff)
         << '.'
         << ((libver >> 0) & 0xff)
+        << " ("
+        << macroname
+        << " = 0x"
+        << std::hex << std::setfill('0') << std::setw(8)
+        << static_cast<unsigned>(libver)
+        << std::dec
+        << ")"
         << std::endl
         ;
 }
 
 
-int
-libCLImate_program_main(
-    clasp_arguments_t const* args
-)
+int main(int /* argc */, char* /* argv */[])
 {
-    if (clasp::flag_specified(args, "--help"))
     {
-        libCLImate_show_usage(args, libCLImate_specifications, stdout, PROGRAM_VER_LIST, PROGRAM_NAME, NULL, NULL, NULL, NULL, 0);
+        unsigned const libver = LIBCLIMATE_VER;
 
-        return EXIT_SUCCESS;
+        version(std::cout, "", "libCLImate", "LIBCLIMATE_VER", libver);
     }
 
-    if (clasp::flag_specified(args, "--version"))
-    {
-        libCLImate_show_version(args, libCLImate_specifications, stdout, PROGRAM_VER_LIST, PROGRAM_NAME);
-
-        return EXIT_SUCCESS;
-    }
-
-    if (clasp::flag_specified(args, "--all-versions"))
-    {
-        {
-            auto const libver = LIBCLIMATE_VER;
-
-            version(std::cout, "libCLImate", libver);
-        }
-
-        std::cout
-            << std::endl
-            << "implemented in terms of:"
-            << std::endl
-            << std::endl
-            ;
+    std::cout << "\n" << "efferent dependencies:" << std::endl;
 
 #ifdef LIBCLIMATE_HAS_b64
 
-        {
-            auto const libver = B64_VER;
+    {
+        unsigned const libver = B64_VER;
 
-            version(std::cout, "\tb64", libver);
-        }
+        version(std::cout, "\t", "b64", "B64_VER", libver);
+    }
 #endif
 
-        {
-            auto const libver = CLASP_VER;
+    {
+        unsigned const libver = CLASP_VER;
 
-            version(std::cout, "\tCLASP", libver);
-        }
+        version(std::cout, "\t", "CLASP", "CLASP_VER", libver);
+    }
 
 #ifdef LIBCLIMATE_HAS_Pantheios
 
-        {
-            auto const libver = PANTHEIOS_VER;
+    {
+        unsigned const libver = PANTHEIOS_VER;
 
-            version(std::cout, "\tPantheios", libver);
-        }
+        version(std::cout, "\t", "Pantheios", "PANTHEIOS_VER", libver);
+    }
 #endif
 
 #ifdef LIBCLIMATE_HAS_recls
 
-        {
-            auto const libver = RECLS_VER;
+    {
+        unsigned const libver = RECLS_VER;
 
-            version(std::cout, "\trecls", libver);
-        }
+        version(std::cout, "\t", "recls", "RECLS_VER", libver);
+    }
 #endif
 
 #ifdef LIBCLIMATE_HAS_shwild
 
-        {
-            auto const libver = SHWILD_VER;
+    {
+        unsigned const libver = SHWILD_VER;
 
-            version(std::cout, "\tshwild", libver);
-        }
+        version(std::cout, "\t", "shwild", "SHWILD_VER", libver);
+    }
 #endif
 
-        {
-            auto const libver = _STLSOFT_VER;
+    {
+        unsigned const libver = _STLSOFT_VER;
 
-            version(std::cout, "\tSTLSoft", libver);
-        }
+        version(std::cout, "\t", "STLSoft", "_STLSOFT_VER", libver);
+    }
 
 #ifdef LIBCLIMATE_HAS_UNIXem
 
-        {
-            auto const libver = UNIXEM_VER;
-
-            version(std::cout, "\tUNIXem", libver);
-        }
-#endif
-
-
-        return EXIT_SUCCESS;
-    }
-
-
-#if 0
-
-    if (!args.options().empty())
     {
-        std::cout
-            << "USAGE: unrecognised flag/option '"
-            << args.options()[0].name
-            << "'; use --help for usage"
-            << std::endl;
+        unsigned const libver = UNIXEM_VER;
 
-        return EXIT_SUCCESS;
-    }
-
-    if (!args.values().empty())
-    {
-        std::cout
-            << "USAGE: unrecognised value '"
-            << args.values()[0].name
-            << "'; use --help for usage"
-            << std::endl;
-
-        return EXIT_SUCCESS;
+        version(std::cout, "\t", "UNIXem", "UNIXEM_VER", libver);
     }
 #endif
-
-
-    std::cout
-        << "USAGE: no flags specified; use --help for usage"
-        << std::endl;
 
     return EXIT_SUCCESS;
 }
+
+
+/* ///////////////////////////// end of file //////////////////////////// */
 
