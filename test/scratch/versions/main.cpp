@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test/scratch/libver/main.cpp
+ * File:    test/scratch/versions/main.cpp
  *
  * Purpose: Prints libCLImate composite version (and sibling VERs when
  *          those public headers are included).
@@ -43,7 +43,7 @@
 #include <stdlib.h>
 
 
-#define PROGRAM_NAME                                        "libver"
+#define PROGRAM_NAME                                        "versions"
 
 #ifdef LIBCLIMATE_HAS_Pantheios
 
