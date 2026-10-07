@@ -1,34 +1,137 @@
 #! /bin/bash
 
-ScriptPath=$0
-Dir=$(cd "$(dirname "$ScriptPath")"; pwd)
-Basename=$(basename "$ScriptPath")
+# ##########################################################
+# functions - 1
+
+sis_cmake_is_truey() {
+  case "$(printf '%s' "${1:-}" | tr '[:upper:]' '[:lower:]')" in
+
+    1|ok|on|true|yes|y)
+
+      return 0
+    ;;
+    *)
+
+      return 1
+      ;;
+  esac
+}
+
+
+# ##########################################################
+# constants and variables
+
+Basename=$(basename "$0")
+Dir=$(cd "$(dirname "$0")" && pwd)
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
-# MSYSTEM selects the default make driver in Git Bash/MSYS2 only; it does not
-# imply the MinGW Makefiles generator (cl.exe builds are common from MSYS2).
-if [[ -n "$MSYSTEM" ]]; then
-
-  DefaultMakeCmd=mingw32-make.exe
-else
-
-  DefaultMakeCmd=make
-fi
-MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
 ProjectNameFile="$Dir/.sis/project_name.txt"
 ProjectName=$(tr -d '[:space:]' < "$ProjectNameFile")
+ScriptPath=$0
 
+AlwaysUseColours=${SIS_CMAKE_ALWAYS_USE_COLOURS:-${SIS_ALWAYS_USE_COLOURS:-0}}
 BuildSharedLibs=0
 Configuration=Release
 ExamplesDisabled=0
+MinGW=$(sis_cmake_is_truey "${SIS_CMAKE_MINGW:-}" && echo 1 || echo 0)
 MSVC_MT=0
-MinGW="${MinGW:=0}"
+RunMake=0
+SisUseColours=0
+TestingDisabled=0
+VerboseMakefile=0
+
+# ##########################################################
+# PROJECT-SPECIFIC FLAGS (customise per library; keep marker)
+#
+# Add project-only options here (e.g. --no-cpp, --stlsoft-root-dir,
+# --no-shwild). The common body below must stay aligned with
+# misc-dev-scripts/shell-scripts/cmake-helpers/prepare_cmake.sh.
+
+
 NO_b64=0
 NO_shwild=0
-RunMake=0
 STLSoftDirGiven=
-TestingDisabled=0
 USE_UNIXem=0
-VerboseMakefile=0
+
+# ##########################################################
+# colours
+#
+# Enable when tput is available and either:
+#   - AlwaysUseColours is set (overrides NO_COLOR; may set TERM if
+#     empty/dumb), or
+#   - NO_COLOR is unset, stdout is a TTY, and TERM is not dumb (union of
+#     collect-c's "TERM set + TTY" and cstring's "TTY" — empty TERM on a
+#     TTY is OK).
+
+SisClr_Blue=
+SisClr_Bold=
+SisClr_Green=
+SisClr_None=
+SisClr_Red=
+SisClr_Yellow=
+
+for arg in "$@"; do
+
+  case $arg in
+    --always-use-colors|--always-use-colours|-A)
+
+      AlwaysUseColours=1
+      ;;
+  esac
+done
+
+if command -v tput >/dev/null 2>&1; then
+
+  if [ $AlwaysUseColours -ne 0 ]; then
+
+    if [ -z "${TERM:-}" ] || [ "$TERM" = "dumb" ]; then
+
+      TERM=xterm-256color
+    fi
+
+    SisUseColours=1
+  elif [ -z "${NO_COLOR:-}" ] && [ -t 1 ] && [ "${TERM:-}" != "dumb" ]; then
+
+    SisUseColours=1
+  fi
+fi
+
+if [ $SisUseColours -ne 0 ]; then
+
+  SisClr_Blue=${FG_BLUE:-$(tput setaf 4)}
+  SisClr_Bold=${FD_BOLD:-$(tput bold)}
+  SisClr_Green=${FG_GREEN:-$(tput setaf 2)}
+  SisClr_None=${FD_NONE:-$(tput sgr0)}
+  SisClr_Red=${FG_RED:-$(tput setaf 1)}
+  SisClr_Yellow=${FG_YELLOW:-$(tput setaf 3)}
+fi
+
+CMakeDirClr="${SisClr_Blue}${SisClr_Bold}${CMakeDir}${SisClr_None}"
+ProjectNameClr="${SisClr_Blue}${SisClr_Bold}${ProjectName}${SisClr_None}"
+ScriptPathClr="${SisClr_Blue}${SisClr_Bold}${ScriptPath}${SisClr_None}"
+
+
+# ##########################################################
+# functions - 2
+
+sis_cmake_build() {
+
+  local config="${SIS_CMAKE_CONFIG:-Release}"
+  local args=(--build "$CMakeDir")
+  if [ -f "$CMakeDir/CMakeCache.txt" ] && grep -q '^CMAKE_CONFIGURATION_TYPES:' "$CMakeDir/CMakeCache.txt" 2>/dev/null; then
+
+    args+=(--config "$config")
+  fi
+  if [ "$#" -gt 0 ]; then
+
+    local t
+    for t in "$@"; do
+
+      args+=(--target "$t")
+    done
+  fi
+
+  cmake "${args[@]}"
+}
 
 
 # ##########################################################
@@ -37,6 +140,10 @@ VerboseMakefile=0
 while [[ $# -gt 0 ]]; do
 
   case $1 in
+    --always-use-colors|--always-use-colours|-A)
+
+      # AlwaysUseColours=1 - this is handled by the for loop above
+      ;;
     --build-shared-libs)
 
       BuildSharedLibs=1
@@ -60,8 +167,6 @@ while [[ $# -gt 0 ]]; do
     --mingw)
 
       MinGW=1
-      DefaultMakeCmd=mingw32-make.exe
-      MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
       ;;
     --msvc-mt)
 
@@ -94,41 +199,41 @@ while [[ $# -gt 0 ]]; do
       cat << EOF
 Creates/reinitialises the CMake build script(s)
 
-$ScriptPath [ ... flags/options ... ]
+${ScriptPath} [ ... flags/options ... ]
 
 Flags/options:
 
     behaviour:
 
+    -A
+    --always-use-colors
+    --always-use-colours
+        forces use of colours even when stdout is not a TTY
+
     --build-shared-libs
-        builds ${ProjectName} as a shared library (by setting
-        BUILD_SHARED_LIBS=ON); the default is a static library
+        builds ${ProjectName} as a shared library (BUILD_SHARED_LIBS=ON)
 
     -v
     --cmake-verbose-makefile
-        configures CMake to run verbosely (by setting CMAKE_VERBOSE_MAKEFILE
-        to be ON)
+        configures CMake to run verbosely (CMAKE_VERBOSE_MAKEFILE=ON)
 
     -d
     --debug-configuration
-        use Debug configuration (by setting CMAKE_BUILD_TYPE=Debug). Default
-        is to use Release
+        use Debug configuration (CMAKE_BUILD_TYPE=Debug). Default is Release
 
     -E
     --disable-examples
-        disables building of examples (by setting BUILD_EXAMPLES=OFF)
+        disables building of examples (BUILD_EXAMPLES=OFF)
 
     -T
     --disable-testing
-        disables building of tests (by setting BUILD_TESTING=OFF)
+        disables building of tests (BUILD_TESTING=OFF)
 
     --mingw
-        uses explicitly the "MinGW Makefiles" generator, and defaults the
-        make-command to "mingw32-make.exe"
+        uses explicitly the "MinGW Makefiles" generator
 
     --msvc-mt
-        when using Visual C++ (MSVC), the static runtime library will be
-        selected; the default is the dynamic runtime library
+        when using Visual C++ (MSVC), select the static runtime library
 
     --no-b64
         suppresses discovery of b64 package
@@ -138,7 +243,8 @@ Flags/options:
 
     -m
     --run-make
-        executes make after a successful running of CMake
+        executes a build via cmake --build after a successful configure
+
 
     -s <dir>
     --stlsoft-root-dir <dir>
@@ -152,7 +258,6 @@ Flags/options:
         exercise UNIXSTL, not WinSTL (or COMSTL, etc.). Has no effect when
         not executing on Windows
 
-
     standard flags:
 
     --help
@@ -164,7 +269,7 @@ EOF
       ;;
     *)
 
-      >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
+      >&2 echo "${ScriptPathClr}: unrecognised argument '${SisClr_Red}${SisClr_Bold}$1${SisClr_None}'; use --help for usage"
 
       exit 1
       ;;
@@ -179,9 +284,8 @@ done
 
 mkdir -p "$CMakeDir" || exit 1
 
-cd "$CMakeDir"
-
-echo "Executing CMake for ${ProjectName} (in ${CMakeDir})"
+echo
+echo "Executing CMake for ${ProjectNameClr} (in ${CMakeDirClr})"
 
 if [ $BuildSharedLibs -eq 0 ]; then CMakeBuildSharedLibsFlag="OFF" ; else CMakeBuildSharedLibsFlag="ON" ; fi
 if [ $ExamplesDisabled -eq 0 ]; then CMakeBuildExamplesFlag="ON" ; else CMakeBuildExamplesFlag="OFF" ; fi
@@ -199,42 +303,47 @@ if [ $VerboseMakefile -eq 0 ]; then CMakeVerboseMakefileFlag="OFF" ; else CMakeV
 
 CMakeGeneratorArgs=()
 
+if [ -n "${SIS_CMAKE_GENERATOR:-}" ] && [ $MinGW -eq 0 ]; then
+
+  CMakeGeneratorArgs=(-G "$SIS_CMAKE_GENERATOR")
+fi
+
 if [ $MinGW -ne 0 ]; then
 
   CMakeGeneratorArgs=(-G "MinGW Makefiles")
 fi
 
 cmake \
-  $CMakeSTLSoftVariable \
   -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
   -DBUILD_SHARED_LIBS:BOOL=$CMakeBuildSharedLibsFlag \
   -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
   -DCMAKE_BUILD_TYPE=$Configuration \
-  -DCMAKE_NO_B64:BOOL=$CMakeNoB64 \
-  -DCMAKE_NO_SHWILD:BOOL=$CMakeNoShwild \
   -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
   -DMSVC_USE_MT:BOOL=$CMakeMsvcMtFlag \
+  -DNO_B64:BOOL=$CMakeNoB64 \
+  -DNO_SHWILD:BOOL=$CMakeNoShwild \
+  $CMakeSTLSoftVariable \
   -DUSE_UNIXEM:BOOL=$CMakeUSE_UNIXem \
   "${CMakeGeneratorArgs[@]}" \
-  -S "$Dir" \
   -B "$CMakeDir" \
-  || (cd ->/dev/null ; exit 1)
+  -S "$Dir" \
+  || exit 1
 
 status=0
 
 if [ $RunMake -ne 0 ]; then
 
-  echo "Executing build of ${ProjectName} (via command \`$MakeCmd\`)"
+  echo
+  echo "Executing build of ${ProjectNameClr} (via cmake --build)"
 
-  $MakeCmd
+  sis_cmake_build
   status=$?
 fi
 
-cd ->/dev/null
-
 if [ $VerboseMakefile -ne 0 ]; then
 
-  echo -e "contents of $CMakeDir:"
+  echo
+  echo -e "contents of ${CMakeDirClr}:"
   ls -al "$CMakeDir"
 fi
 

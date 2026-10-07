@@ -4,11 +4,11 @@
  * Purpose: libCLImate library version.
  *
  * Created: 13th July 2015
- * Updated: 8th May 2025
+ * Updated: 17th September 2026
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -51,17 +51,20 @@
 #define LIBCLIMATE_VER_MAJOR            0
 #define LIBCLIMATE_VER_MINOR            4
 #define LIBCLIMATE_VER_PATCH            1
-#define LIBCLIMATE_VER_ALPHABETA        42
+#define LIBCLIMATE_VER_AB               0x81
 
 #define LIBCLIMATE_VER \
     (0\
-        |   (   LIBCLIMATE_VER_MAJOR       << 24   ) \
-        |   (   LIBCLIMATE_VER_MINOR       << 16   ) \
-        |   (   LIBCLIMATE_VER_PATCH       <<  8   ) \
-        |   (   LIBCLIMATE_VER_ALPHABETA   <<  0   ) \
+        |   (   LIBCLIMATE_VER_MAJOR   << 24   ) \
+        |   (   LIBCLIMATE_VER_MINOR   << 16   ) \
+        |   (   LIBCLIMATE_VER_PATCH   <<  8   ) \
+        |   (   LIBCLIMATE_VER_AB      <<  0   ) \
     )
 
-#define LIBCLIMATE_VER_REVISION         LIBCLIMATE_VER_PATCH
+#ifndef LIBCLIMATE_DOCUMENTATION_SKIP_SECTION
+# define LIBCLIMATE_VER_ALPHABETA       LIBCLIMATE_VER_AB
+# define LIBCLIMATE_VER_REVISION                            LIBCLIMATE_VER_PATCH
+#endif /* !LIBCLIMATE_DOCUMENTATION_SKIP_SECTION */
 
 #ifndef LIBCLIMATE_DOCUMENTATION_SKIP_SECTION
  /* libCLImate completely supercedes Synesis Software Command Line Interface library */

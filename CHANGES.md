@@ -1,7 +1,22 @@
 # libCLImate - Changes <!-- omit in toc -->
 
 
-## 0.4.1-alpha42 - 4th September 2026
+## Unreleased
+
+* Applied **misc-dev-scripts** **0.6.0** editor/Git/`.sis` drop-in templates on **boilerplate**;
+* Restored historical **.gitignore** patterns as a sorted union with **misc-dev-scripts** gold section layout;
+
+
+## 0.4.1-beta1 - 10th September 2026
+
+* Canonicalised CMake exclusion variables from reserved `CMAKE_NO_*` (`CMAKE_NO_B64`, `CMAKE_NO_PANTHEIOS`, `CMAKE_NO_SHWILD`) to canonical `NO_*` in **CMakeLists.txt** and **prepare_cmake.sh**;
+* Added backwards-compatibility mappings with obsolete-variable warnings for legacy `CMAKE_NO_*` in **CMakeLists.txt**;
+* Updated `LIBCLIMATE_VER_AB` to `0x81`, wired `LIBCLIMATE_VER` to `LIBCLIMATE_VER_AB` directly, and provided legacy `LIBCLIMATE_VER_ALPHABETA` and `LIBCLIMATE_VER_REVISION` compatibility aliases in **include/libclimate/version.h**;
+* Updated version macro assertions in unit test **test.unit.version**;
+* Added third **Details** column to **NEWS.md** table;
+
+
+## 0.4.1-alpha2 - 4th September 2026
 
 * Modernised Synesis C/C++ boilerplate (CI, helper scripts, documentation, CMake packaging);
 * Added GitHub Actions **ci.yml** with reusable **ci-cell.yml** and **install-sis-deps** composite action;
