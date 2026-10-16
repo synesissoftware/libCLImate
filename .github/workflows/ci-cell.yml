@@ -57,8 +57,8 @@ jobs:
           c-compiler: ${{ inputs.c-compiler }}
           cpp-compiler: ${{ inputs.cpp-compiler }}
           dependencies: >-
-            STLSoft b64 shwild xTests CLASP Pantheios
-            Pantheios.Extras.DiagUtil Pantheios.Extras.Main woad
+            STLSoft b64 shwild xTests CLASP woad Pantheios
+            Pantheios.Extras.DiagUtil Pantheios.Extras.Main
           toolchain: ${{ inputs.toolchain }}
 
       - name: Configure
