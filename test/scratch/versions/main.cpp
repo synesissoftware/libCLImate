@@ -5,12 +5,14 @@
  *          those public headers are included).
  *
  * Created: 17th September 2026
- * Updated: 17th September 2026
+ * Updated: 8th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
 
 #include <libclimate/version.h>
+
+#include <woad/woad.h>
 
 #ifdef LIBCLIMATE_HAS_b64
 # include <b64/b64.h>
@@ -66,8 +68,12 @@ version(
 {
     stm
         << prefix
+        << WOAD_FG_BLUE
         << libname
-        << ": v"
+        << WOAD_RESET
+        << ": "
+        << WOAD_FG_GREEN
+        << "v"
         << ((libver >> 24) & 0xff)
         << '.'
         << ((libver >> 16) & 0xff)
@@ -75,12 +81,18 @@ version(
         << ((libver >> 8) & 0xff)
         << '.'
         << ((libver >> 0) & 0xff)
+        << WOAD_RESET
         << " ("
+        << WOAD_FG_CYAN
         << macroname
-        << " = 0x"
+        << WOAD_RESET
+        << " = "
+        << WOAD_FG_GREEN
+        << "0x"
         << std::hex << std::setfill('0') << std::setw(8)
         << static_cast<unsigned>(libver)
         << std::dec
+        << WOAD_RESET
         << ")"
         << std::endl
         ;

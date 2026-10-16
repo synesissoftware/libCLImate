@@ -6,7 +6,7 @@
  *          command-line argument handling (CLASP).
  *
  * Created: 13th July 2015
- * Updated: 4th September 2026
+ * Updated: 16th October 2026
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -77,6 +77,7 @@
 namespace {
 
     char const ST_USAGE_HELP_SUFFIX[] = "use --help for usage";
+    clasp_char_t const* s_programName_ = NULL;
 } // anonymous namespace
 
 
@@ -108,7 +109,7 @@ main_CLASP_inner_(
         fprintf(
             stderr
         ,   "%s: invalid argument '%.*s'; %s\n"
-        ,   pantheios::getProcessIdentity()
+        ,   NULL != s_programName_ ? s_programName_ : pantheios::getProcessIdentity()
         ,   int(x.optionName.size()), x.optionName.data()
         ,   ST_USAGE_HELP_SUFFIX
         );
@@ -127,7 +128,7 @@ main_CLASP_inner_(
         fprintf(
             stderr
         ,   "%s: invalid command-line: %s; %s\n"
-        ,   pantheios::getProcessIdentity()
+        ,   NULL != s_programName_ ? s_programName_ : pantheios::getProcessIdentity()
         ,   x.what()
         ,   ST_USAGE_HELP_SUFFIX
         );
@@ -144,8 +145,8 @@ main_CLASP_inner_(
         ,   x.what()
         );
 
-        // char const* const program_name = platformstl_ns_qual(get_executable_name_from_path)(argv[0]).ptr;
-        char const* const program_name = pantheios::getProcessIdentity();
+        char const* const program_name =
+            NULL != s_programName_ ? s_programName_ : pantheios::getProcessIdentity();
 
         if (EXIT_SUCCESS == x.ExitCode)
         {
@@ -220,7 +221,7 @@ main_CLASP_outer_(
                     argc
                 ,   argv
                 ,   main_CLASP_inner_
-                ,   NULL
+                ,   s_programName_
                 ,   libCLImate_specifications
                 ,   flags
                 ,   &ctxt
@@ -253,7 +254,11 @@ main_memory_leak_trace_(
     return main_CLASP_outer_(argc, argv);
 #else
 
-    return ::pantheios::extras::diagutil::main_leak_trace::invoke(argc, argv, main_CLASP_outer_);
+    return ::pantheios::extras::diagutil::main_memory_msvcrt_leak_trace::invoke(
+                argc
+            ,   argv
+            ,   main_CLASP_outer_
+            );
 #endif
 }
 
@@ -265,21 +270,52 @@ main_memory_leak_trace_(
 extern "C"
 #ifdef LIBCLIMATE_USE_wmain
 int
+libCLImate_wmain_entry_point_Cpp_with_program_name(
+    int         argc
+,   wchar_t*    argv[]
+,   wchar_t const*
+                programName
+,   void*       /* reserved */
+)
+#else /* ? LIBCLIMATE_USE_wmain */
+int
+libCLImate_main_entry_point_Cpp_with_program_name(
+    int     argc
+,   char*   argv[]
+,   char const*
+                programName
+,   void*   /* reserved */
+)
+#endif /* LIBCLIMATE_USE_wmain */
+{
+    s_programName_ = programName;
+
+    return ::pantheios::extras::main::invoke(argc, argv, main_memory_leak_trace_, programName);
+}
+
+extern "C"
+#ifdef LIBCLIMATE_USE_wmain
+int
 libCLImate_wmain_entry_point_Cpp(
     int         argc
 ,   wchar_t*    argv[]
-,   void*    /* reserved */
+ ,   void*       reserved
 )
 #else /* ? LIBCLIMATE_USE_wmain */
 int
 libCLImate_main_entry_point_Cpp(
     int     argc
 ,   char*   argv[]
-,   void* /* reserved */
+ ,   void*   reserved
 )
 #endif /* LIBCLIMATE_USE_wmain */
 {
-    return ::pantheios::extras::main::invoke(argc, argv, main_memory_leak_trace_);
+    return
+#ifdef LIBCLIMATE_USE_wmain
+        libCLImate_wmain_entry_point_Cpp_with_program_name(argc, argv, NULL, reserved);
+#else /* ? LIBCLIMATE_USE_wmain */
+        libCLImate_main_entry_point_Cpp_with_program_name(argc, argv, NULL, reserved);
+#endif /* LIBCLIMATE_USE_wmain */
 }
 
 

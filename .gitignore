@@ -118,6 +118,8 @@ list_changes.cmd
 logging-bailout.txt
 prepare.cmd
 sh.exe.stackdump
+test.unit.main.programname-stderr.txt
+test.unit.main.programname.C-stderr.txt
 test/testpatterns.orj
 test/tests-plan.txt
 tidydir.cmd

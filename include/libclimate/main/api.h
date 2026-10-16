@@ -4,7 +4,7 @@
  * Purpose: libCLImate core API for C programs.
  *
  * Created: 13th July 2015
- * Updated: 8th May 2025
+ * Updated: 8th October 2026
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
@@ -143,6 +143,38 @@ libCLImate_main_entry_point_Cpp(
 ,   char*   argv[]
 ,   void*   reserved
 );
+
+# if defined(LIBCLIMATE_USE_wmain)
+
+/** The wmain() implementation for C++ with an explicit program name.
+ *
+ * \note This must be called only once in a C++ program
+ *
+ * \return A return code suitable for the process exit code.
+ */
+int
+libCLImate_wmain_entry_point_Cpp_with_program_name(
+    int                 argc
+,   wchar_t*            argv[]
+,   wchar_t const*      programName
+,   void*               reserved
+);
+# else /* ? LIBCLIMATE_USE_wmain */
+
+/** The main() implementation for C++ with an explicit program name.
+ *
+ * \note This must be called only once in a C++ program
+ *
+ * \return A return code suitable for the process exit code.
+ */
+int
+libCLImate_main_entry_point_Cpp_with_program_name(
+    int                 argc
+,   char*               argv[]
+,   char const*         programName
+,   void*               reserved
+);
+# endif /* LIBCLIMATE_USE_wmain */
 #endif /* __cplusplus */
 
 #if 0
@@ -160,6 +192,20 @@ libCLImate_main_entry_point_C(
     int     argc
 ,   char*   argv[]
 ,   void*   reserved
+);
+
+/** The main() implementation for C with an explicit program name.
+ *
+ * \note This must be called only once in a C program
+ *
+ * \return A return code suitable for the process exit code.
+ */
+int
+libCLImate_main_entry_point_C_with_program_name(
+    int                 argc
+,   char*               argv[]
+,   char const*         programName
+,   void*               reserved
 );
 #endif /* !__cplusplus */
 
