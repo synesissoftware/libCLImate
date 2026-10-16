@@ -43,8 +43,7 @@ static char const Test_programName[] =
  * globals
  */
 
-PANTHEIOS_EXTERN_C PAN_CHAR_T const PANTHEIOS_FE_PROCESS_IDENTITY[] =
-    PANTHEIOS_LITERAL_STRING("test.unit.main.programname.C");
+PANTHEIOS_EXTERN_C PAN_CHAR_T const PANTHEIOS_FE_PROCESS_IDENTITY[] = PANTHEIOS_LITERAL_STRING("test.unit.main.programname.C");
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -122,7 +121,18 @@ test_coloured_program_name_passes_through(void)
         NULL,
     };
 
-    FILE* const redirected = freopen(Test_path, "w", stderr);
+    FILE* redirected = NULL;
+
+#if defined(_MSC_VER)
+
+    if (0 != freopen_s(&redirected, Test_path, "w", stderr))
+    {
+        redirected = NULL;
+    }
+#else /* ? _MSC_VER */
+
+    redirected = freopen(Test_path, "w", stderr);
+#endif /* _MSC_VER */
 
     if (NULL == redirected)
     {

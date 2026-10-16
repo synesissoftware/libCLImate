@@ -49,8 +49,7 @@ char const Test_programName[] =
  * globals
  */
 
-PANTHEIOS_EXTERN_C PAN_CHAR_T const PANTHEIOS_FE_PROCESS_IDENTITY[] =
-    PANTHEIOS_LITERAL_STRING("test.unit.main.programname");
+PANTHEIOS_EXTERN_C PAN_CHAR_T const PANTHEIOS_FE_PROCESS_IDENTITY[] = PANTHEIOS_LITERAL_STRING("test.unit.main.programname");
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -135,7 +134,18 @@ test_coloured_program_name_passes_through()
         NULL,
     };
 
-    FILE* const redirected = ::freopen(Test_path, "w", stderr);
+    FILE* redirected = NULL;
+
+#if defined(_MSC_VER)
+
+    if (0 != ::freopen_s(&redirected, Test_path, "w", stderr))
+    {
+        redirected = NULL;
+    }
+#else /* ? _MSC_VER */
+
+    redirected = ::freopen(Test_path, "w", stderr);
+#endif /* _MSC_VER */
 
     if (NULL == redirected)
     {
@@ -164,7 +174,9 @@ test_coloured_program_name_passes_through()
 
     for (size_t i = 0; i != lines.size(); ++i)
     {
-        if (0 == std::strncmp(lines[i].data(), Test_programName, prefixLen))
+        /* memcmp avoids MinGW -Wstring-compare on string_view::data(). */
+        if (lines[i].size() >= prefixLen &&
+            0 == std::memcmp(lines[i].data(), Test_programName, prefixLen))
         {
             found = true;
 
