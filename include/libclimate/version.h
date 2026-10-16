@@ -4,7 +4,7 @@
  * Purpose: libCLImate library version.
  *
  * Created: 13th July 2015
- * Updated: 10th September 2026
+ * Updated: 16th October 2026
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *

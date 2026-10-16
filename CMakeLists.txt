@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libCLImate
 #
 # Created:  23rd October 2024
-# Updated:  10th September 2026
+# Updated:  16th October 2026
 #
 # ######################################################################## #
 
@@ -135,6 +135,7 @@ endif(LIBCLIMATE_USE_wmain)
 # - b64 - may be needed by Pantheios;
 # - Pantheios.Extras.DiagUtil - Windows-only;
 # - shwild - required for testing;
+# - woad - required for testing and for coloured-program-name examples;
 # - xTests - required for testing;
 
 if(DEFINED CMAKE_NO_B64 AND NOT DEFINED NO_B64)
@@ -393,6 +394,19 @@ if(BUILD_TESTING)
 
 	message("-- CMake package xTests found (version ${xTests_VERSION}; ${xTests_REQUIRED_VERSION_} requested)")
 endif(BUILD_TESTING)
+
+
+# ############################
+# woad
+
+if(BUILD_TESTING OR BUILD_EXAMPLES)
+
+	set(woad_REQUIRED_VERSION_ 0.1)
+
+	find_package(woad ${woad_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package woad found (version ${woad_VERSION}; ${woad_REQUIRED_VERSION_} requested)")
+endif(BUILD_TESTING OR BUILD_EXAMPLES)
 
 
 # ################################################
