@@ -25,6 +25,7 @@
 * [x] ~~~Unit tests and CTest wiring (**test.unit.version**, **test.unit.api**)~~~ - ✅;
 * [x] ~~~**CHANGES.md** version-first; **HISTORY.md** merged and removed~~~ - ✅;
 * [x] ~~~CMake package config **find_dependency()** for true interface deps~~~ - ✅;
+* [ ] Remove '--no-b64' flag and associated support (in **prepare_cmake.sh** and **CMakeLists.txt**), rendered redundant by recent improvements to **Pantheios**' CMake usage;
 
 
 <!-- ########################### end of file ########################### -->

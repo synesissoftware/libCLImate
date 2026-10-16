@@ -210,8 +210,8 @@ cmake \
   -DBUILD_SHARED_LIBS:BOOL=$CMakeBuildSharedLibsFlag \
   -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
   -DCMAKE_BUILD_TYPE=$Configuration \
-  -DCMAKE_NO_B64:BOOL=$CMakeNoB64 \
-  -DCMAKE_NO_SHWILD:BOOL=$CMakeNoShwild \
+  -DNO_B64:BOOL=$CMakeNoB64 \
+  -DNO_SHWILD:BOOL=$CMakeNoShwild \
   -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
   -DMSVC_USE_MT:BOOL=$CMakeMsvcMtFlag \
   -DUSE_UNIXEM:BOOL=$CMakeUSE_UNIXem \
