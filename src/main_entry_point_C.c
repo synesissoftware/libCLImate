@@ -6,11 +6,11 @@
  *          argument handling (CLASP).
  *
  * Created: 12nd July 2015
- * Updated: 8th March 2025
+ * Updated: 16th October 2026
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -65,6 +65,8 @@
  * implementation
  */
 
+static char const* s_programName_ = NULL;
+
 static
 void
 CLASP_CALLCONV CLASP_Pantheios_log_(
@@ -117,7 +119,7 @@ main_CLASP_(
                 argc
             ,   argv
             ,   libCLImate_program_main_C
-            ,   NULL
+            ,   s_programName_
             ,   libCLImate_specifications
             ,   flags
             ,   &ctxt
@@ -136,7 +138,11 @@ main_memory_leak_trace_(
     return main_CLASP_(argc, argv);
 #else
 
-    return pantheios_extras_diagutil_main_leak_trace_invoke(argc, argv, main_CLASP_);
+    return pantheios_extras_diagutil_main_memory_msvcrt_leak_trace_invoke(
+                argc
+            ,   argv
+            ,   main_CLASP_
+            );
 #endif
 }
 
@@ -146,15 +152,28 @@ main_memory_leak_trace_(
  */
 
 int
+libCLImate_main_entry_point_C_with_program_name(
+    int         argc
+,   char*       argv[]
+,   char const* programName
+,   void*      reserved
+)
+{
+    ((void)reserved);
+
+    s_programName_ = programName;
+
+    return pantheios_extras_main_invoke(argc, argv, main_memory_leak_trace_, programName, NULL);
+}
+
+int
 libCLImate_main_entry_point_C(
     int     argc
 ,   char*   argv[]
 ,   void*   reserved
 )
 {
-    ((void)reserved);
-
-    return pantheios_extras_main_invoke(argc, argv, main_memory_leak_trace_, NULL, NULL);
+    return libCLImate_main_entry_point_C_with_program_name(argc, argv, NULL, reserved);
 }
 
 

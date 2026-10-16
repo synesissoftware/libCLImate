@@ -1,3 +1,4 @@
+add_subdirectory(coloured_program_name)
 add_subdirectory(explicit_main)
 add_subdirectory(implicit_main)
 add_subdirectory(minimal)

@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libCLImate
 #
 # Created:  23rd October 2024
-# Updated:  4th September 2026
+# Updated:  16th October 2026
 #
 # ######################################################################## #
 
@@ -135,13 +135,35 @@ endif(LIBCLIMATE_USE_wmain)
 # - b64 - may be needed by Pantheios;
 # - Pantheios.Extras.DiagUtil - Windows-only;
 # - shwild - required for testing;
+# - woad - required for testing and for coloured-program-name examples;
 # - xTests - required for testing;
+
+if(DEFINED CMAKE_NO_B64 AND NOT DEFINED NO_B64)
+
+	message(WARNING "variable 'CMAKE_NO_B64' is obsolete and will not be supported in a future version; use 'NO_B64' instead")
+
+	set(NO_B64 ${CMAKE_NO_B64})
+endif()
+
+if(DEFINED CMAKE_NO_PANTHEIOS AND NOT DEFINED NO_PANTHEIOS)
+
+	message(WARNING "variable 'CMAKE_NO_PANTHEIOS' is obsolete and will not be supported in a future version; use 'NO_PANTHEIOS' instead")
+
+	set(NO_PANTHEIOS ${CMAKE_NO_PANTHEIOS})
+endif()
+
+if(DEFINED CMAKE_NO_SHWILD AND NOT DEFINED NO_SHWILD)
+
+	message(WARNING "variable 'CMAKE_NO_SHWILD' is obsolete and will not be supported in a future version; use 'NO_SHWILD' instead")
+
+	set(NO_SHWILD ${CMAKE_NO_SHWILD})
+endif()
 
 
 # ############################
 # b64
 
-if(NOT (CMAKE_NO_B64))
+if(NOT NO_B64)
 
 	if(BUILD_TESTING)
 
@@ -187,9 +209,9 @@ endif(CLASP_FOUND)
 # ############################
 # Pantheios
 
-if(NOT (CMAKE_NO_PANTHEIOS))
+if(NOT NO_PANTHEIOS)
 
-	if(BUILD_TESTING)
+	if(BUILD_TESTING OR BUILD_EXAMPLES)
 
 		set(Pantheios_REQUIRED_VERSION_ 1.0)
 
@@ -201,7 +223,7 @@ if(NOT (CMAKE_NO_PANTHEIOS))
 
 			add_compile_definitions(HAS_Pantheios)
 		endif(Pantheios_FOUND)
-	endif(BUILD_TESTING)
+	endif(BUILD_TESTING OR BUILD_EXAMPLES)
 endif()
 
 if(Pantheios_FOUND)
@@ -213,7 +235,7 @@ endif(Pantheios_FOUND)
 # ############################
 # Pantheios.Extras.DiagUtil
 
-if(NOT (CMAKE_NO_PANTHEIOS))
+if(NOT NO_PANTHEIOS)
 
 	set(Pantheios.Extras.DiagUtil_REQUIRED_VERSION_ 0.1)
 
@@ -240,7 +262,7 @@ endif(Pantheios.Extras.DiagUtil_FOUND)
 # ############################
 # Pantheios.Extras.Main
 
-if(NOT (CMAKE_NO_PANTHEIOS))
+if(NOT NO_PANTHEIOS)
 
 	set(Pantheios.Extras.Main_REQUIRED_VERSION_ 0.2)
 
@@ -258,7 +280,7 @@ endif(Pantheios.Extras.Main_FOUND)
 # ############################
 # shwild
 
-if(NOT (CMAKE_NO_SHWILD))
+if(NOT NO_SHWILD)
 
 	if(BUILD_TESTING)
 
@@ -372,6 +394,19 @@ if(BUILD_TESTING)
 
 	message("-- CMake package xTests found (version ${xTests_VERSION}; ${xTests_REQUIRED_VERSION_} requested)")
 endif(BUILD_TESTING)
+
+
+# ############################
+# woad
+
+if(BUILD_TESTING OR BUILD_EXAMPLES)
+
+	set(woad_REQUIRED_VERSION_ 0.1)
+
+	find_package(woad ${woad_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package woad found (version ${woad_VERSION}; ${woad_REQUIRED_VERSION_} requested)")
+endif(BUILD_TESTING OR BUILD_EXAMPLES)
 
 
 # ################################################
