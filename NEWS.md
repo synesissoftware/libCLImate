@@ -3,6 +3,7 @@
 
 | Date                 | News Item                           | Details |
 | -------------------- | ----------------------------------- | ------- |
+| 20th October 2026    | [libCLImate 0.4.1 (beta 2)](https://github.com/synesissoftware/libCLImate/releases/tag/0.4.1-beta2) released | `LIBCLIMATE_VER_RELSTATUS`; gold helpers; Windows `.cmd` CI |
 | 10th September 2026  | libCLImate 0.4.1 (beta 1) released  | |
 | 3rd September 2026   | libCLImate 0.4.1 (alpha 2) released | |
 | 8th May 2025         | libCLImate 0.4.0 (alpha 1) released | |

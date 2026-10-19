@@ -51,7 +51,7 @@
 #define LIBCLIMATE_VER_MAJOR            0
 #define LIBCLIMATE_VER_MINOR            4
 #define LIBCLIMATE_VER_PATCH            1
-#define LIBCLIMATE_VER_RELSTATUS        0x81
+#define LIBCLIMATE_VER_RELSTATUS        0x82
 
 #define LIBCLIMATE_VER \
     (0\
