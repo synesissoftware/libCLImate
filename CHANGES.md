@@ -1,6 +1,14 @@
 # libCLImate - Changes <!-- omit in toc -->
 
 
+## 0.4.1-beta2 - 20th October 2026
+
+* Made `LIBCLIMATE_VER_RELSTATUS` the primary low-byte version macro (`0x82`), retaining `LIBCLIMATE_VER_AB` and `LIBCLIMATE_VER_ALPHABETA` as documentation-hidden aliases in **include/libclimate/version.h**;
+* Aligned the **run_all_examples**, **run_all_scratch_tests**, and **run_all_unit_tests** helper scripts (including **.cmd** counterparts) with **misc-dev-scripts** gold tip **0754c23**, excluding **CMakeFiles** and `*.d` / `*.o` / `*.obj` from discovery and adding scratch `--skip-interactive`;
+* Added native Windows **.cmd** dogfood steps for the **run_all_*** runners in **.github/workflows/ci-cell.yml**;
+* Updated version macro assertions in unit test **test.unit.version**;
+
+
 ## 0.4.1-beta1 - 16th October 2026
 
 * Canonicalised CMake exclusion variables from reserved `CMAKE_NO_*` (`CMAKE_NO_B64`, `CMAKE_NO_PANTHEIOS`, `CMAKE_NO_SHWILD`) to canonical `NO_*` in **CMakeLists.txt** and **prepare_cmake.sh**;
