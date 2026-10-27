@@ -75,7 +75,7 @@ macro(target_link_Pantheios_Extras_DiagUtil target_name)
 
 	target_link_libraries(${target_name}
 		PRIVATE
-			Pantheios.Extras.DiagUtil
+			Pantheios.Extras.DiagUtil::Pantheios.Extras.DiagUtil
 	)
 endmacro(target_link_Pantheios_Extras_DiagUtil)
 

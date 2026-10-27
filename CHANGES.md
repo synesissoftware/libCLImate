@@ -1,6 +1,12 @@
 # libCLImate - Changes <!-- omit in toc -->
 
 
+## 0.4.1-beta3 - 27th October 2026
+
+* Defined `HAS_<Pkg>` and `HAS_<PKG>` when a Synesis package other than **STLSoft** is detected, and stopped defining the client-prefixed presence macros `LIBCLIMATE_HAS_*`, `RECLS_HAS_SHWILD`, `RECLS_HAS_UNIXEM`, and `STLSOFT_HAS_UNIXEM`;
+* **test.scratch.versions** gates efferent lines on `HAS_*`;
+
+
 ## 0.4.1-beta2 - 20th October 2026
 
 * Made `LIBCLIMATE_VER_RELSTATUS` the primary low-byte version macro (`0x82`), retaining `LIBCLIMATE_VER_AB` and `LIBCLIMATE_VER_ALPHABETA` as documentation-hidden aliases in **include/libclimate/version.h**;
