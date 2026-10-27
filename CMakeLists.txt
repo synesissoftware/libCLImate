@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libCLImate
 #
 # Created:  23rd October 2024
-# Updated:  16th October 2026
+# Updated:  27th October 2026
 #
 # ######################################################################## #
 
@@ -174,20 +174,23 @@ if(NOT NO_B64)
 		if(b64_FOUND)
 
 			message("-- CMake package b64 found (version ${b64_VERSION}; ${b64_REQUIRED_VERSION_} requested)")
-
-			add_compile_definitions(HAS_b64)
-		else(b64_FOUND)
-
-			add_compile_definitions(PANTHEIOS_NO_B64)
-			add_compile_definitions(RECLS_NO_B64)
-			add_compile_definitions(SHWILD_NO_B64)
 		endif(b64_FOUND)
 	endif(BUILD_TESTING)
 endif()
 
 if(b64_FOUND)
 
-	add_compile_definitions(LIBCLIMATE_HAS_b64)
+	add_compile_definitions(
+		HAS_b64
+		HAS_B64
+	)
+else(b64_FOUND)
+
+	add_compile_definitions(
+		PANTHEIOS_NO_B64
+		RECLS_NO_B64
+		SHWILD_NO_B64
+	)
 endif(b64_FOUND)
 
 
@@ -202,7 +205,9 @@ message("-- CMake package CLASP found (version ${CLASP_VERSION}; ${CLASP_REQUIRE
 
 if(CLASP_FOUND)
 
-	add_compile_definitions(LIBCLIMATE_HAS_CLASP)
+	add_compile_definitions(
+		HAS_CLASP
+	)
 endif(CLASP_FOUND)
 
 
@@ -220,15 +225,16 @@ if(NOT NO_PANTHEIOS)
 		if(Pantheios_FOUND)
 
 			message("-- CMake package Pantheios found (version ${Pantheios_VERSION}; ${Pantheios_REQUIRED_VERSION_} requested)")
-
-			add_compile_definitions(HAS_Pantheios)
 		endif(Pantheios_FOUND)
 	endif(BUILD_TESTING OR BUILD_EXAMPLES)
 endif()
 
 if(Pantheios_FOUND)
 
-	add_compile_definitions(LIBCLIMATE_HAS_Pantheios)
+	add_compile_definitions(
+		HAS_Pantheios
+		HAS_PANTHEIOS
+	)
 endif(Pantheios_FOUND)
 
 
@@ -244,18 +250,18 @@ if(NOT NO_PANTHEIOS)
 	if(Pantheios.Extras.DiagUtil_FOUND)
 
 		message("-- CMake package Pantheios.Extras.DiagUtil found (version ${Pantheios.Extras.DiagUtil_VERSION}; ${Pantheios.Extras.DiagUtil_REQUIRED_VERSION_} requested)")
-
-		add_compile_definitions(HAS_Pantheios_Extras_DiagUtil)
-		add_compile_definitions(HAS_DIAGUTIL)
-	else(Pantheios.Extras.DiagUtil_FOUND)
-
-		add_compile_definitions(PANTHEIOS_NO_DIAGUTIL)
 	endif(Pantheios.Extras.DiagUtil_FOUND)
 endif()
 
 if(Pantheios.Extras.DiagUtil_FOUND)
 
-	add_compile_definitions(LIBCLIMATE_HAS_Pantheios_Extras_DiagUtil)
+	add_compile_definitions(
+		HAS_Pantheios_Extras_DiagUtil
+		HAS_PANTHEIOS_EXTRAS_DIAGUTIL
+	)
+else(Pantheios.Extras.DiagUtil_FOUND)
+
+	add_compile_definitions(PANTHEIOS_NO_DIAGUTIL)
 endif(Pantheios.Extras.DiagUtil_FOUND)
 
 
@@ -269,12 +275,12 @@ if(NOT NO_PANTHEIOS)
 	find_package(Pantheios.Extras.Main ${Pantheios.Extras.Main_REQUIRED_VERSION_} REQUIRED)
 
 	message("-- CMake package Pantheios.Extras.Main found (version ${Pantheios.Extras.Main_VERSION}; ${Pantheios.Extras.Main_REQUIRED_VERSION_} requested)")
+
+	add_compile_definitions(
+		HAS_Pantheios_Extras_Main
+		HAS_PANTHEIOS_EXTRAS_MAIN
+	)
 endif()
-
-if(Pantheios.Extras.Main_FOUND)
-
-	add_compile_definitions(LIBCLIMATE_HAS_Pantheios_Extras_Main)
-endif(Pantheios.Extras.Main_FOUND)
 
 
 # ############################
@@ -292,10 +298,13 @@ if(NOT NO_SHWILD)
 
 			message("-- CMake package shwild found (version ${shwild_VERSION}; ${shwild_REQUIRED_VERSION_} requested)")
 
-			add_compile_definitions(HAS_shwild)
+			add_compile_definitions(
+				HAS_shwild
+				HAS_SHWILD
+			)
+
 			add_compile_definitions(PANTHEIOS_HAS_SHWILD)
-			add_compile_definitions(RECLS_HAS_SHWILD)
-			add_compile_definitions(XTESTS_HAS_SHWILD)
+			add_compile_definitions(XTESTS_HAS_SHWILD) # Legacy form, and should be removed later
 		else(shwild_FOUND)
 
 			add_compile_definitions(PANTHEIOS_NO_SHWILD)
@@ -314,11 +323,6 @@ else()
 	add_compile_definitions(RECLS_NO_SHWILD)
 	add_compile_definitions(XTESTS_NO_SHWILD)
 endif()
-
-if(shwild_FOUND)
-
-	add_compile_definitions(LIBCLIMATE_HAS_shwild)
-endif(shwild_FOUND)
 
 
 # ############################
@@ -371,16 +375,14 @@ if((USE_UNIXEM) AND (WIN32))
 
 	message("-- CMake package UNIXem found (version ${UNIXem_VERSION}; ${UNIXem_REQUIRED_VERSION_} requested)")
 
+	add_compile_definitions(
+		HAS_UNIXem
+		HAS_UNIXEM
+	)
+
 	add_compile_definitions(_STLSOFT_FORCE_ANY_COMPILER)
 	add_compile_definitions(EMULATE_UNIX_ON_WINDOWS)
-	add_compile_definitions(RECLS_HAS_UNIXEM)
-	add_compile_definitions(STLSOFT_HAS_UNIXEM)
 endif()
-
-if(UNIXem_FOUND)
-
-	add_compile_definitions(LIBCLIMATE_HAS_UNIXem)
-endif(UNIXem_FOUND)
 
 
 # ############################
@@ -388,11 +390,16 @@ endif(UNIXem_FOUND)
 
 if(BUILD_TESTING)
 
-	set(xTests_REQUIRED_VERSION_ 0.26.3)
+	set(xTests_REQUIRED_VERSION_ 0.28)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
 	message("-- CMake package xTests found (version ${xTests_VERSION}; ${xTests_REQUIRED_VERSION_} requested)")
+
+	add_compile_definitions(
+		HAS_xTests
+		HAS_XTESTS
+	)
 endif(BUILD_TESTING)
 
 
@@ -406,6 +413,11 @@ if(BUILD_TESTING OR BUILD_EXAMPLES)
 	find_package(woad ${woad_REQUIRED_VERSION_} REQUIRED)
 
 	message("-- CMake package woad found (version ${woad_VERSION}; ${woad_REQUIRED_VERSION_} requested)")
+
+	add_compile_definitions(
+		HAS_woad
+		HAS_WOAD
+	)
 endif(BUILD_TESTING OR BUILD_EXAMPLES)
 
 

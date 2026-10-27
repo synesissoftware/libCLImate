@@ -5,7 +5,7 @@
  *          those public headers are included).
  *
  * Created: 17th September 2026
- * Updated: 8th October 2026
+ * Updated: 27th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -14,28 +14,28 @@
 
 #include <woad/woad.h>
 
-#ifdef LIBCLIMATE_HAS_b64
+#ifdef HAS_b64
 # include <b64/b64.h>
 #endif
 
 #include <clasp/clasp.h>
 
-#ifdef LIBCLIMATE_HAS_Pantheios
+#ifdef HAS_Pantheios
 # include <pantheios/pantheios.h>
 # include <pantheios/frontends/stock.h>
 #endif
 
-#ifdef LIBCLIMATE_HAS_recls
+#ifdef HAS_recls
 # include <recls/recls.h>
 #endif
 
-#ifdef LIBCLIMATE_HAS_shwild
+#ifdef HAS_shwild
 # include <shwild/shwild.h>
 #endif
 
 #include <stlsoft/stlsoft.h>
 
-#ifdef LIBCLIMATE_HAS_UNIXem
+#ifdef HAS_UNIXem
 # include <unixem/unixem.h>
 #endif
 
@@ -47,7 +47,7 @@
 
 #define PROGRAM_NAME                                        "versions"
 
-#ifdef LIBCLIMATE_HAS_Pantheios
+#ifdef HAS_Pantheios
 
 PANTHEIOS_EXTERN_C PAN_CHAR_T const PANTHEIOS_FE_PROCESS_IDENTITY[] = PANTHEIOS_LITERAL_STRING(PROGRAM_NAME);
 #endif
@@ -109,7 +109,7 @@ int main(int /* argc */, char* /* argv */[])
 
     std::cout << "\n" << "efferent dependencies:" << std::endl;
 
-#ifdef LIBCLIMATE_HAS_b64
+#ifdef HAS_b64
 
     {
         unsigned const libver = B64_VER;
@@ -124,7 +124,7 @@ int main(int /* argc */, char* /* argv */[])
         version(std::cout, "\t", "CLASP", "CLASP_VER", libver);
     }
 
-#ifdef LIBCLIMATE_HAS_Pantheios
+#ifdef HAS_Pantheios
 
     {
         unsigned const libver = PANTHEIOS_VER;
@@ -133,7 +133,7 @@ int main(int /* argc */, char* /* argv */[])
     }
 #endif
 
-#ifdef LIBCLIMATE_HAS_recls
+#ifdef HAS_recls
 
     {
         unsigned const libver = RECLS_VER;
@@ -142,7 +142,7 @@ int main(int /* argc */, char* /* argv */[])
     }
 #endif
 
-#ifdef LIBCLIMATE_HAS_shwild
+#ifdef HAS_shwild
 
     {
         unsigned const libver = SHWILD_VER;
@@ -157,7 +157,7 @@ int main(int /* argc */, char* /* argv */[])
         version(std::cout, "\t", "STLSoft", "_STLSOFT_VER", libver);
     }
 
-#ifdef LIBCLIMATE_HAS_UNIXem
+#ifdef HAS_UNIXem
 
     {
         unsigned const libver = UNIXEM_VER;
