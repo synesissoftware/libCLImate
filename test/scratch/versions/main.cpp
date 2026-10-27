@@ -25,6 +25,14 @@
 # include <pantheios/frontends/stock.h>
 #endif
 
+#ifdef HAS_Pantheios_Extras_DiagUtil
+# include <pantheios/extras/diagutil.h>
+#endif
+
+#ifdef HAS_Pantheios_Extras_Main
+# include <pantheios/extras/main.h>
+#endif
+
 #ifdef HAS_recls
 # include <recls/recls.h>
 #endif
@@ -37,6 +45,10 @@
 
 #ifdef HAS_UNIXem
 # include <unixem/unixem.h>
+#endif
+
+#ifdef HAS_xTests
+# include <xtests/xtests.h>
 #endif
 
 #include <iomanip>
@@ -101,15 +113,20 @@ version(
 
 int main(int /* argc */, char* /* argv */[])
 {
+    int efferents_count = 0;
+
     {
         unsigned const libver = LIBCLIMATE_VER;
 
         version(std::cout, "", "libCLImate", "LIBCLIMATE_VER", libver);
     }
 
-    std::cout << "\n" << "efferent dependencies:" << std::endl;
-
 #ifdef HAS_b64
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
 
     {
         unsigned const libver = B64_VER;
@@ -117,6 +134,11 @@ int main(int /* argc */, char* /* argv */[])
         version(std::cout, "\t", "b64", "B64_VER", libver);
     }
 #endif
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
 
     {
         unsigned const libver = CLASP_VER;
@@ -126,6 +148,11 @@ int main(int /* argc */, char* /* argv */[])
 
 #ifdef HAS_Pantheios
 
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
     {
         unsigned const libver = PANTHEIOS_VER;
 
@@ -133,7 +160,40 @@ int main(int /* argc */, char* /* argv */[])
     }
 #endif
 
+#ifdef HAS_Pantheios_Extras_DiagUtil
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
+    {
+        unsigned const libver = PANTHEIOS_EXTRAS_DIAGUTIL_VER;
+
+        version(std::cout, "\t", "Pantheios.Extras.DiagUtil", "PANTHEIOS_EXTRAS_DIAGUTIL_VER", libver);
+    }
+#endif
+
+#ifdef HAS_Pantheios_Extras_Main
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
+    {
+        unsigned const libver = PANTHEIOS_EXTRAS_MAIN_VER;
+
+        version(std::cout, "\t", "Pantheios.Extras.Main", "PANTHEIOS_EXTRAS_MAIN_VER", libver);
+    }
+#endif
+
 #ifdef HAS_recls
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
 
     {
         unsigned const libver = RECLS_VER;
@@ -144,12 +204,22 @@ int main(int /* argc */, char* /* argv */[])
 
 #ifdef HAS_shwild
 
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
     {
         unsigned const libver = SHWILD_VER;
 
         version(std::cout, "\t", "shwild", "SHWILD_VER", libver);
     }
 #endif
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
 
     {
         unsigned const libver = _STLSOFT_VER;
@@ -159,6 +229,11 @@ int main(int /* argc */, char* /* argv */[])
 
 #ifdef HAS_UNIXem
 
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
     {
         unsigned const libver = UNIXEM_VER;
 
@@ -166,9 +241,33 @@ int main(int /* argc */, char* /* argv */[])
     }
 #endif
 
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
+    {
+        unsigned const libver = WOAD_VER;
+
+        version(std::cout, "\t", "woad", "WOAD_VER", libver);
+    }
+
+#ifdef HAS_xTests
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
+    {
+        unsigned const libver = _XTESTS_VER;
+
+        version(std::cout, "\t", "xTests", "_XTESTS_VER", libver);
+    }
+#endif
+
     return EXIT_SUCCESS;
 }
-
 
 /* ///////////////////////////// end of file //////////////////////////// */
 
