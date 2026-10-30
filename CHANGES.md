@@ -1,6 +1,12 @@
 # libCLImate - Changes <!-- omit in toc -->
 
 
+## 0.4.1-beta4 - 31st October 2026
+
+* testing:
+  * `File:` labels under **test** name the project-relative path;
+
+
 ## 0.4.1-beta3 - 27th October 2026
 
 * Defined `HAS_<Pkg>` and `HAS_<PKG>` when a Synesis package other than **STLSoft** is detected, and stopped defining the client-prefixed presence macros `LIBCLIMATE_HAS_*`, `RECLS_HAS_SHWILD`, `RECLS_HAS_UNIXEM`, and `STLSOFT_HAS_UNIXEM`;

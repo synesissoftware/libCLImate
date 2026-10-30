@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.api/entry.cpp
+ * File:    test/unit/test.unit.api/entry.cpp
  *
  * Purpose: Lightweight API smoke test for libCLImate headers.
  *
  * Created:  2nd September 2026
- * Updated:  2nd September 2026
+ * Updated:  30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

@@ -1,11 +1,11 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.main.programname/entry.cpp
+ * File:    test/unit/test.unit.main.programname/entry.cpp
  *
  * Purpose: Unit test for explicit program-name propagation in the C++
  *          libCLImate entry point.
  *
  * Created: 8th October 2026
- * Updated: 16th October 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
