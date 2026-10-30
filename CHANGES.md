@@ -5,6 +5,9 @@
 
 * testing:
   * `File:` labels under **test** name the project-relative path;
+  * automated-test runners pass `__FILE__` to `XTESTS_START_RUNNER`;
+* build:
+  * **xTests** minimum is **0.28.2**;
 
 
 ## 0.4.1-beta3 - 27th October 2026

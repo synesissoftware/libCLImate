@@ -3,7 +3,7 @@
 
 | Date                 | News Item                           | Details |
 | -------------------- | ----------------------------------- | ------- |
-| 31st October 2026    | Release of [libCLImate 0.4.1-beta4](https://github.com/synesissoftware/libCLImate/releases/tag/0.4.1-beta4) | `File:` labels use the project-relative path |
+| 31st October 2026    | Release of [libCLImate 0.4.1-beta4](https://github.com/synesissoftware/libCLImate/releases/tag/0.4.1-beta4) | `File:` labels; `__FILE__` runners (**xTests** 0.28.2) |
 | 27th October 2026    | Release of [libCLImate 0.4.1-beta3](https://github.com/synesissoftware/libCLImate/releases/tag/0.4.1-beta3) | `HAS_<Pkg>` presence macros; dropped client-prefixed `*_HAS_*` |
 | 20th October 2026    | [libCLImate 0.4.1 (beta 2)](https://github.com/synesissoftware/libCLImate/releases/tag/0.4.1-beta2) released | `LIBCLIMATE_VER_RELSTATUS`; gold helpers; Windows `.cmd` CI |
 | 10th September 2026  | libCLImate 0.4.1 (beta 1) released  | |
