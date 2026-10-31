@@ -1,11 +1,11 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.main.programname.C/entry.c
+ * File:    test/unit/test.unit.main.programname.C/entry.c
  *
  * Purpose: Unit test for explicit program-name propagation in the C
  *          libCLImate entry point.
  *
  * Created: 8th October 2026
- * Updated: 16th October 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -94,7 +94,7 @@ main(
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.main.programname.C", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
         XTESTS_RUN_CASE(test_coloured_program_name_passes_through);
 

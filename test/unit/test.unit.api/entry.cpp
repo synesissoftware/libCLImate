@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.api/entry.cpp
+ * File:    test/unit/test.unit.api/entry.cpp
  *
  * Purpose: Lightweight API smoke test for libCLImate headers.
  *
  * Created:  2nd September 2026
- * Updated:  2nd September 2026
+ * Updated:  30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.api", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
         XTESTS_RUN_CASE(test_common_header);
 
