@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.version/entry.cpp
+ * File:    test/unit/test.unit.version/entry.cpp
  *
  * Purpose: Unit test for libCLImate version macros.
  *
  * Created:  2nd September 2026
- * Updated:  27th October 2026
+ * Updated:  30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.version", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
         XTESTS_RUN_CASE(test_version_macros);
 
@@ -68,7 +68,7 @@ static void test_version_macros()
     TEST_INT_EQ(LIBCLIMATE_VER_MAJOR, 0);
     TEST_INT_EQ(LIBCLIMATE_VER_MINOR, 4);
     TEST_INT_EQ(LIBCLIMATE_VER_PATCH, 1);
-    TEST_INT_EQ(LIBCLIMATE_VER_AB, 0x83);
+    TEST_INT_EQ(LIBCLIMATE_VER_AB, 0x84);
 
     TEST_INT_EQ(LIBCLIMATE_VER_ALPHABETA, LIBCLIMATE_VER_AB);
     TEST_INT_EQ(LIBCLIMATE_VER_REVISION, LIBCLIMATE_VER_PATCH);
