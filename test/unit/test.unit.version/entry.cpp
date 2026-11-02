@@ -4,7 +4,7 @@
  * Purpose: Unit test for libCLImate version macros.
  *
  * Created:  2nd September 2026
- * Updated:  30th October 2026
+ * Updated:  2nd November 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -68,7 +68,7 @@ static void test_version_macros()
     TEST_INT_EQ(LIBCLIMATE_VER_MAJOR, 0);
     TEST_INT_EQ(LIBCLIMATE_VER_MINOR, 4);
     TEST_INT_EQ(LIBCLIMATE_VER_PATCH, 1);
-    TEST_INT_EQ(LIBCLIMATE_VER_AB, 0x84);
+    TEST_INT_EQ(LIBCLIMATE_VER_AB, 0x85);
 
     TEST_INT_EQ(LIBCLIMATE_VER_ALPHABETA, LIBCLIMATE_VER_AB);
     TEST_INT_EQ(LIBCLIMATE_VER_REVISION, LIBCLIMATE_VER_PATCH);

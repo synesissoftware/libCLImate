@@ -1,6 +1,15 @@
 # libCLImate - Changes <!-- omit in toc -->
 
 
+## 0.4.1-beta5 - 2nd November 2026
+
+* build:
+  * **b64** minimum is **1.5.12** when tests look for it;
+  * **shwild** minimum is **0.12.16** when tests look for it;
+  * **STLSoft** minimum is **1.11.5**;
+  * **UNIXem** minimum is **1.14.2** when `USE_UNIXEM` is on for Windows;
+  * **woad** minimum is **0.2.1** for examples and tests;
+
 ## 0.4.1-beta4 - 1st November 2026
 
 * testing:

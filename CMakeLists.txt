@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libCLImate
 #
 # Created:  23rd October 2024
-# Updated:  30th October 2026
+# Updated:  2nd November 2026
 #
 # ######################################################################## #
 
@@ -167,7 +167,7 @@ if(NOT NO_B64)
 
 	if(BUILD_TESTING)
 
-		set(b64_REQUIRED_VERSION_ 1.5)
+		set(b64_REQUIRED_VERSION_ 1.5.12)
 
 		find_package(b64 ${b64_REQUIRED_VERSION_} QUIET)
 
@@ -290,7 +290,7 @@ if(NOT NO_SHWILD)
 
 	if(BUILD_TESTING)
 
-		set(shwild_REQUIRED_VERSION_ 0.12)
+		set(shwild_REQUIRED_VERSION_ 0.12.16)
 
 		find_package(shwild ${shwild_REQUIRED_VERSION_} QUIET)
 
@@ -328,7 +328,7 @@ endif()
 # ############################
 # STLSoft
 
-set(STLSoft_REQUIRED_VERSION_ 1.11)
+set(STLSoft_REQUIRED_VERSION_ 1.11.5)
 
 if(NOT DEFINED STLSOFT AND NOT DEFINED ENV{STLSOFT})
 
@@ -375,7 +375,7 @@ endif()
 
 if((USE_UNIXEM) AND (WIN32))
 
-	set(UNIXem_REQUIRED_VERSION_ 1.12.7)
+	set(UNIXem_REQUIRED_VERSION_ 1.14.2)
 
 	find_package(UNIXem ${UNIXem_REQUIRED_VERSION_} REQUIRED)
 
@@ -414,7 +414,7 @@ endif(BUILD_TESTING)
 
 if(BUILD_TESTING OR BUILD_EXAMPLES)
 
-	set(woad_REQUIRED_VERSION_ 0.1)
+	set(woad_REQUIRED_VERSION_ 0.2.1)
 
 	find_package(woad ${woad_REQUIRED_VERSION_} REQUIRED)
 
