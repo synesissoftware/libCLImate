@@ -27,8 +27,8 @@ namespace CommandLineInterface
     using ::libCLImate::show_usage_body;
     using ::libCLImate::show_version;
 
-} /* namespace CommandLineInterface */
-} /* namespace SynesisSoftware */
+} // namespace CommandLineInterface
+} // namespace SynesisSoftware
 
 
 /* ////////////////////////////////////////////////////////////////////// */
