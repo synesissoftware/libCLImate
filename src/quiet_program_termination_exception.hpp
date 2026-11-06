@@ -5,11 +5,11 @@
  *          class.
  *
  * Created: 13th July 2015
- * Updated: 8th May 2025
+ * Updated: 6th November 2026
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -335,7 +335,7 @@ private: // fields
 # error Exactly one of LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_???? preprocessor constants must be defined
 #endif
 
-} /* namespace libCLImate_internal */
+} // namespace libCLImate_internal
 
 #if 0
 #elif defined(LIBCLIMATE_TERMINATION_EXCEPTIONS_INHERIT_NONE)

@@ -1,6 +1,14 @@
 # libCLImate - Changes <!-- omit in toc -->
 
 
+## 0.4.1-beta6 - 6th November 2026
+
+* build:
+  * CI installs **woad** before **xTests**, which **xTests** 0.29 requires;
+* documentation and boilerplate:
+  * C++ namespace closers in **include/libclimate/main/api.hpp**, **include/SynesisSoftware/CommandLineInterface/main/api.hpp**, and **src/quiet_program_termination_exception.hpp** are spelled `// namespace`;
+
+
 ## 0.4.1-beta5 - 2nd November 2026
 
 * build:

@@ -4,11 +4,11 @@
  * Purpose: libCLImate core API for C++ programs.
  *
  * Created: 13th July 2015
- * Updated: 8th May 2025
+ * Updated: 6th November 2026
  *
  * Home:    http://github.com/synesissoftware/libCLImate/
  *
- * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2015-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -256,7 +256,7 @@ show_version(
  * namespace
  */
 
-} /* namespace libCLImate */
+} // namespace libCLImate
 
 
 /* ////////////////////////////////////////////////////////////////////// */
